@@ -110,6 +110,10 @@ test("one-page presentation uses source-specific journal performance and the rev
     "src/components/one-page/CitationAuthors.astro",
     "utf8",
   );
+  const profileIcon = await readFile(
+    "src/components/one-page/AcademicProfileIcon.astro",
+    "utf8",
+  );
 
   assert.match(page, /PublicationMetric/);
   assert.match(page, /hasVerifiedJournalReport/);
@@ -159,6 +163,13 @@ test("one-page presentation uses source-specific journal performance and the rev
     /\.citation-authors__self\s*\{\s*font-weight: 700;/,
   );
   assert.match(page, /ContactCardQr/);
+  assert.match(page, /AcademicProfileIcon/);
+  assert.match(page, /aria-label={`Email Faisal Albalwy at \$\{email\}`}/);
+  assert.match(page, /title=\{profile\.label\}/);
+  assert.match(page, /Google Scholar/);
+  assert.match(page, /ResearchGate/);
+  assert.match(profileIcon, /google-scholar/);
+  assert.match(profileIcon, /researchgate/);
   assert.doesNotMatch(page, /Department of Cybersecurity <span/);
   assert.match(metric, /reportRanking/);
   assert.match(metric, /Open the \$\{reportRanking\.source\} ranking report/);

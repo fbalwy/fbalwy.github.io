@@ -1,0 +1,47 @@
+---
+import clarivateIcon from "../../assets/academic-icons/clarivate.svg?raw";
+import googleScholarIcon from "../../assets/academic-icons/google-scholar.svg?raw";
+import orcidIcon from "../../assets/academic-icons/orcid.svg?raw";
+import researchGateIcon from "../../assets/academic-icons/researchgate.svg?raw";
+import scopusIcon from "../../assets/academic-icons/scopus.svg?raw";
+
+export type AcademicProfileIconName =
+  | "clarivate"
+  | "email"
+  | "google-scholar"
+  | "orcid"
+  | "researchgate"
+  | "scopus";
+
+interface Props {
+  icon: AcademicProfileIconName;
+}
+
+const { icon } = Astro.props;
+const iconMarkup = {
+  clarivate: clarivateIcon,
+  "google-scholar": googleScholarIcon,
+  orcid: orcidIcon,
+  researchgate: researchGateIcon,
+  scopus: scopusIcon,
+}[icon];
+---
+
+{
+  icon === "email" ? (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.8"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M3.75 6.75A2.25 2.25 0 0 1 6 4.5h12a2.25 2.25 0 0 1 2.25 2.25v10.5A2.25 2.25 0 0 1 18 19.5H6a2.25 2.25 0 0 1-2.25-2.25V6.75Z" />
+      <path d="m3.75 7.5 7.05 4.7a2.1 2.1 0 0 0 2.4 0l7.05-4.7" />
+    </svg>
+  ) : (
+    <span aria-hidden="true" set:html={iconMarkup}></span>
+  )
+}

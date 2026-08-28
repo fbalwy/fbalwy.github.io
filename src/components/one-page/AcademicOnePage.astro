@@ -2,6 +2,9 @@
 import PublicationMetric from "./PublicationMetric.astro";
 import CitationAuthors from "./CitationAuthors.astro";
 import ContactCardQr from "./ContactCardQr.astro";
+import AcademicProfileIcon, {
+  type AcademicProfileIconName,
+} from "./AcademicProfileIcon.astro";
 import orcidFeed from "../../../content/data/orcid-feed.json";
 import journalMetrics from "../../../content/data/journal-metrics.json";
 import { currentSite } from "../../lib/integration/current-site";
@@ -33,25 +36,34 @@ const emailHref = `mailto:${email}?subject=Academic%20website%20inquiry`;
 const profileLinks = [
   {
     label: "ORCID",
+    icon: "orcid",
     href: "https://orcid.org/0000-0002-2342-2156",
   },
   {
     label: "Google Scholar",
+    icon: "google-scholar",
     href: "https://scholar.google.com/citations?hl=en&user=zkrWLDAAAAAJ&view_op=list_works&sortby=pubdate",
   },
   {
     label: "Scopus",
+    icon: "scopus",
     href: "https://www.scopus.com/pages/authors/57331483800",
   },
   {
     label: "Web of Science",
+    icon: "clarivate",
     href: "https://www.webofscience.com/wos/author/record/GRR-7890-2022",
   },
   {
     label: "ResearchGate",
+    icon: "researchgate",
     href: "https://www.researchgate.net/profile/Faisal-Albalwy?ev=hdr_xprf",
   },
-];
+] satisfies ReadonlyArray<{
+  label: string;
+  icon: Exclude<AcademicProfileIconName, "email">;
+  href: string;
+}>;
 
 const journalMetricIndex = new Map(
   journalMetrics.journals.map((metric) => [metric.venue, metric]),
@@ -180,9 +192,24 @@ const peerReviewSyncLabel = orcidPeerReviews.length
           and intelligent cyber-threat detection.
         </p>
         <nav class="identity-links" aria-label="Contact and academic profiles">
-          <a href={emailHref}>{email}</a>
+          <a
+            class="identity-links__item identity-links__item--email"
+            href={emailHref}
+            aria-label={`Email Faisal Albalwy at ${email}`}
+            title={email}
+          >
+            <AcademicProfileIcon icon="email" />
+          </a>
           {profileLinks.map((profile) => (
-            <a href={profile.href} rel="noopener">{profile.label}</a>
+            <a
+              class="identity-links__item"
+              href={profile.href}
+              rel="noopener"
+              aria-label={profile.label}
+              title={profile.label}
+            >
+              <AcademicProfileIcon icon={profile.icon} />
+            </a>
           ))}
         </nav>
         <p class="orcid-id">ORCID iD: 0000-0002-2342-2156</p>

@@ -137,22 +137,42 @@ main:focus {
 .identity-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.2rem 0;
+  gap: 0.55rem;
   margin-block-start: 1.35rem;
 }
 
 .identity-links a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2.75rem;
-  white-space: nowrap;
+  display: grid;
+  width: 2.55rem;
+  min-height: 2.55rem;
+  place-items: center;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  color: var(--ink);
+  text-decoration: none;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    transform 160ms ease;
 }
 
-.identity-links a:not(:last-child)::after {
-  margin-inline: 0.72rem;
-  color: #9da1af;
-  content: "·";
-  text-decoration: none;
+.identity-links a:hover {
+  border-color: var(--link);
+  background: #f5f7ff;
+  color: var(--link-hover);
+  transform: translateY(-1px);
+}
+
+.identity-links a span,
+.identity-links a svg {
+  display: block;
+  width: 1.22rem;
+  height: 1.22rem;
+}
+
+.identity-links__item--email svg {
+  width: 1.28rem;
+  height: 1.28rem;
 }
 
 .orcid-id {
@@ -613,11 +633,7 @@ main:focus {
   }
 
   .identity-links {
-    gap: 0.15rem 0;
-  }
-
-  .identity-links a:not(:last-child)::after {
-    margin-inline: 0.48rem;
+    gap: 0.5rem;
   }
 
   .section-heading-row {
