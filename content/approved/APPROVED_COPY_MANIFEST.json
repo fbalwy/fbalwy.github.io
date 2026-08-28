@@ -1,0 +1,740 @@
+{
+  "schema": "approved-copy-manifest",
+  "schema_version": "1.0.0",
+  "pack_version": "CNT-009-v1-2026-08-19",
+  "generated_at": "2026-08-19T02:20:00+03:00",
+  "language": "en",
+  "reviewer_role": "independent_content_reviewer",
+  "gate_recommendation": "G2_PASS",
+  "gate_action_taken": "none",
+  "counts": {
+    "html_routes": 7,
+    "route_status_include": 7,
+    "route_status_conditional": 0,
+    "route_status_omit": 0,
+    "route_status_block": 0,
+    "route_modules": 56,
+    "route_modules_include": 44,
+    "route_modules_conditional": 0,
+    "route_modules_omit": 12,
+    "route_modules_block": 0,
+    "shared_ui_modules": 7,
+    "shared_ui_modules_include": 7,
+    "approved_claim_keys": 35,
+    "suppressed_claim_keys": 20,
+    "canonical_publications": 27,
+    "canonical_dois": 26,
+    "canonical_records_without_doi": 1,
+    "latest_publications": 5,
+    "featured_publications": 4,
+    "approved_course_titles": 19
+  },
+  "source_artifacts": [
+    {
+      "key": "authoring-home",
+      "artifact": "content/pages/home.md",
+      "kind": "authoring_pack"
+    },
+    {
+      "key": "authoring-research",
+      "artifact": "content/pages/research.md",
+      "kind": "authoring_pack"
+    },
+    {
+      "key": "authoring-publications",
+      "artifact": "content/pages/publications.md",
+      "kind": "authoring_pack"
+    },
+    {
+      "key": "authoring-teaching",
+      "artifact": "content/pages/teaching.md",
+      "kind": "authoring_pack"
+    },
+    {
+      "key": "authoring-leadership",
+      "artifact": "content/pages/leadership-service.md",
+      "kind": "authoring_pack"
+    },
+    {
+      "key": "authoring-about",
+      "artifact": "content/pages/about.md",
+      "kind": "authoring_pack"
+    },
+    {
+      "key": "authoring-contact",
+      "artifact": "content/pages/contact.md",
+      "kind": "authoring_pack"
+    },
+    {
+      "key": "authoring-site-ui",
+      "artifact": "content/pages/site-ui.md",
+      "kind": "authoring_pack"
+    },
+    {
+      "key": "canonical-publications",
+      "artifact": "content/data/publications.json",
+      "kind": "canonical_dataset"
+    },
+    {
+      "key": "publication-conflicts",
+      "artifact": "docs/PUBLICATION_CONFLICT_LOG.md",
+      "kind": "decision_log"
+    },
+    {
+      "key": "publication-selections",
+      "artifact": "docs/PUBLICATION_SELECTION_LOG.md",
+      "kind": "decision_log"
+    },
+    {
+      "key": "evidence-registry",
+      "artifact": "docs/EVIDENCE_REGISTRY.md",
+      "kind": "governance_input"
+    },
+    {
+      "key": "content-governance",
+      "artifact": "docs/CONTENT_GOVERNANCE.md",
+      "kind": "governance_input"
+    },
+    {
+      "key": "editorial-direction",
+      "artifact": "docs/EDITORIAL_DIRECTION.md",
+      "kind": "governance_input"
+    },
+    {
+      "key": "information-architecture",
+      "artifact": "docs/INFORMATION_ARCHITECTURE.md",
+      "kind": "governance_input"
+    },
+    {
+      "key": "project-brief",
+      "artifact": "docs/PROJECT_BRIEF.md",
+      "kind": "governance_input"
+    },
+    {
+      "key": "asset-manifest",
+      "artifact": "docs/ASSET_MANIFEST.md",
+      "kind": "governance_input"
+    },
+    {
+      "key": "brand-web-rules",
+      "artifact": "docs/brand/WEB_BRAND_SPEC.md",
+      "kind": "brand_rule"
+    },
+    {
+      "key": "cobranding-rules",
+      "artifact": "docs/brand/COBRANDING_MODEL.md",
+      "kind": "brand_rule"
+    },
+    {
+      "key": "taibah-profile",
+      "artifact": "https://www.taibahu.edu.sa/en/employees/120",
+      "kind": "current_institutional_primary"
+    },
+    {
+      "key": "taibah-department-listing",
+      "artifact": "https://www.taibahu.edu.sa/en/college-of-computer-science-and-engineering-in-al-madinah-al-munawwarah-/department-of-cybersecurity/faculty-members",
+      "kind": "current_institutional_primary"
+    },
+    {
+      "key": "taibah-root",
+      "artifact": "https://www.taibahu.edu.sa/",
+      "kind": "institutional_primary"
+    },
+    {
+      "key": "manchester-thesis",
+      "artifact": "https://research.manchester.ac.uk/en/studentTheses/a-blockchain-infrastructure-to-support-smart-contracts-based-cons/",
+      "kind": "awarding_institution_primary"
+    },
+    {
+      "key": "google-scholar-profile",
+      "artifact": "https://scholar.google.com/citations?hl=en&user=zkrWLDAAAAAJ&view_op=list_works&sortby=pubdate",
+      "kind": "verified_profile"
+    },
+    {
+      "key": "orcid-profile",
+      "artifact": "https://orcid.org/0000-0002-2342-2156",
+      "kind": "verified_profile"
+    },
+    {
+      "key": "research-health-primary",
+      "artifact": "Primary publisher abstracts for DOI 10.3390/systems14040385, DOI 10.2196/27816, and DOI 10.1016/j.eswa.2026.132969",
+      "kind": "publisher_primary_set"
+    },
+    {
+      "key": "research-blockchain-primary",
+      "artifact": "Primary publisher abstracts for DOI 10.1016/j.aej.2025.06.011 and DOI 10.7717/peerj-cs.2914",
+      "kind": "publisher_primary_set"
+    },
+    {
+      "key": "research-ml-primary",
+      "artifact": "Primary publisher abstracts for DOI 10.3390/systems13040231 and DOI 10.3389/fcomp.2024.1387354",
+      "kind": "publisher_primary_set"
+    },
+    {
+      "key": "teaching-schedules",
+      "artifact": "Ten registered Taibah University teaching schedules for academic years 1444–1447 AH",
+      "kind": "protected_institutional_primary_set"
+    },
+    {
+      "key": "wadi-appointments",
+      "artifact": "Three registered Taibah University decisions for one-year Wadi Taibah Company appointments in 2023, 2024, and 2025",
+      "kind": "protected_appointing_authority_set"
+    },
+    {
+      "key": "review-certificates",
+      "artifact": "Six registered issuer certificates covering conference, publisher, and journal review service",
+      "kind": "protected_issuer_primary_set"
+    },
+    {
+      "key": "community-certificates",
+      "artifact": "Three registered community-activity certificates representing two activity lineages in 2023",
+      "kind": "protected_issuer_primary_set"
+    }
+  ],
+  "approved_claims": [
+    {
+      "key": "person.display_name",
+      "value": "Faisal Albalwy",
+      "source_keys": ["taibah-profile", "canonical-publications"],
+      "public_locations": ["all routes", "shared header", "shared footer", "metadata"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["owner name-form change", "institutional profile change", "annual identity review"]
+    },
+    {
+      "key": "person.descriptor",
+      "value": "Assistant Professor of Cybersecurity and researcher focused on trustworthy digital systems",
+      "source_keys": ["taibah-profile", "taibah-department-listing", "canonical-publications", "research-health-primary", "research-blockchain-primary", "research-ml-primary"],
+      "public_locations": ["/", "/about"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["rank or department change", "research-theme evidence change", "before release"]
+    },
+    {
+      "key": "appointment.rank",
+      "value": "Assistant Professor",
+      "source_keys": ["taibah-profile", "taibah-department-listing"],
+      "public_locations": ["/", "/about"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["institutional profile change", "90-day freshness", "before release"]
+    },
+    {
+      "key": "appointment.department",
+      "value": "Department of Cybersecurity",
+      "source_keys": ["taibah-department-listing"],
+      "public_locations": ["/about"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["department listing change", "90-day freshness", "before release"]
+    },
+    {
+      "key": "affiliation.institution",
+      "value": "Taibah University",
+      "source_keys": ["taibah-profile", "taibah-department-listing"],
+      "public_locations": ["all routes through shared footer", "/", "/about", "/contact"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["institutional relationship change", "90-day freshness", "before release"]
+    },
+    {
+      "key": "affiliation.official_url",
+      "value": "https://www.taibahu.edu.sa/",
+      "source_keys": ["taibah-root"],
+      "public_locations": ["shared footer", "/", "/about", "/contact"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["redirect or identity change", "monthly link check", "before release"]
+    },
+    {
+      "key": "affiliation.personal_site_notice",
+      "value": "This is Faisal Albalwy's personal academic website. Taibah University is shown as his institutional affiliation; this is not an official Taibah University website.",
+      "source_keys": ["cobranding-rules", "brand-web-rules", "taibah-profile"],
+      "public_locations": ["shared footer", "/", "/about", "/contact"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["affiliation change", "brand relationship change"]
+    },
+    {
+      "key": "contact.institutional_email",
+      "value": "fbalwy@taibahu.edu.sa",
+      "source_keys": ["taibah-profile"],
+      "public_locations": ["/contact", "shared footer"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["bounce or account change", "90-day freshness", "before release", "owner withdrawal"]
+    },
+    {
+      "key": "profile.google_scholar",
+      "value": "https://scholar.google.com/citations?hl=en&user=zkrWLDAAAAAJ&view_op=list_works&sortby=pubdate",
+      "source_keys": ["google-scholar-profile", "taibah-profile"],
+      "public_locations": ["/contact", "shared footer", "/publications failure state"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["redirect or access failure", "monthly link check", "90-day identity review"]
+    },
+    {
+      "key": "profile.orcid",
+      "value": "https://orcid.org/0000-0002-2342-2156",
+      "source_keys": ["orcid-profile", "taibah-profile", "canonical-publications"],
+      "public_locations": ["/contact", "shared footer"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["identity or access change", "monthly link check", "90-day identity review"]
+    },
+    {
+      "key": "profile.taibah",
+      "value": "https://www.taibahu.edu.sa/en/employees/120",
+      "source_keys": ["taibah-profile"],
+      "public_locations": ["/about", "/contact", "shared footer"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["redirect or access failure", "monthly link check", "before release"]
+    },
+    {
+      "key": "education.phd",
+      "value": "PhD, The University of Manchester",
+      "source_keys": ["manchester-thesis"],
+      "public_locations": ["/about"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["awarding-institution correction"]
+    },
+    {
+      "key": "education.phd_award_date",
+      "value": "2022-04-14",
+      "source_keys": ["manchester-thesis"],
+      "public_locations": ["/about"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["awarding-institution correction"]
+    },
+    {
+      "key": "education.thesis",
+      "value": "A BLOCKCHAIN INFRASTRUCTURE TO SUPPORT SMART CONTRACTS-BASED CONSENT MODELS FOR CLINICAL GENOMICS",
+      "source_keys": ["manchester-thesis", "canonical-publications"],
+      "public_locations": ["/about", "/publications through canonical record"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["repository correction", "canonical publication change"]
+    },
+    {
+      "key": "research.theme.health_data",
+      "value": "Privacy-preserving health-data sharing",
+      "source_keys": ["research-health-primary", "canonical-publications"],
+      "public_locations": ["/", "/research", "/about"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["publisher correction or retraction", "research framing change", "annual review"]
+    },
+    {
+      "key": "research.theme.blockchain",
+      "value": "Blockchain security and interoperability",
+      "source_keys": ["research-blockchain-primary", "canonical-publications"],
+      "public_locations": ["/", "/research", "/about"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["publisher correction or retraction", "research framing change", "annual review"]
+    },
+    {
+      "key": "research.theme.ml_detection",
+      "value": "Machine learning for cyber-threat detection",
+      "source_keys": ["research-ml-primary", "canonical-publications"],
+      "public_locations": ["/", "/research", "/about"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["publisher correction or retraction", "research framing change", "annual review"]
+    },
+    {
+      "key": "publication.catalogue_27",
+      "value": 27,
+      "source_keys": ["canonical-publications", "publication-conflicts"],
+      "public_locations": ["/publications", "/ through featured bindings"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["dataset membership change", "correction", "retraction", "version change", "90-day review"]
+    },
+    {
+      "key": "publication.latest_5",
+      "value": ["doi-10-1016-j-eswa-2026-132969", "doi-10-3390-systems14040385", "doi-10-32604-cmc-2025-075098", "doi-10-1016-j-aej-2025-06-011", "doi-10-18280-isi-300510"],
+      "source_keys": ["canonical-publications", "publication-selections"],
+      "public_locations": ["/publications"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["catalogue order or status change", "correction", "retraction", "future-issue change"]
+    },
+    {
+      "key": "publication.featured_4",
+      "value": ["doi-10-3390-systems14040385", "doi-10-1016-j-aej-2025-06-011", "doi-10-3389-fcomp-2024-1387354", "doi-10-2196-27816"],
+      "source_keys": ["canonical-publications", "publication-selections", "research-health-primary", "research-blockchain-primary", "research-ml-primary"],
+      "public_locations": ["/", "/publications"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["record ineligibility", "correction", "retraction", "selection rationale change"]
+    },
+    {
+      "key": "publication.future_issue_status",
+      "value": "Available online; issue assigned for 1 December 2026",
+      "source_keys": ["canonical-publications", "publication-conflicts"],
+      "public_locations": ["/publications"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["publisher status change", "2026-12-01 reached", "correction or withdrawal"]
+    },
+    {
+      "key": "teaching.course_titles_19",
+      "value": ["Algorithms and Data Structures", "Compiler Construction", "Computer Programming", "Computer Security", "Computer Skills", "Cryptography", "Cybersecurity Design Principles", "Cybersecurity Fundamentals", "Field Training", "Graduation Project I", "Graduation Project II", "Information Technology Systems Components", "Introduction to Computing", "Programming I", "Research Project", "Research Seminar", "Selected Topics", "Software Engineering", "Theory of Computation"],
+      "source_keys": ["teaching-schedules", "authoring-teaching"],
+      "public_locations": ["/teaching", "/ through teaching snapshot"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["new schedule or catalogue", "translation correction", "annual review"]
+    },
+    {
+      "key": "leadership.deputy_ceo_2023",
+      "value": "One-year appointment as Deputy CEO for Business Development at Wadi Taibah Company in 2023",
+      "source_keys": ["wadi-appointments"],
+      "public_locations": ["/leadership-service", "/about"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["issuer correction", "annual historical-role review"]
+    },
+    {
+      "key": "leadership.ceo_2024",
+      "value": "One-year appointment as CEO of Wadi Taibah Company in 2024",
+      "source_keys": ["wadi-appointments"],
+      "public_locations": ["/leadership-service", "/about"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["issuer correction", "annual historical-role review"]
+    },
+    {
+      "key": "leadership.ceo_renewal_2025",
+      "value": "One-year renewal of the CEO appointment in 2025",
+      "source_keys": ["wadi-appointments"],
+      "public_locations": ["/leadership-service", "/about"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["issuer correction", "annual historical-role review", "do not infer status beyond stated term"]
+    },
+    {
+      "key": "service.ieee_reviewer_2026",
+      "value": "Reviewer for the 2nd IEEE International Conference on Cognitive Computing in Engineering, Communications, Sciences and Biomedical Health Informatics, 12–14 February 2026",
+      "source_keys": ["review-certificates"],
+      "public_locations": ["/leadership-service"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["issuer correction", "annual historical-service review"]
+    },
+    {
+      "key": "service.mdpi_reviews_2025_2026",
+      "value": "45 reviews for MDPI journals during 2025–2026; later issuer certificate dated 14 August 2026",
+      "source_keys": ["review-certificates"],
+      "public_locations": ["/leadership-service"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["issuer correction", "superseding certificate", "never add earlier cumulative value"]
+    },
+    {
+      "key": "service.eswa_reviews_2023_2025",
+      "value": "22 reviews for Expert Systems with Applications between October 2023 and July 2025",
+      "source_keys": ["review-certificates"],
+      "public_locations": ["/leadership-service"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["issuer correction", "annual historical-service review"]
+    },
+    {
+      "key": "service.fgcs_reviews_2023_2025",
+      "value": "28 reviews for Future Generation Computer Systems between November 2023 and June 2025",
+      "source_keys": ["review-certificates"],
+      "public_locations": ["/leadership-service"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["issuer correction", "annual historical-service review"]
+    },
+    {
+      "key": "service.jisa_reviews_2025",
+      "value": "Five reviews for the Journal of Information Security and Applications between April and May 2025",
+      "source_keys": ["review-certificates"],
+      "public_locations": ["/leadership-service"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["issuer correction", "annual historical-service review"]
+    },
+    {
+      "key": "community.drug_awareness_2023",
+      "value": "Contributed to a Taibah University-supervised activity on awareness of drug harms, 8–13 July 2023",
+      "source_keys": ["community-certificates"],
+      "public_locations": ["/leadership-service"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["issuer correction", "translation correction", "annual historical-service review"]
+    },
+    {
+      "key": "community.blockchain_workshop_2023",
+      "value": "Contributed to presenting a Taibah University-supervised workshop on blockchain technology and entrepreneurship, 9–10 August 2023",
+      "source_keys": ["community-certificates"],
+      "public_locations": ["/leadership-service"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["issuer correction", "translation correction", "annual historical-service review"]
+    },
+    {
+      "key": "document.cv_unavailable",
+      "value": "CV unavailable",
+      "source_keys": ["asset-manifest", "authoring-about", "authoring-site-ui"],
+      "public_locations": ["/", "/about", "shared header and footer"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["approved English CV derivative becomes available", "document withdrawal"]
+    },
+    {
+      "key": "privacy.no_form",
+      "value": true,
+      "source_keys": ["project-brief", "content-governance", "authoring-contact"],
+      "public_locations": ["/contact", "shared footer"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["architecture or privacy-policy change"]
+    },
+    {
+      "key": "privacy.no_analytics",
+      "value": true,
+      "source_keys": ["project-brief", "content-governance", "authoring-site-ui"],
+      "public_locations": ["shared footer"],
+      "last_verified": "2026-08-19",
+      "reopen_triggers": ["measurement-scope or privacy-policy change"]
+    }
+  ],
+  "suppressed_claims": [
+    {"key": "education.other_degrees", "status": "omit", "reason": "No direct awarding-institution primary was resolved.", "reopen_trigger": "Exact awarding-institution record and identity match."},
+    {"key": "appointment.history_start_dates", "status": "omit", "reason": "Current institutional pages do not establish appointment start or promotion dates.", "reopen_trigger": "Authoritative appointment record."},
+    {"key": "leadership.current_status", "status": "omit", "reason": "The approved wording states dated one-year terms and does not infer status beyond them.", "reopen_trigger": "Fresh accountable-company or appointing-authority current-status record."},
+    {"key": "research.emerging_directions", "status": "omit", "reason": "No dated owner classification distinguishes an emerging direction.", "reopen_trigger": "Dated approved owner statement plus evidence mapping."},
+    {"key": "research.funded_projects", "status": "omit", "reason": "Project title, role, funder, amount, status, confidentiality, and rights remain unresolved.", "reopen_trigger": "Field-authoritative project and award evidence."},
+    {"key": "research.systems", "status": "omit", "reason": "No separately governed system identity, role, or maturity record exists.", "reopen_trigger": "Canonical system record with publisher evidence and role/maturity review."},
+    {"key": "publication.theme_filter", "status": "omit", "reason": "Only route-level themes were approved; record-level filter relationships were not reviewed for all 27 records.", "reopen_trigger": "Primary abstract review and stable relationship dataset."},
+    {"key": "teaching.approach", "status": "omit", "reason": "No source-backed teaching-practice statement exists.", "reopen_trigger": "Dated owner statement with exact practice evidence."},
+    {"key": "teaching.assessment", "status": "omit", "reason": "No source-backed assessment-practice record exists.", "reopen_trigger": "Approved course-specific assessment evidence."},
+    {"key": "supervision.records", "status": "omit", "reason": "Role, dates, privacy, consent, and public necessity remain unresolved.", "reopen_trigger": "Authoritative privacy-safe record and applicable consent."},
+    {"key": "supervision.availability", "status": "omit", "reason": "No fresh capacity or availability statement exists.", "reopen_trigger": "Current owner-approved availability record."},
+    {"key": "university.committee_service", "status": "omit", "reason": "Exact English names, roles, periods, and selection rationale were not needed to make the route substantive.", "reopen_trigger": "Complete decision-by-decision translation and chronology review."},
+    {"key": "service.talks", "status": "omit", "reason": "No record establishes a speaker, trainer, organiser, or panellist role beyond the approved community workshop wording.", "reopen_trigger": "Issuer-authoritative event role record."},
+    {"key": "professional.development", "status": "omit", "reason": "Issuer, exact type, dates, status, and selection remain unresolved.", "reopen_trigger": "Issuer-primary records and editorial selection."},
+    {"key": "professional.memberships", "status": "omit", "reason": "Member authority, class, period, and currentness remain unresolved.", "reopen_trigger": "Current member-authority record."},
+    {"key": "about.recognition", "status": "omit", "reason": "No governed recognition claim and proportionate selection rationale exists.", "reopen_trigger": "Issuer-primary recognition record and selection decision."},
+    {"key": "contact.location", "status": "omit", "reason": "A physical location is unnecessary for the email-only visitor task.", "reopen_trigger": "Demonstrated necessity plus privacy, safety, and freshness review."},
+    {"key": "document.cv_download", "status": "omit", "reason": "No approved minimized English derivative exists.", "reopen_trigger": "Document, privacy, rights, accessibility, metadata, and owner approvals."},
+    {"key": "profile.other_platforms", "status": "omit", "reason": "Scopus, Web of Science, and ResearchGate destinations were not independently resolved.", "reopen_trigger": "Each exact profile passes identity, access, safety, and freshness review."},
+    {"key": "metrics.funding_and_impact", "status": "omit", "reason": "No metric, funding, quality, impact, prestige, deployment, adoption, or partner claim is necessary or approved.", "reopen_trigger": "New atomic evidence and governed editorial need."}
+  ],
+  "routes": [
+    {
+      "id": "home",
+      "route": "/",
+      "file": "content/approved/home.md",
+      "status": "include",
+      "release_blocking": true,
+      "source_artifact_keys": ["authoring-home", "authoring-site-ui", "canonical-publications", "publication-selections", "information-architecture"],
+      "approved_claim_keys": ["person.display_name", "person.descriptor", "affiliation.institution", "affiliation.official_url", "affiliation.personal_site_notice", "research.theme.health_data", "research.theme.blockchain", "research.theme.ml_detection", "publication.featured_4", "teaching.course_titles_19", "leadership.ceo_renewal_2025", "document.cv_unavailable", "contact.institutional_email"],
+      "public_locations": ["/"],
+      "selection_stable_ids": ["doi-10-3390-systems14040385", "doi-10-1016-j-aej-2025-06-011", "doi-10-3389-fcomp-2024-1387354", "doi-10-2196-27816"],
+      "last_verified": "2026-08-19",
+      "freshness_reopen_triggers": ["any bound claim becomes stale or changes", "featured selection changes", "route loses substantive Research or Publications destination"],
+      "blocked_values": ["logo images", "portrait placeholders", "metrics", "funding claims", "private contact", "protected documents"],
+      "modules": [
+        {"id": "identity", "status": "include", "source_artifact_key": "authoring-home", "approved_claim_keys": ["person.display_name", "person.descriptor", "affiliation.institution"], "public_locations": ["/#identity"]},
+        {"id": "research-introduction", "status": "include", "source_artifact_key": "authoring-home", "approved_claim_keys": ["research.theme.health_data", "research.theme.blockchain", "research.theme.ml_detection"], "public_locations": ["/#research-and-evidence"]},
+        {"id": "research-themes", "status": "include", "source_artifact_key": "authoring-research", "approved_claim_keys": ["research.theme.health_data", "research.theme.blockchain", "research.theme.ml_detection"], "public_locations": ["/#research-themes"]},
+        {"id": "selected-project-or-system-stories", "status": "omit", "source_artifact_key": "authoring-research", "approved_claim_keys": [], "public_locations": []},
+        {"id": "featured-publications", "status": "include", "source_artifact_key": "publication-selections", "approved_claim_keys": ["publication.featured_4"], "public_locations": ["/#featured-publications"]},
+        {"id": "teaching-snapshot", "status": "include", "source_artifact_key": "authoring-teaching", "approved_claim_keys": ["teaching.course_titles_19"], "public_locations": ["/#teaching"]},
+        {"id": "leadership-service-snapshot", "status": "include", "source_artifact_key": "authoring-leadership", "approved_claim_keys": ["leadership.ceo_renewal_2025", "service.ieee_reviewer_2026", "community.blockchain_workshop_2023"], "public_locations": ["/#leadership-and-service"]},
+        {"id": "about-and-cv", "status": "include", "source_artifact_key": "authoring-about", "approved_claim_keys": ["education.phd", "document.cv_unavailable"], "public_locations": ["/#about-and-cv"]},
+        {"id": "contact", "status": "include", "source_artifact_key": "authoring-contact", "approved_claim_keys": ["contact.institutional_email"], "public_locations": ["/#contact"]},
+        {"id": "affiliation-notice", "status": "include", "source_artifact_key": "cobranding-rules", "approved_claim_keys": ["affiliation.personal_site_notice", "affiliation.official_url"], "public_locations": ["/#personal-site-notice"]}
+      ]
+    },
+    {
+      "id": "research",
+      "route": "/research",
+      "file": "content/approved/research.md",
+      "status": "include",
+      "release_blocking": true,
+      "source_artifact_keys": ["authoring-research", "canonical-publications", "research-health-primary", "research-blockchain-primary", "research-ml-primary"],
+      "approved_claim_keys": ["person.descriptor", "research.theme.health_data", "research.theme.blockchain", "research.theme.ml_detection"],
+      "public_locations": ["/research"],
+      "selection_stable_ids": ["doi-10-1016-j-eswa-2026-132969", "doi-10-3390-systems14040385", "doi-10-2196-27816", "doi-10-1016-j-aej-2025-06-011", "doi-10-7717-peerj-cs-2914", "doi-10-3390-systems13040231", "doi-10-3389-fcomp-2024-1387354"],
+      "last_verified": "2026-08-19",
+      "freshness_reopen_triggers": ["publisher correction or retraction", "theme evidence changes", "owner research framing changes"],
+      "blocked_values": ["funders", "amounts", "partners", "deployment", "impact", "availability", "unverified project or system records"],
+      "modules": [
+        {"id": "research-statement", "status": "include", "source_artifact_key": "authoring-research", "approved_claim_keys": ["person.descriptor", "research.theme.health_data", "research.theme.blockchain", "research.theme.ml_detection"], "public_locations": ["/research"]},
+        {"id": "established-themes", "status": "include", "source_artifact_key": "canonical-publications", "approved_claim_keys": ["research.theme.health_data", "research.theme.blockchain", "research.theme.ml_detection"], "public_locations": ["/research"]},
+        {"id": "emerging-directions", "status": "omit", "source_artifact_key": "authoring-research", "approved_claim_keys": [], "public_locations": []},
+        {"id": "funded-projects", "status": "omit", "source_artifact_key": "authoring-research", "approved_claim_keys": [], "public_locations": []},
+        {"id": "research-systems", "status": "omit", "source_artifact_key": "authoring-research", "approved_claim_keys": [], "public_locations": []},
+        {"id": "collaboration-pathway", "status": "include", "source_artifact_key": "authoring-research", "approved_claim_keys": ["contact.institutional_email"], "public_locations": ["/research"]},
+        {"id": "related-publications", "status": "include", "source_artifact_key": "canonical-publications", "approved_claim_keys": ["publication.catalogue_27"], "public_locations": ["/research"]}
+      ]
+    },
+    {
+      "id": "publications",
+      "route": "/publications",
+      "file": "content/approved/publications.md",
+      "status": "include",
+      "release_blocking": true,
+      "source_artifact_keys": ["authoring-publications", "canonical-publications", "publication-conflicts", "publication-selections"],
+      "approved_claim_keys": ["publication.catalogue_27", "publication.latest_5", "publication.featured_4", "publication.future_issue_status", "profile.google_scholar"],
+      "public_locations": ["/publications"],
+      "selection_stable_ids": ["doi-10-3390-systems14040385", "doi-10-1016-j-aej-2025-06-011", "doi-10-3389-fcomp-2024-1387354", "doi-10-2196-27816", "doi-10-1016-j-eswa-2026-132969", "doi-10-32604-cmc-2025-075098", "doi-10-18280-isi-300510"],
+      "last_verified": "2026-08-19",
+      "freshness_reopen_triggers": ["publication dataset change", "correction, withdrawal, or retraction", "2026-12-01 future issue transition", "90-day publication review"],
+      "blocked_values": ["citation metrics", "impact or quality labels", "venue rank", "author-position claims", "held JNMES candidate", "duplicate and linked rows as separate works"],
+      "modules": [
+        {"id": "purpose", "status": "include", "source_artifact_key": "authoring-publications", "approved_claim_keys": ["publication.catalogue_27"], "public_locations": ["/publications"]},
+        {"id": "featured", "status": "include", "source_artifact_key": "publication-selections", "approved_claim_keys": ["publication.featured_4"], "public_locations": ["/publications#featured-publications"]},
+        {"id": "latest", "status": "include", "source_artifact_key": "publication-selections", "approved_claim_keys": ["publication.latest_5", "publication.future_issue_status"], "public_locations": ["/publications"]},
+        {"id": "catalogue", "status": "include", "source_artifact_key": "canonical-publications", "approved_claim_keys": ["publication.catalogue_27"], "public_locations": ["/publications#publication-catalogue"]},
+        {"id": "search-year-type-filters", "status": "include", "source_artifact_key": "authoring-publications", "approved_claim_keys": ["publication.catalogue_27"], "public_locations": ["/publications"]},
+        {"id": "theme-filter", "status": "omit", "source_artifact_key": "publication-selections", "approved_claim_keys": [], "public_locations": []},
+        {"id": "record-actions", "status": "include", "source_artifact_key": "canonical-publications", "approved_claim_keys": ["publication.catalogue_27"], "public_locations": ["/publications"]},
+        {"id": "operational-states", "status": "include", "source_artifact_key": "authoring-site-ui", "approved_claim_keys": ["profile.google_scholar"], "public_locations": ["/publications"]},
+        {"id": "freshness-note", "status": "include", "source_artifact_key": "publication-conflicts", "approved_claim_keys": ["publication.future_issue_status"], "public_locations": ["/publications"]},
+        {"id": "related-research", "status": "include", "source_artifact_key": "authoring-research", "approved_claim_keys": ["research.theme.health_data", "research.theme.blockchain", "research.theme.ml_detection"], "public_locations": ["/publications"]}
+      ]
+    },
+    {
+      "id": "teaching",
+      "route": "/teaching",
+      "file": "content/approved/teaching.md",
+      "status": "include",
+      "release_blocking": true,
+      "source_artifact_keys": ["authoring-teaching", "teaching-schedules", "asset-manifest"],
+      "approved_claim_keys": ["teaching.course_titles_19"],
+      "public_locations": ["/teaching"],
+      "selection_stable_ids": [],
+      "last_verified": "2026-08-19",
+      "freshness_reopen_triggers": ["new schedule or catalogue", "course translation correction", "annual review"],
+      "blocked_values": ["course codes", "sections", "rooms", "days", "times", "enrolment", "students", "grades", "schedule documents", "supervision availability"],
+      "modules": [
+        {"id": "page-purpose", "status": "include", "source_artifact_key": "authoring-teaching", "approved_claim_keys": ["teaching.course_titles_19"], "public_locations": ["/teaching"]},
+        {"id": "courses", "status": "include", "source_artifact_key": "teaching-schedules", "approved_claim_keys": ["teaching.course_titles_19"], "public_locations": ["/teaching"]},
+        {"id": "teaching-approach-and-assessment", "status": "omit", "source_artifact_key": "authoring-teaching", "approved_claim_keys": [], "public_locations": []},
+        {"id": "supervision-and-student-projects", "status": "omit", "source_artifact_key": "authoring-teaching", "approved_claim_keys": [], "public_locations": []},
+        {"id": "related-routes-and-inquiry", "status": "include", "source_artifact_key": "authoring-teaching", "approved_claim_keys": ["contact.institutional_email"], "public_locations": ["/teaching"]}
+      ]
+    },
+    {
+      "id": "leadership-service",
+      "route": "/leadership-service",
+      "file": "content/approved/leadership-service.md",
+      "status": "include",
+      "release_blocking": true,
+      "source_artifact_keys": ["authoring-leadership", "wadi-appointments", "review-certificates", "community-certificates"],
+      "approved_claim_keys": ["leadership.deputy_ceo_2023", "leadership.ceo_2024", "leadership.ceo_renewal_2025", "service.ieee_reviewer_2026", "service.mdpi_reviews_2025_2026", "service.eswa_reviews_2023_2025", "service.fgcs_reviews_2023_2025", "service.jisa_reviews_2025", "community.drug_awareness_2023", "community.blockchain_workshop_2023"],
+      "public_locations": ["/leadership-service"],
+      "selection_stable_ids": [],
+      "last_verified": "2026-08-19",
+      "freshness_reopen_triggers": ["issuer correction", "superseding review certificate", "annual historical-service review", "any current-status wording request"],
+      "blocked_values": ["certificate images", "decision scans", "identifiers", "signatures", "QR codes", "manuscript information", "combined review total", "unsupported impact or currentness"],
+      "modules": [
+        {"id": "page-purpose", "status": "include", "source_artifact_key": "authoring-leadership", "approved_claim_keys": [], "public_locations": ["/leadership-service"]},
+        {"id": "technology-leadership", "status": "include", "source_artifact_key": "wadi-appointments", "approved_claim_keys": ["leadership.deputy_ceo_2023", "leadership.ceo_2024", "leadership.ceo_renewal_2025"], "public_locations": ["/leadership-service#technology-leadership"]},
+        {"id": "university-service", "status": "omit", "source_artifact_key": "authoring-leadership", "approved_claim_keys": [], "public_locations": []},
+        {"id": "peer-review", "status": "include", "source_artifact_key": "review-certificates", "approved_claim_keys": ["service.ieee_reviewer_2026", "service.mdpi_reviews_2025_2026", "service.eswa_reviews_2023_2025", "service.fgcs_reviews_2023_2025", "service.jisa_reviews_2025"], "public_locations": ["/leadership-service#peer-review"]},
+        {"id": "community-engagement", "status": "include", "source_artifact_key": "community-certificates", "approved_claim_keys": ["community.drug_awareness_2023", "community.blockchain_workshop_2023"], "public_locations": ["/leadership-service#community-engagement"]},
+        {"id": "talks-and-workshops", "status": "omit", "source_artifact_key": "authoring-leadership", "approved_claim_keys": [], "public_locations": []},
+        {"id": "professional-development-and-memberships", "status": "omit", "source_artifact_key": "authoring-leadership", "approved_claim_keys": [], "public_locations": []},
+        {"id": "contact-pathway", "status": "include", "source_artifact_key": "authoring-contact", "approved_claim_keys": ["contact.institutional_email"], "public_locations": ["/leadership-service"]}
+      ]
+    },
+    {
+      "id": "about",
+      "route": "/about",
+      "file": "content/approved/about.md",
+      "status": "include",
+      "release_blocking": true,
+      "source_artifact_keys": ["authoring-about", "taibah-profile", "taibah-department-listing", "manchester-thesis", "wadi-appointments"],
+      "approved_claim_keys": ["person.display_name", "person.descriptor", "appointment.rank", "appointment.department", "affiliation.institution", "education.phd", "education.phd_award_date", "education.thesis", "research.theme.health_data", "research.theme.blockchain", "research.theme.ml_detection", "leadership.deputy_ceo_2023", "leadership.ceo_2024", "leadership.ceo_renewal_2025", "document.cv_unavailable", "affiliation.personal_site_notice"],
+      "public_locations": ["/about"],
+      "selection_stable_ids": [],
+      "last_verified": "2026-08-19",
+      "freshness_reopen_triggers": ["rank, department, or affiliation change", "institutional profile change", "CV derivative availability", "awarding-institution correction"],
+      "blocked_values": ["unverified degrees", "appointment start date", "current leadership inference", "recognition", "private contact", "protected CV"],
+      "modules": [
+        {"id": "short-biography", "status": "include", "source_artifact_key": "authoring-about", "approved_claim_keys": ["person.descriptor", "research.theme.health_data", "research.theme.blockchain", "research.theme.ml_detection"], "public_locations": ["/about"]},
+        {"id": "extended-biography", "status": "include", "source_artifact_key": "authoring-about", "approved_claim_keys": ["person.descriptor", "education.phd", "education.thesis"], "public_locations": ["/about"]},
+        {"id": "education", "status": "include", "source_artifact_key": "manchester-thesis", "approved_claim_keys": ["education.phd", "education.phd_award_date", "education.thesis"], "public_locations": ["/about"]},
+        {"id": "academic-appointment", "status": "include", "source_artifact_key": "taibah-department-listing", "approved_claim_keys": ["appointment.rank", "appointment.department", "affiliation.institution"], "public_locations": ["/about"]},
+        {"id": "relevant-leadership", "status": "include", "source_artifact_key": "wadi-appointments", "approved_claim_keys": ["leadership.deputy_ceo_2023", "leadership.ceo_2024", "leadership.ceo_renewal_2025"], "public_locations": ["/about"]},
+        {"id": "selected-recognition", "status": "omit", "source_artifact_key": "authoring-about", "approved_claim_keys": [], "public_locations": []},
+        {"id": "academic-context", "status": "include", "source_artifact_key": "canonical-publications", "approved_claim_keys": ["research.theme.health_data", "research.theme.blockchain", "research.theme.ml_detection", "education.thesis"], "public_locations": ["/about"]},
+        {"id": "cv-state", "status": "include", "source_artifact_key": "asset-manifest", "approved_claim_keys": ["document.cv_unavailable"], "public_locations": ["/about"]},
+        {"id": "affiliation-and-related-routes", "status": "include", "source_artifact_key": "cobranding-rules", "approved_claim_keys": ["affiliation.institution", "affiliation.official_url", "affiliation.personal_site_notice"], "public_locations": ["/about"]}
+      ]
+    },
+    {
+      "id": "contact",
+      "route": "/contact",
+      "file": "content/approved/contact.md",
+      "status": "include",
+      "release_blocking": true,
+      "source_artifact_keys": ["authoring-contact", "taibah-profile", "google-scholar-profile", "orcid-profile", "cobranding-rules"],
+      "approved_claim_keys": ["person.display_name", "contact.institutional_email", "profile.google_scholar", "profile.orcid", "profile.taibah", "affiliation.institution", "affiliation.official_url", "affiliation.personal_site_notice", "privacy.no_form"],
+      "public_locations": ["/contact"],
+      "selection_stable_ids": [],
+      "last_verified": "2026-08-19",
+      "freshness_reopen_triggers": ["email bounce or account change", "profile redirect or access failure", "90-day email/profile review", "before release"],
+      "blocked_values": ["private email", "phone", "postal or office address", "contact form", "calendar", "messaging account", "response promise"],
+      "modules": [
+        {"id": "page-purpose", "status": "include", "source_artifact_key": "authoring-contact", "approved_claim_keys": ["person.display_name"], "public_locations": ["/contact"]},
+        {"id": "inquiry-guidance", "status": "include", "source_artifact_key": "authoring-contact", "approved_claim_keys": [], "public_locations": ["/contact"]},
+        {"id": "institutional-email", "status": "include", "source_artifact_key": "taibah-profile", "approved_claim_keys": ["contact.institutional_email", "privacy.no_form"], "public_locations": ["/contact"]},
+        {"id": "location", "status": "omit", "source_artifact_key": "authoring-contact", "approved_claim_keys": [], "public_locations": []},
+        {"id": "academic-profiles", "status": "include", "source_artifact_key": "taibah-profile", "approved_claim_keys": ["profile.google_scholar", "profile.orcid", "profile.taibah"], "public_locations": ["/contact"]},
+        {"id": "affiliation", "status": "include", "source_artifact_key": "cobranding-rules", "approved_claim_keys": ["affiliation.institution", "affiliation.official_url", "affiliation.personal_site_notice"], "public_locations": ["/contact"]},
+        {"id": "related-routes", "status": "include", "source_artifact_key": "information-architecture", "approved_claim_keys": [], "public_locations": ["/contact"]}
+      ]
+    }
+  ],
+  "shared_ui": {
+    "file": "content/approved/site-ui.md",
+    "status": "include",
+    "source_artifact_keys": ["authoring-site-ui", "information-architecture", "cobranding-rules", "brand-web-rules"],
+    "approved_claim_keys": ["person.display_name", "affiliation.institution", "affiliation.official_url", "affiliation.personal_site_notice", "contact.institutional_email", "profile.google_scholar", "profile.orcid", "profile.taibah", "document.cv_unavailable", "privacy.no_form", "privacy.no_analytics"],
+    "public_locations": ["shared header", "mobile menu", "shared footer", "publication controls and states", "404", "application error", "metadata"],
+    "last_verified": "2026-08-19",
+    "freshness_reopen_triggers": ["any route label or status changes", "email, profile, affiliation, or CV state changes", "analytics or form scope changes"],
+    "blocked_values": ["logo or portrait", "hidden held values", "private contact", "tracking identifiers", "form endpoints", "source paths", "protected assets"],
+    "modules": [
+      {"id": "identity-and-navigation", "status": "include"},
+      {"id": "shared-actions", "status": "include"},
+      {"id": "footer", "status": "include"},
+      {"id": "publication-controls-and-states", "status": "include"},
+      {"id": "availability-and-failure-states", "status": "include"},
+      {"id": "404-and-application-error", "status": "include"},
+      {"id": "route-metadata", "status": "include"}
+    ]
+  },
+  "publication_validation": {
+    "catalogue_count": 27,
+    "unique_normalized_dois": 26,
+    "doi_less_thesis_count": 1,
+    "latest_ids": ["doi-10-1016-j-eswa-2026-132969", "doi-10-3390-systems14040385", "doi-10-32604-cmc-2025-075098", "doi-10-1016-j-aej-2025-06-011", "doi-10-18280-isi-300510"],
+    "featured_ids": ["doi-10-3390-systems14040385", "doi-10-1016-j-aej-2025-06-011", "doi-10-3389-fcomp-2024-1387354", "doi-10-2196-27816"],
+    "held_candidates": 1,
+    "held_candidate_treatment": "JNMES candidate excluded from approved copy because its claimed DOI is unregistered and its publisher PDF has conflicting pagination.",
+    "linked_not_counted_candidates": 3,
+    "version_relationships_checked": true,
+    "faisal_identity_flags_checked": 27,
+    "typed_dates_and_statuses_checked": 27,
+    "crossref_records_checked": 26,
+    "crossref_update_relations_found": 0,
+    "other_relation_records": 1,
+    "other_relation_note": "The JMIR version of record retains its Crossref has-preprint relation; the preprint is not counted separately.",
+    "future_issue_record": "doi-10-1016-j-eswa-2026-132969",
+    "future_issue_date": "2026-12-01",
+    "notice_check_date": "2026-08-19"
+  },
+  "file_hashes": {
+    "content/approved/about.md": "40a0804d4cb44469215e85a0166dcb3f9e74b29a4843a53bdd7913d407b29d90",
+    "content/approved/contact.md": "eb8a5192ffb970f61b9ba0ba53ce82901aee10cbf2623d348050be692db850ee",
+    "content/approved/home.md": "e5a7a6c05e5ecbcfe5e77fce7d3d6f47f0bf2c1bcd035e3a4120cd245ae02da3",
+    "content/approved/leadership-service.md": "8c36eaca7c4b9cc9b10eb1d284dfd0f4ce22ddff06164f26fc5a7b7ae78774c6",
+    "content/approved/publications.md": "67f15aeee61a4f92cd48f30c249b9cec02d7f860982e341032e4c849ddd8ec08",
+    "content/approved/research.md": "05de99f0d104fe08cf73886d03fd48d416c15e5755babfd6dde24910fb12d2c7",
+    "content/approved/site-ui.md": "28ab7924c7a04050e5cab7edae3cd8ae7dc5276790bc1208d46fecbc02ab18fa",
+    "content/approved/teaching.md": "be63d06567aa7b29d33bad58e8e6646d58d03ab4116ad1afa15afdf6f957838f"
+  },
+  "zero_marker_privacy_scan": {
+    "scan_date": "2026-08-19",
+    "files_scanned": 8,
+    "authoring_markers": 0,
+    "registry_claim_ids": 0,
+    "registry_source_ids": 0,
+    "private_paths": 0,
+    "hashes_in_visitor_copy": 0,
+    "phone_values": 0,
+    "private_email_values": 0,
+    "physical_address_values": 0,
+    "student_identifiers": 0,
+    "timetable_detail_values": 0,
+    "identity_numbers": 0,
+    "signature_or_qr_payloads": 0,
+    "protected_asset_links": 0,
+    "logo_image_references": 0,
+    "form_endpoints": 0,
+    "analytics_or_tracking_identifiers": 0,
+    "allowed_unique_institutional_email_values": 1,
+    "allowed_institutional_email": "fbalwy@taibahu.edu.sa",
+    "result": "pass"
+  }
+}

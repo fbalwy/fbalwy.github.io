@@ -1,0 +1,136 @@
+---
+import "../styles/global.css";
+import { ROUTES, type RouteDefinition } from "../lib/routes/registry";
+import { currentSite } from "../lib/integration/current-site";
+import { canonicalFor, metadataFor } from "../lib/discovery/metadata.mjs";
+import { socialMetadataFor } from "../lib/discovery/social.mjs";
+import StructuredData from "../components/discovery/StructuredData.astro";
+import { structuredDataForRoute } from "../lib/structured-data/model";
+
+interface Props {
+  route?: RouteDefinition;
+}
+
+const { route } = Astro.props;
+const discoveryPath = route?.path ?? "/404.html";
+const metadata = metadataFor(discoveryPath);
+const robots =
+  import.meta.env.SITE_BUILD_MODE === "production" &&
+  discoveryPath !== "/404.html"
+    ? "index, follow"
+    : "noindex, nofollow, noarchive, nosnippet";
+const canonical = canonicalFor(
+  import.meta.env.SITE_ORIGIN ?? "https://local.invalid",
+  discoveryPath,
+);
+const social = socialMetadataFor(
+  import.meta.env.SITE_ORIGIN ?? "https://local.invalid",
+  discoveryPath,
+);
+const structuredData = structuredDataForRoute({
+  site: currentSite,
+  origin: import.meta.env.SITE_ORIGIN ?? "https://local.invalid",
+  pathname: discoveryPath,
+});
+const primaryRouteIds = ["R2", "R3", "R4", "R5", "R6"];
+const primaryRoutes = ROUTES.filter((item) => primaryRouteIds.includes(item.id));
+const publicProfiles = currentSite.actions.profiles;
+const contactCurrent = route?.id === "R7" ? "page" : undefined;
+---
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#111144" />
+    <meta name="robots" content={robots} />
+    <meta name="description" content={metadata.description} />
+    <meta name="author" content="Faisal Albalwy" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta property="og:type" content={social.openGraphType} />
+    <meta property="og:site_name" content="Faisal Albalwy | Personal academic website" />
+    <meta property="og:title" content={social.title} />
+    <meta property="og:description" content={social.description} />
+    <meta property="og:url" content={social.url} />
+    <meta property="og:image" content={social.image} />
+    <meta property="og:image:secure_url" content={social.image} />
+    <meta property="og:image:type" content={social.imageType} />
+    <meta property="og:image:width" content={String(social.imageWidth)} />
+    <meta property="og:image:height" content={String(social.imageHeight)} />
+    <meta property="og:image:alt" content={social.imageAlt} />
+    <meta name="twitter:card" content={social.twitterCard} />
+    <meta name="twitter:title" content={social.title} />
+    <meta name="twitter:description" content={social.description} />
+    <meta name="twitter:image" content={social.image} />
+    <meta name="twitter:image:alt" content={social.imageAlt} />
+    <link rel="canonical" href={canonical} />
+    <title>{metadata.title}</title>
+    {structuredData && <StructuredData document={structuredData} />}
+  </head>
+  <body data-route={route?.id ?? "R0"}>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <header class="site-header">
+      <div class="shell-bar">
+        <div class="nameplate">
+          <a href="/" aria-current={route?.id === "R1" ? "page" : undefined}
+            >Faisal Albalwy</a
+          >
+          <span>Cybersecurity researcher</span>
+        </div>
+        <nav class="primary-nav" aria-label="Primary navigation">
+          {primaryRoutes.map((item) => (
+            <a href={item.path} aria-current={route?.id === item.id ? "page" : undefined}>{item.label}</a>
+          ))}
+        </nav>
+        <div class="shell-actions">
+          <a href="/contact" aria-current={contactCurrent}>Contact</a>
+        </div>
+        <details class="mobile-nav">
+          <summary>Menu</summary>
+          <nav aria-label="Mobile navigation">
+            {primaryRoutes.map((item) => (
+              <a href={item.path} aria-current={route?.id === item.id ? "page" : undefined}>{item.label}</a>
+            ))}
+            <strong>Actions</strong>
+            <a href="/contact" aria-current={contactCurrent}>Contact</a>
+          </nav>
+        </details>
+      </div>
+      <div class="affiliation">
+        <strong>Taibah University · Department of Cybersecurity</strong>
+        <a href="https://www.taibahu.edu.sa/" rel="noopener"
+          >Institutional profile</a
+        >
+      </div>
+    </header>
+    <main id="main-content" tabindex="-1"><slot /></main>
+    <footer class="site-footer">
+      <div class="footer-identity">
+        <strong>Faisal Albalwy</strong>
+        <p>Assistant Professor of Cybersecurity</p>
+        <p>Taibah University · Department of Cybersecurity</p>
+        <p class="footer-statement">Researching trustworthy digital systems across privacy, blockchain interoperability, and AI-enabled cyber-threat detection.</p>
+      </div>
+      <nav aria-label="Explore">
+        <strong>Explore</strong>
+        {primaryRoutes.map((item) => <a href={item.path}>{item.label}</a>)}
+      </nav>
+      <nav aria-label="Actions">
+        <strong>Actions</strong>
+        <a href="/contact">Contact</a>
+        {currentSite.actions.contactHref ? <a href={currentSite.actions.contactHref}>Email Faisal Albalwy</a> : <span>Email unavailable</span>}
+      </nav>
+      <nav aria-label="Academic profiles">
+        <strong>Academic profiles</strong>
+        {publicProfiles.length ? publicProfiles.map((profile) => <a href={profile.href} rel="noopener">{profile.label}</a>) : <span>Academic profiles unavailable</span>}
+      </nav>
+      <div class="footer-legal">
+        <p>© 2026 Faisal Albalwy · Site last updated 19 August 2026.</p>
+        <p><strong>Institutional affiliation: Taibah University.</strong> <a href="https://www.taibahu.edu.sa/" rel="noopener">Taibah University website (external)</a>. Personal academic website; this is not an official Taibah University website.</p>
+        <p>This site does not use third-party analytics, tracking, or contact forms. This site does not collect or retain inquiries. Email is handled outside the site.</p>
+      </div>
+    </footer>
+    <noscript><p class="noscript-state">Enhanced controls are unavailable. The page remains available with native navigation and visible content.</p></noscript>
+    <script src="../scripts/mobile-nav.ts"></script>
+  </body>
+</html>

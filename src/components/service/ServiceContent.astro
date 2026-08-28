@@ -1,0 +1,14 @@
+---
+import type { ServiceModel } from "../../lib/service/model";
+import "../../styles/service.css";
+interface Props { model: ServiceModel; }
+const { model } = Astro.props;
+---
+<div class="service-content" data-module-order={model.modules.join(",")}>
+  <header class="service-intro"><h1>Leadership &amp; Service</h1><p class="service-lead">This page presents selected technology leadership, scholarly service, and community engagement as supporting context. The three categories remain separate so that each statement retains its own scope.</p></header>
+  <section aria-labelledby="technology-leadership"><h2 id="technology-leadership">Technology leadership</h2><ol>{model.leadership.map((record) => <li>{record.wording}</li>)}</ol><p>These dated appointment records do not add claims about responsibilities, outcomes, team size, partnerships, or status beyond the stated terms.</p></section>
+  <section aria-labelledby="peer-review"><h2 id="peer-review">Peer review</h2><ol>{model.reviews.map((record) => <li>{record.wording}</li>)}</ol><p>These are source-specific records. They are not combined into a total, and no reviewed manuscript information is published.</p></section>
+  <section aria-labelledby="community-engagement"><h2 id="community-engagement">Community engagement</h2><ol>{model.community.map((record) => <li>{record.wording}</li>)}</ol><p>The records describe participation only. They do not imply institutional representation, partnership, measured impact, or continuing availability.</p></section>
+  <section aria-labelledby="service-source-context"><h2 id="service-source-context">Source and record context</h2><p>Each dated statement remains tied to its own reviewed source record and interval. Review figures remain source-specific and non-additive.</p></section>
+  <section aria-labelledby="service-contact"><h2 id="service-contact">Related routes and contact</h2><ul><li><a href="/research">Explore research</a></li><li><a href="/publications">View publications</a></li></ul><p>For a professional inquiry, include the topic, audience or context, proposed date where relevant, and intended contribution. An inquiry does not imply availability, acceptance, consulting, partnership, institutional participation, or endorsement.</p><a href="/contact">Contact Faisal Albalwy</a></section>
+</div>

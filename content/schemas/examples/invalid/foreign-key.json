@@ -1,0 +1,5 @@
+{
+  "cases": [
+    { "case_id": "missing-theme-publication-target", "expected_check": "COLLECTION-FOREIGN-KEY", "payload": { "publication_ids": [], "theme_ids": ["theme-one"], "relationship": { "theme_id": "theme-one", "publication_id": "publication-missing" } } }
+  ]
+}

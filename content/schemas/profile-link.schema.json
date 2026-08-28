@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fbalwy.sa/schemas/v1/profile-link.schema.json",
+  "title": "Profile or external link",
+  "allOf": [
+    { "$ref": "common.schema.json#/$defs/recordEnvelope" },
+    { "properties": { "domain": { "const": "profile-link" }, "data": { "$ref": "#/$defs/profileLinkData" } } }
+  ],
+  "$defs": {
+    "profileLinkData": {
+      "type": "object", "additionalProperties": false,
+      "required": ["platform", "canonical_url", "identifier", "label", "external", "same_tab", "identity_match", "access_state", "observed_at"],
+      "properties": {
+        "platform": { "enum": ["google_scholar", "orcid", "scopus", "web_of_science", "researchgate", "taibah_faculty_profile", "institution"] },
+        "canonical_url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "identifier": { "type": ["string", "null"] },
+        "label": { "type": "string", "minLength": 3, "maxLength": 120 },
+        "external": { "const": true },
+        "same_tab": { "const": true },
+        "identity_match": { "enum": ["verified", "ambiguous", "unavailable"] },
+        "access_state": { "enum": ["available", "blocked", "login_required", "javascript_only", "rate_limited", "missing"] },
+        "observed_at": { "type": "string", "format": "date-time" }
+      }
+    }
+  }
+}

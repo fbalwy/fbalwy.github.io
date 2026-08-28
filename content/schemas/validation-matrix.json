@@ -1,0 +1,18 @@
+{
+  "matrix_version": "1.0.0",
+  "checks": [
+    { "id": "SCHEMA-01", "name": "Schema JSON and Draft 2020-12", "expected": "all schema files parse and declare the dialect" },
+    { "id": "SCHEMA-02", "name": "Stable unique schema IDs", "expected": "all $id values are unique under https://fbalwy.sa/schemas/v1/" },
+    { "id": "SCHEMA-03", "name": "Reference resolution", "expected": "all local file and JSON Pointer references resolve" },
+    { "id": "EXAMPLE-01", "name": "Valid examples", "expected": "all valid examples pass their named contract" },
+    { "id": "FIXTURE-01", "name": "Invalid fixtures", "expected": "every fixture fails with exactly its expected check code" },
+    { "id": "COLLECTION-01", "name": "Unique record IDs and DOIs", "expected": "no duplicates after DOI normalization" },
+    { "id": "COLLECTION-02", "name": "Foreign keys", "expected": "theme, publication, course, project, platform, version, and supersession targets exist" },
+    { "id": "PUBLICATION-01", "name": "One Faisal", "expected": "every publication has exactly one is_faisal=true author" },
+    { "id": "PUBLICATION-02", "name": "Dates and status", "expected": "typed dates preserve precision and future-issue records contain issue evidence" },
+    { "id": "GOVERNANCE-01", "name": "Lifecycle and disposition", "expected": "only controlled pairs pass" },
+    { "id": "GOVERNANCE-02", "name": "Public render fail closed", "expected": "only verified/publish with all release fields renders public" },
+    { "id": "PRIVACY-01", "name": "No restricted public fields", "expected": "public values contain no internal paths, hashes, tokens, IDs, timetable/student fields, or protected markers" },
+    { "id": "COMPAT-01", "name": "Publication dataset compatibility", "expected": "27 records, 26 DOIs, one DOI-less thesis, source count parity, sorted, all internal-only eligible" }
+  ]
+}

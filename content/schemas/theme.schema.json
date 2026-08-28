@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fbalwy.sa/schemas/v1/theme.schema.json",
+  "title": "Research theme or editorial relationship",
+  "oneOf": [
+    { "$ref": "#/$defs/themeRecord" },
+    { "$ref": "#/$defs/themePublicationRelationship" }
+  ],
+  "$defs": {
+    "themeRecord": {
+      "allOf": [
+        { "$ref": "common.schema.json#/$defs/recordEnvelope" },
+        { "properties": { "domain": { "const": "theme" }, "data": { "$ref": "#/$defs/themeData" } } }
+      ]
+    },
+    "themeData": {
+      "type": "object", "additionalProperties": false,
+      "required": ["name", "classification", "summary", "approach", "contribution_types", "boundary", "query_value"],
+      "properties": {
+        "name": { "type": "string", "minLength": 2, "maxLength": 100 },
+        "classification": { "enum": ["established", "emerging"] },
+        "summary": { "type": "string", "minLength": 3 },
+        "approach": { "type": ["string", "null"] },
+        "contribution_types": { "type": "array", "uniqueItems": true, "items": { "enum": ["study", "framework", "prototype", "dataset", "review", "system", "other"] } },
+        "boundary": { "type": "string", "minLength": 3 },
+        "query_value": { "$ref": "common.schema.json#/$defs/stableId" }
+      }
+    },
+    "themePublicationRelationship": {
+      "allOf": [
+        { "$ref": "common.schema.json#/$defs/recordEnvelope" },
+        { "properties": { "domain": { "const": "theme-publication-relationship" }, "data": { "$ref": "#/$defs/relationshipData" } } }
+      ]
+    },
+    "relationshipData": {
+      "type": "object", "additionalProperties": false,
+      "required": ["theme_id", "publication_id", "relationship_type", "editorial_rationale", "confidence"],
+      "properties": {
+        "theme_id": { "$ref": "common.schema.json#/$defs/stableId" },
+        "publication_id": { "$ref": "common.schema.json#/$defs/stableId" },
+        "relationship_type": { "enum": ["primary_evidence", "related_evidence", "historical_basis", "emerging_basis"] },
+        "editorial_rationale": { "type": "string", "minLength": 3, "maxLength": 500 },
+        "confidence": { "enum": ["verified", "candidate", "rejected"] }
+      }
+    }
+  }
+}

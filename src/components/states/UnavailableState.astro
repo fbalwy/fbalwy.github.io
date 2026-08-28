@@ -1,0 +1,8 @@
+---
+import OperationalState from "./OperationalState.astro";
+import { stateFor } from "../../lib/states/contracts";
+interface Props { heading?: string; explanation?: string; }
+const { heading, explanation } = Astro.props;
+const state = { ...stateFor("evidence-gap"), heading: heading ?? stateFor("evidence-gap").heading, explanation: explanation ?? stateFor("evidence-gap").explanation };
+---
+<OperationalState state={state} headingLevel="h1" />

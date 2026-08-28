@@ -1,0 +1,12 @@
+---
+import type { TeachingModel } from "../../lib/teaching/model";
+import "../../styles/teaching.css";
+interface Props { model: TeachingModel; }
+const { model } = Astro.props;
+---
+<div class="teaching-content" data-module-order={model.modules.join(",")}>
+  <header class="teaching-intro"><h1>Teaching</h1><p class="teaching-lead">Faisal Albalwy's teaching record includes the courses below. Each unique title appears once, and every English title has been independently reviewed.</p><p>Sections, rooms, times, enrolment, student information, and course codes are not published.</p></header>
+  <section class="teaching-catalogue" aria-labelledby="courses-taught-heading"><h2 id="courses-taught-heading">Courses taught</h2><p>The list records course titles only. It does not claim current availability, frequency, course ownership, programme authority, delivery method, assessment practice, or student outcomes.</p><ol>{model.courses.map((course) => <li>{course.title}</li>)}</ol></section>
+  <section class="teaching-related" aria-labelledby="teaching-related-heading"><h2 id="teaching-related-heading">Related research and publications</h2><ul><li><a href="/research">Explore research</a></li><li><a href="/publications">View publications</a></li></ul></section>
+  <section class="teaching-inquiry" aria-labelledby="teaching-inquiry-heading"><h2 id="teaching-inquiry-heading">Teaching or supervision inquiries</h2><p>For an inquiry, include the topic, relevant academic or technical background, programme or study context, and intended timing. This guidance does not imply admission authority, available supervision places, funding, supervision availability, or a response commitment.</p><a href="/contact">Contact Faisal Albalwy</a></section>
+</div>

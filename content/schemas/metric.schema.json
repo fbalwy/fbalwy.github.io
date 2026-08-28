@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fbalwy.sa/schemas/v1/metric.schema.json",
+  "title": "Source-specific metric snapshot",
+  "allOf": [
+    { "$ref": "common.schema.json#/$defs/recordEnvelope" },
+    { "properties": { "domain": { "const": "metric" }, "data": { "$ref": "#/$defs/metricData" } } }
+  ],
+  "$defs": {
+    "metricData": {
+      "type": "object", "additionalProperties": false,
+      "required": ["metric_name", "value", "unit", "source_platform_id", "source_definition", "scope", "observed_at", "aggregation_policy"],
+      "properties": {
+        "metric_name": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "value": { "type": "number", "minimum": 0 },
+        "unit": { "type": "string", "minLength": 1, "maxLength": 50 },
+        "source_platform_id": { "$ref": "common.schema.json#/$defs/stableId" },
+        "source_definition": { "type": ["string", "null"] },
+        "scope": { "type": "string", "minLength": 3 },
+        "observed_at": { "type": "string", "format": "date-time" },
+        "aggregation_policy": { "const": "source_specific_non_additive" }
+      }
+    }
+  }
+}

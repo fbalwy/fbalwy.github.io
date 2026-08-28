@@ -1,0 +1,19 @@
+---
+import AcademicOnePage from "../components/one-page/AcademicOnePage.astro";
+import AcademicOnePageLayout from "../layouts/AcademicOnePageLayout.astro";
+import UnavailableState from "../components/states/UnavailableState.astro";
+import { skeletonState } from "../lib/content/public-model";
+import { currentSite } from "../lib/integration/current-site";
+
+const home = currentSite.routes.home;
+---
+
+<AcademicOnePageLayout>
+  {
+    home.public ? (
+      <AcademicOnePage />
+    ) : (
+      <UnavailableState {...skeletonState} />
+    )
+  }
+</AcademicOnePageLayout>

@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <link rel="icon" href="data:,">
+  <title>Responsive wireframe system — DES-003</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --page: #ffffff;
+      --muted: #f2f2f2;
+      --ink: #111144;
+      --link: #4056e3;
+      --error: #a3212a;
+      --rule: #111144;
+      --soft-rule: rgba(17, 17, 68, 0.28);
+      --focus: #4056e3;
+      --gutter: clamp(1rem, 4vw, 2rem);
+      --section: clamp(3rem, 7vw, 6rem);
+      --measure: 68ch;
+      --content: 75rem;
+      --target: 2.75rem;
+      --radius: 0.25rem;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    a { color: var(--link); text-decoration-thickness: 0.1em; text-underline-offset: 0.18em; }
+    a:hover { color: var(--ink); text-decoration-thickness: 0.16em; }
+    button, select, input { font: inherit; color: inherit; }
+
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    .board-skip {
+      position: fixed;
+      inset-block-start: 0.5rem;
+      inset-inline-start: 0.5rem;
+      z-index: 20;
+      padding: 0.65rem 0.85rem;
+      background: var(--page);
+      border: 2px solid var(--rule);
+      transform: translateY(-180%);
+    }
+    .board-skip:focus { transform: translateY(0); }
+
+    .board-header {
+      border-block-end: 2px solid var(--rule);
+      display: grid;
+      grid-template-columns: minmax(16rem, 1.2fr) minmax(17rem, 0.8fr) minmax(18rem, 1fr);
+    }
+    .board-header > * { padding: 1.25rem var(--gutter); }
+    .board-header > * + * { border-inline-start: 1px solid var(--soft-rule); }
+    .board-title { margin: 0; font-size: clamp(1.55rem, 3vw, 2.35rem); line-height: 1.15; }
+    .board-subtitle { margin: 0.4rem 0 0; max-width: 54ch; }
+    .board-label { display: block; font-size: 0.85rem; font-weight: 700; margin-block-end: 0.4rem; }
+    .board-select {
+      inline-size: 100%;
+      min-block-size: var(--target);
+      border: 2px solid var(--rule);
+      border-radius: var(--radius);
+      background: var(--page);
+      padding-inline: 0.75rem;
+    }
+
+    .legend { margin: 0; display: grid; gap: 0.35rem; font-size: 0.88rem; }
+    .legend div { display: grid; grid-template-columns: 1.8rem 1fr; align-items: center; gap: 0.45rem; }
+    .key { block-size: 0.85rem; border: 1px solid var(--rule); background: var(--page); }
+    .key.rail { border-style: dashed; }
+    .key.focus { border: 3px solid var(--focus); }
+
+    .board-main { max-inline-size: 100rem; margin-inline: auto; padding: var(--gutter); }
+    .board-intro { max-inline-size: var(--measure); margin-block: 0 2rem; }
+    .board-status { min-block-size: 1.5rem; font-weight: 700; }
+    .board-section { margin-block: 0 var(--section); }
+    .section-title {
+      margin: 0 0 1rem;
+      padding-block-end: 0.6rem;
+      border-block-end: 2px solid var(--rule);
+      font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+    }
+
+    .specimen-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 1rem; }
+    .specimen {
+      grid-column: span 12;
+      min-inline-size: 0;
+      border: 1px solid var(--rule);
+      background: var(--page);
+      scroll-margin-block-start: 1rem;
+    }
+    .specimen[data-span="6"] { grid-column: span 6; }
+    .specimen[data-span="4"] { grid-column: span 4; }
+    .specimen[data-span="3"] { grid-column: span 3; }
+    .specimen-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.4rem 1rem;
+      padding: 0.7rem 0.85rem;
+      border-block-end: 1px solid var(--rule);
+      background: var(--muted);
+    }
+    .specimen-id { font-weight: 800; letter-spacing: 0.02em; }
+    .specimen-kind { font-size: 0.82rem; }
+    .specimen-body { padding: 1rem; }
+
+    .viewport-label {
+      display: inline-block;
+      margin-block-end: 0.65rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border-block-end: 1px solid currentColor;
+    }
+
+    .site-shell { border: 1px solid var(--soft-rule); background: var(--page); }
+    .site-skip {
+      display: inline-block;
+      margin: 0.45rem 0.65rem;
+      padding: 0.2rem 0.3rem;
+      font-size: 0.78rem;
+    }
+    .site-header {
+      display: grid;
+      grid-template-columns: minmax(10rem, auto) 1fr auto;
+      align-items: start;
+      gap: 1rem;
+      padding: 0.75rem;
+      border-block: 1px solid var(--soft-rule);
+    }
+    .nameplate { color: var(--ink); font-weight: 800; text-decoration: none; }
+    .site-nav, .site-actions { display: flex; flex-wrap: wrap; gap: 0.45rem 0.8rem; }
+    .site-nav a, .site-actions a { color: var(--ink); font-size: 0.82rem; }
+    .site-nav [aria-current="page"], .site-actions [aria-current="page"] {
+      font-weight: 800;
+      text-decoration-thickness: 0.2em;
+    }
+    .site-actions { border-inline-start: 1px solid var(--soft-rule); padding-inline-start: 0.8rem; }
+    .unavailable { font-weight: 700; font-size: 0.82rem; }
+
+    .mobile-toggle {
+      min-block-size: var(--target);
+      min-inline-size: var(--target);
+      padding-inline: 0.7rem;
+      border: 2px solid var(--rule);
+      background: var(--page);
+      border-radius: var(--radius);
+      font-weight: 700;
+    }
+    .mobile-menu { margin-block-start: 0.8rem; border-block-start: 1px solid var(--rule); padding-block-start: 0.6rem; }
+    .mobile-menu a, .mobile-menu span { display: block; padding: 0.45rem 0; overflow-wrap: anywhere; }
+    .mobile-menu h3 { font-size: 0.86rem; margin: 0.8rem 0 0.2rem; }
+
+    .page {
+      padding: clamp(1rem, 3vw, 2rem);
+    }
+    .page h1 { margin: 0 0 0.65rem; font-size: clamp(1.6rem, 4vw, 2.8rem); line-height: 1.15; }
+    .page h2 { margin-block: 2rem 0.65rem; font-size: clamp(1.2rem, 2.5vw, 1.55rem); line-height: 1.25; }
+    .page h3 { margin-block: 1.25rem 0.45rem; font-size: 1.05rem; line-height: 1.3; }
+    .page-purpose { max-inline-size: var(--measure); font-size: 1.05rem; }
+    .annotation-note {
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin: 0.7rem 0;
+      padding-inline-start: 0.65rem;
+      border-inline-start: 3px solid var(--rule);
+    }
+
+    .planes {
+      display: grid;
+      grid-template-columns: minmax(0, 7fr) minmax(13rem, 3fr);
+      gap: clamp(1rem, 4vw, 2.25rem);
+      align-items: start;
+    }
+    .reading-plane { min-inline-size: 0; }
+    .evidence-rail {
+      min-inline-size: 0;
+      border: 1px dashed var(--rule);
+      padding: 0.85rem;
+      font-size: 0.85rem;
+    }
+    .evidence-rail h2, .evidence-rail h3 { margin-block-start: 0; font-size: 0.95rem; }
+    .evidence-rail dl { margin: 0; }
+    .evidence-rail dt { font-weight: 800; margin-block-start: 0.65rem; }
+    .evidence-rail dd { margin: 0; }
+
+    .action-row { display: flex; flex-wrap: wrap; gap: 0.65rem; margin-block: 1rem; }
+    .action {
+      display: inline-flex;
+      align-items: center;
+      min-block-size: var(--target);
+      padding: 0.55rem 0.8rem;
+      border: 2px solid var(--link);
+      border-radius: var(--radius);
+      background: var(--page);
+      font-weight: 700;
+    }
+    .action.primary { background: var(--link); color: var(--page); }
+    .action.primary:focus-visible { outline-color: var(--ink); box-shadow: 0 0 0 2px var(--page); }
+
+    .in-page-nav { border-block: 1px solid var(--soft-rule); padding-block: 0.65rem; margin-block: 1rem; }
+    .in-page-nav strong { display: block; margin-block-end: 0.35rem; }
+    .in-page-nav ul { margin: 0; padding-inline-start: 1.2rem; columns: 2; }
+
+    .record-list, .simple-list, .timeline { list-style: none; padding: 0; margin: 0; }
+    .record, .simple-list li, .timeline li { padding-block: 1rem; border-block-start: 1px solid var(--soft-rule); }
+    .record:last-child, .simple-list li:last-child, .timeline li:last-child { border-block-end: 1px solid var(--soft-rule); }
+    .record h3 { margin: 0 0 0.35rem; overflow-wrap: anywhere; }
+    .record p { margin: 0.25rem 0; overflow-wrap: anywhere; }
+    .meta { font-size: 0.86rem; }
+    .meta strong { font-weight: 800; }
+    .doi { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; overflow-wrap: anywhere; }
+
+    .filters {
+      display: grid;
+      grid-template-columns: minmax(12rem, 2fr) repeat(2, minmax(8rem, 1fr));
+      gap: 0.75rem;
+      padding: 1rem;
+      border: 2px solid var(--rule);
+      margin-block: 1rem;
+    }
+    .control label { display: block; font-weight: 800; margin-block-end: 0.3rem; }
+    .control input, .control select {
+      inline-size: 100%;
+      min-block-size: var(--target);
+      padding: 0.45rem 0.6rem;
+      border: 2px solid var(--rule);
+      background: var(--page);
+      border-radius: var(--radius);
+    }
+    .hint { margin: 0.25rem 0 0; font-size: 0.78rem; }
+    .filter-token {
+      display: inline-block;
+      max-inline-size: 100%;
+      margin: 0.25rem 0.25rem 0.25rem 0;
+      padding: 0.25rem 0.45rem;
+      border: 1px solid var(--rule);
+      overflow-wrap: anywhere;
+    }
+
+    .status-box { border: 2px solid var(--rule); padding: 1rem; margin-block: 0.75rem; }
+    .status-box h2, .status-box h3 { margin-block-start: 0; }
+    .status-box.error { border-inline-start: 0.5rem solid var(--error); }
+    .status-box.warning { border-inline-start: 0.5rem double var(--rule); }
+    .state-page { max-inline-size: 42rem; margin-inline: auto; text-align: start; }
+
+    .site-footer {
+      display: grid;
+      grid-template-columns: 1.3fr repeat(2, 1fr);
+      gap: 1rem;
+      padding: 1rem;
+      border-block-start: 2px solid var(--rule);
+      background: var(--muted);
+      font-size: 0.82rem;
+    }
+    .site-footer h2 { margin: 0 0 0.45rem; font-size: 0.9rem; }
+    .site-footer a, .site-footer span { display: block; margin-block: 0.2rem; }
+    .affiliation-placeholder { grid-column: 1 / -1; border-block-start: 1px solid var(--rule); padding-block-start: 0.75rem; }
+
+    .phone-frame { inline-size: min(100%, 20rem); margin-inline: auto; }
+    .tablet-frame { inline-size: min(100%, 48rem); margin-inline: auto; }
+    .desktop-frame { inline-size: 100%; }
+    .phone-frame .site-header { grid-template-columns: 1fr auto; }
+    .phone-frame .site-nav, .phone-frame .site-actions { display: none; }
+    .phone-frame .planes { grid-template-columns: 1fr; }
+    .phone-frame .evidence-rail { margin-block-start: 0.5rem; }
+    .phone-frame .filters { grid-template-columns: 1fr; }
+    .phone-frame .in-page-nav ul { columns: 1; }
+    .phone-frame .site-footer { grid-template-columns: 1fr; }
+
+    .choice-path { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.6rem; }
+    .choice-step { border-block-start: 3px solid var(--rule); padding-block-start: 0.45rem; font-size: 0.82rem; }
+    .choice-step strong { display: block; }
+
+    .print-sheet { max-inline-size: 42rem; margin-inline: auto; border: 1px solid var(--rule); padding: 1.5rem; background: var(--page); }
+    .print-sheet nav, .print-sheet button, .print-sheet .filters { display: none; }
+    .print-header, .print-footer { border-block: 1px solid var(--rule); padding-block: 0.55rem; }
+    .print-footer { margin-block-start: 1rem; font-size: 0.8rem; }
+
+    [hidden] { display: none !important; }
+
+    @media (max-width: 64rem) {
+      .board-header { grid-template-columns: 1fr 1fr; }
+      .board-header > :last-child { grid-column: 1 / -1; border-inline-start: 0; border-block-start: 1px solid var(--soft-rule); }
+      .specimen[data-span="4"], .specimen[data-span="3"] { grid-column: span 6; }
+      .site-header { grid-template-columns: 1fr; }
+      .site-actions { border-inline-start: 0; padding-inline-start: 0; }
+      .planes { grid-template-columns: minmax(0, 1fr); }
+      .evidence-rail { margin-block-start: 0.5rem; }
+    }
+
+    @media (max-width: 48rem) {
+      .board-header { grid-template-columns: 1fr; }
+      .board-header > * + * { border-inline-start: 0; border-block-start: 1px solid var(--soft-rule); }
+      .specimen[data-span="6"], .specimen[data-span="4"], .specimen[data-span="3"] { grid-column: span 12; }
+      .filters, .choice-path { grid-template-columns: 1fr; }
+      .site-footer { grid-template-columns: 1fr; }
+      .in-page-nav ul { columns: 1; }
+    }
+
+    @media (max-width: 24.5rem) {
+      .board-main, .board-header > * { padding-inline: 1rem; }
+      .specimen-body, .page { padding-inline: 0.75rem; }
+      .site-header { grid-template-columns: 1fr auto; gap: 0.5rem; }
+      .site-nav, .site-actions { display: none; }
+      .action-row { align-items: stretch; }
+      .action { inline-size: 100%; justify-content: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0ms !important; animation-duration: 0ms !important; }
+    }
+
+    @media (forced-colors: active) {
+      :root { --page: Canvas; --muted: Canvas; --ink: CanvasText; --link: LinkText; --error: CanvasText; --rule: CanvasText; --soft-rule: CanvasText; --focus: Highlight; }
+      .action.primary { background: Canvas; color: LinkText; }
+      .specimen, .status-box, .filters, .evidence-rail, .site-shell { border-color: CanvasText; }
+    }
+
+    @media print {
+      .board-skip, .board-header, .board-intro, .board-status { display: none !important; }
+      body { color: #000000; background: #ffffff; font-size: 11pt; }
+      .board-main { max-inline-size: none; padding: 0; }
+      .board-section { break-before: page; margin: 0; }
+      .specimen-grid { display: block; }
+      .specimen { break-inside: avoid; margin-block-end: 1rem; box-shadow: none; }
+      a { color: #000000; text-decoration: underline; }
+      .site-nav, .site-actions, .mobile-menu, .filters, .board-controls { display: none !important; }
+      .planes { display: block; }
+      .evidence-rail { border-style: solid; margin-block-start: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+  <a class="board-skip" href="#wireframe-board">Skip to wireframe board</a>
+
+  <header class="board-header">
+    <div>
+      <h1 class="board-title">Responsive wireframe system</h1>
+      <p class="board-subtitle">DES-003 internal board for the frozen English academic-site routes. Structure only; synthetic content is not visitor copy.</p>
+    </div>
+    <div class="board-controls">
+      <label class="board-label" for="specimen-filter">Route / state selector</label>
+      <select class="board-select" id="specimen-filter">
+        <option value="all">Show all specimens</option>
+        <option value="global">Global shell and viewport behavior</option>
+        <option value="home">Home</option>
+        <option value="research">Research</option>
+        <option value="publications">Publications</option>
+        <option value="teaching">Teaching</option>
+        <option value="leadership">Leadership &amp; Service</option>
+        <option value="about">About</option>
+        <option value="contact">Contact</option>
+        <option value="cv">CV utility</option>
+        <option value="states">Operational states</option>
+        <option value="modes">Modes and failures</option>
+      </select>
+    </div>
+    <div>
+      <span class="board-label">Annotation key</span>
+      <div class="legend">
+        <div><span class="key"></span><span>Primary reading plane / route module</span></div>
+        <div><span class="key rail"></span><span>Additive evidence or implementation annotation</span></div>
+        <div><span class="key focus"></span><span>Visible keyboard focus example</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="board-main" id="wireframe-board">
+    <div class="board-intro">
+      <p><strong>Use:</strong> inspect module order, reading order, choice paths, density, recovery, and reflow. This artifact contains no approved factual profile, email, publication, course, service, affiliation, or CV value.</p>
+      <p class="board-status" id="board-status" aria-live="polite">Showing all specimens.</p>
+    </div>
+
+    <section class="board-section" data-group-section="global" aria-labelledby="global-title">
+      <h2 class="section-title" id="global-title">Global shell and labelled viewports</h2>
+      <div class="specimen-grid">
+        <article class="specimen" id="wf-g-01" data-group="global">
+          <header class="specimen-head"><span class="specimen-id">WF-G-01</span><span class="specimen-kind">Desktop shell · 1440 CSS px target</span></header>
+          <div class="specimen-body">
+            <span class="viewport-label">Desktop / expanded navigation</span>
+            <div class="site-shell desktop-frame">
+              <a class="site-skip" href="#wf-g-01-main">Skip to main content</a>
+              <header class="site-header">
+                <a class="nameplate" href="#wf-r1-01">Faisal Albalwy</a>
+                <nav class="site-nav" aria-label="Primary navigation">
+                  <a href="#wf-r2-01" aria-current="page">Research</a><a href="#wf-r3-01">Publications</a><a href="#wf-r4-01">Teaching</a><a href="#wf-r5-01">Leadership &amp; Service</a><a href="#wf-r6-01">About</a>
+                </nav>
+                <nav class="site-actions" aria-label="Actions"><a href="#wf-r7-01">Contact</a><span class="unavailable">CV unavailable</span></nav>
+              </header>
+              <div class="page" id="wf-g-01-main">
+                <div class="planes">
+                  <div class="reading-plane"><h1>Research</h1><p class="page-purpose">Synthetic purpose text demonstrates the dominant reading plane and wraps without relying on imagery.</p><div class="action-row"><a class="action primary" href="#wf-r3-01">View related publications</a><a class="action" href="#wf-r7-01">Contact</a></div></div>
+                  <aside class="evidence-rail" aria-label="Evidence rail example"><h2>Evidence rail</h2><p>Short factual labels and actions support the adjacent content. The rail is not navigation and never precedes the claim.</p></aside>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="specimen" id="wf-g-02" data-group="global" data-span="6">
+          <header class="specimen-head"><span class="specimen-id">WF-G-02</span><span class="specimen-kind">Tablet shell · 768 CSS px target</span></header>
+          <div class="specimen-body">
+            <span class="viewport-label">Tablet / wrapped groups, unchanged order</span>
+            <div class="site-shell tablet-frame">
+              <a class="site-skip" href="#wf-g-02-main">Skip to main content</a>
+              <header class="site-header"><a class="nameplate" href="#wf-r1-01">Faisal Albalwy</a><nav class="site-nav" aria-label="Primary navigation"><a href="#wf-r2-01">Research</a><a href="#wf-r3-01">Publications</a><a href="#wf-r4-01">Teaching</a><a href="#wf-r5-01">Leadership &amp; Service</a><a href="#wf-r6-01">About</a></nav><nav class="site-actions" aria-label="Actions"><a href="#wf-r7-01">Contact</a><span class="unavailable">CV unavailable</span></nav></header>
+              <div class="page" id="wf-g-02-main"><h1>Page title</h1><p class="page-purpose">Primary and utility groups wrap before labels abbreviate. Reading order remains nameplate, primary navigation, actions, then content.</p></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="specimen" id="wf-g-03" data-group="global" data-span="3">
+          <header class="specimen-head"><span class="specimen-id">WF-G-03</span><span class="specimen-kind">Mobile shell · closed</span></header>
+          <div class="specimen-body">
+            <span class="viewport-label">Mobile / 320–390 CSS px</span>
+            <div class="site-shell phone-frame">
+              <a class="site-skip" href="#wf-g-03-main">Skip to main content</a>
+              <header class="site-header"><a class="nameplate" href="#wf-r1-01">Faisal Albalwy</a><button class="mobile-toggle" type="button" aria-expanded="false">Menu</button></header>
+              <div class="page" id="wf-g-03-main"><h1>Page title</h1><p>Closed menu preserves the full name and an explicit text control.</p></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="specimen" id="wf-g-04" data-group="global" data-span="3">
+          <header class="specimen-head"><span class="specimen-id">WF-G-04</span><span class="specimen-kind">Mobile shell · open</span></header>
+          <div class="specimen-body">
+            <span class="viewport-label">Mobile / full menu order</span>
+            <div class="site-shell phone-frame">
+              <a class="site-skip" href="#wf-g-04-main">Skip to main content</a>
+              <header class="site-header"><a class="nameplate" href="#wf-r1-01">Faisal Albalwy</a><button class="mobile-toggle" type="button" aria-expanded="true">Menu</button><nav class="mobile-menu" aria-label="Primary navigation"><a href="#wf-r2-01" aria-current="page">Research</a><a href="#wf-r3-01">Publications</a><a href="#wf-r4-01">Teaching</a><a href="#wf-r5-01">Leadership &amp; Service</a><a href="#wf-r6-01">About</a><h3>Actions</h3><a href="#wf-r7-01">Contact</a><span class="unavailable">CV unavailable</span></nav></header>
+              <div class="page" id="wf-g-04-main"><h1>Research</h1><p>Escape closes and returns focus to Menu; Tab proceeds to Research.</p></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="specimen" id="wf-g-05" data-group="global" data-span="6">
+          <header class="specimen-head"><span class="specimen-id">WF-G-05</span><span class="specimen-kind">Keyboard focus and purposeful-choice path</span></header>
+          <div class="specimen-body">
+            <div class="choice-path" aria-label="Top five task path summary">
+              <div class="choice-step"><strong>T1 · Research</strong>Research → evidence<br>Maximum 2 choices</div>
+              <div class="choice-step"><strong>T2 · Publication</strong>Publications → external source<br>Maximum 2</div>
+              <div class="choice-step"><strong>T3 · Fit</strong>Research → Contact<br>Maximum 2</div>
+              <div class="choice-step"><strong>T4 · Contact</strong>Contact → email<br>Maximum 2</div>
+              <div class="choice-step"><strong>T5 · CV</strong>CV utility → PDF<br>Maximum 1</div>
+            </div>
+            <p class="annotation-note">Focus sequence: board skip → nameplate → primary navigation → Actions → page skip → H1/content → route actions → related links → footer. The focused example below uses text plus an outline.</p>
+            <div class="action-row"><a class="action" href="#wf-r2-01" style="outline:3px solid #4056e3;outline-offset:3px">Explore research</a><a class="action" href="#wf-r3-01">View publications</a></div>
+          </div>
+        </article>
+
+        <article class="specimen" id="wf-g-06" data-group="global" data-span="6">
+          <header class="specimen-head"><span class="specimen-id">WF-G-06</span><span class="specimen-kind">Footer · conditional groups</span></header>
+          <div class="specimen-body">
+            <footer class="site-footer" aria-label="Site footer">
+              <div><h2>Faisal Albalwy</h2><span>Personal academic website</span><span>Site update context</span></div>
+              <div><h2>Explore</h2><a href="#wf-r2-01">Research</a><a href="#wf-r3-01">Publications</a><a href="#wf-r4-01">Teaching</a><a href="#wf-r5-01">Leadership &amp; Service</a><a href="#wf-r6-01">About</a></div>
+              <div><h2>Actions</h2><a href="#wf-r7-01">Contact</a><span class="unavailable">CV unavailable</span></div>
+              <div class="affiliation-placeholder"><strong>Conditional text affiliation region</strong><span>Rendered only from approved data; no image, logo gap, or joint nameplate.</span></div>
+            </footer>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="board-section" data-group-section="home" aria-labelledby="home-title">
+      <h2 class="section-title" id="home-title">Frozen launch routes</h2>
+      <div class="specimen-grid">
+        <article class="specimen" id="wf-r1-01" data-group="home">
+          <header class="specimen-head"><span class="specimen-id">WF-R1-01</span><span class="specimen-kind">Home · research-first gateway</span></header>
+          <div class="specimen-body">
+            <div class="site-shell"><div class="page"><h1>Faisal Albalwy</h1><p class="page-purpose">Personal academic website. Synthetic structural copy demonstrates a no-image identity block and does not assert a role, affiliation, or expertise.</p><div class="action-row"><a class="action primary" href="#wf-r2-01">Explore research</a><a class="action" href="#wf-r3-01">View publications</a></div><div class="planes"><div class="reading-plane"><h2>Research context</h2><p>Short route-purpose summary. Conditional themes and project stories disappear completely when no public records exist.</p><h2>Featured publications</h2><ol class="record-list"><li class="record"><h3>Synthetic publication record with a long title used only to test wrapping and hierarchy</h3><p class="meta">Example authors · Example venue · 2026</p></li><li class="record"><h3>Second synthetic record for catalogue-density rhythm</h3><p class="meta">Example authors · Example venue · 2025</p></li></ol><h2>About and CV context</h2><p><a href="#wf-r6-01">About</a></p><div class="status-box"><h3>CV unavailable</h3><p>The public document is being reviewed. No link or reserved download target appears.</p></div><h2>Contact pathway</h2><p><a href="#wf-r7-01">Contact</a></p></div><aside class="evidence-rail"><h2>Home annotations</h2><dl><dt>Order</dt><dd>Identity → Research → Publications → About/CV → Contact.</dd><dt>Omissions</dt><dd>Unsupported modules remove heading, link, and space together.</dd><dt>Images</dt><dd>None required or reserved.</dd></dl></aside></div></div></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="board-section" data-group-section="research" aria-labelledby="research-title">
+      <h2 class="section-title" id="research-title">Research route</h2>
+      <div class="specimen-grid">
+        <article class="specimen" id="wf-r2-01" data-group="research">
+          <header class="specimen-head"><span class="specimen-id">WF-R2-01</span><span class="specimen-kind">Research · dense desktop plus narrow in-page navigation</span></header>
+          <div class="specimen-body"><div class="planes"><div class="reading-plane page"><h1>Research</h1><p class="page-purpose">Synthetic purpose text connects questions, work records, and publication evidence without claiming a real research agenda.</p><nav class="in-page-nav" aria-label="On this page"><strong>On this page</strong><ul><li><a href="#synthetic-themes">Research themes</a></li><li><a href="#synthetic-projects">Projects and systems</a></li><li><a href="#synthetic-emerging">Emerging directions</a></li><li><a href="#synthetic-collaboration">Collaboration</a></li></ul></nav><h2 id="synthetic-themes">Established research themes</h2><div class="record"><h3>Synthetic theme heading</h3><p>One plain-language question and a bounded contribution summary.</p></div><h2 id="synthetic-emerging">Emerging directions</h2><div class="record"><h3>Synthetic emerging direction</h3><p>Explicitly separated from established work.</p></div><h2 id="synthetic-projects">Funded projects</h2><div class="record"><h3>Example project title with intentionally long wording that demonstrates full line wrapping</h3><p class="meta"><strong>Type:</strong> Example · <strong>Status:</strong> Example · <strong>Period:</strong> Example</p></div><h2>Research systems</h2><div class="record"><h3>Example system record</h3><p class="meta">Role, maturity, output, and source fields align beneath the claim.</p></div><h2 id="synthetic-collaboration">Collaboration pathways</h2><div class="action-row"><a class="action primary" href="#wf-r3-01">View related publications</a><a class="action" href="#wf-r7-01">Contact</a></div></div><aside class="evidence-rail"><h2>Evidence rail</h2><p>Each material record has short, adjacent metadata and an external or related destination only when approved.</p><p><strong>Narrow rule:</strong> this rail moves immediately under the corresponding record and retains DOM order.</p></aside></div></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="board-section" data-group-section="publications" aria-labelledby="publications-title">
+      <h2 class="section-title" id="publications-title">Publications route and catalogue states</h2>
+      <div class="specimen-grid">
+        <article class="specimen" id="wf-r3-01" data-group="publications">
+          <header class="specimen-head"><span class="specimen-id">WF-R3-01</span><span class="specimen-kind">Publications · complete HTML catalogue boundary</span></header>
+          <div class="specimen-body"><div class="page"><h1>Publications</h1><p class="page-purpose">Synthetic records demonstrate catalogue anatomy. No real eligible-only bibliography is rendered.</p><h2>Featured publications</h2><p>Compact route-level introduction; featured means a navigation aid, never a quality rank.</p><div class="filters" aria-label="Publication filter specimen"><div class="control"><label for="sample-search">Search publications</label><input id="sample-search" type="search" value="" aria-describedby="sample-search-hint"><p class="hint" id="sample-search-hint">Search by title, author, venue, or DOI.</p></div><div class="control"><label for="sample-year">Year</label><select id="sample-year"><option>All years</option><option>2026</option></select></div><div class="control"><label for="sample-type">Publication type</label><select id="sample-type"><option>All publication types</option><option>Journal article</option></select></div></div><p role="status"><strong>100 publications</strong> <span class="annotation-note">Synthetic density count</span></p><h2>Complete catalogue</h2><ol class="record-list"><li class="record"><h3>A synthetic publication title deliberately extended across many words to demonstrate the wrapping behavior required for an unusually long scholarly record without truncation, ellipsis, hover disclosure, or sideways scrolling</h3><p class="meta">A. Example Author; B. Example Author; C. Example Author; D. Example Author; E. Example Author; F. Example Author; G. Example Author; H. Example Author; I. Example Author; J. Example Author; K. Example Author; L. Example Author</p><p class="meta"><strong>Status:</strong> Available online; issue assigned for a supported future date · <strong>Type:</strong> Journal article</p><p class="meta"><strong>Venue:</strong> An intentionally long synthetic venue name for testing only</p><p class="doi">DOI: 10.0000/example.2026.long-density-string-with-one-hundred-characters-for-responsive-wrapping-000001</p><div class="action-row"><a class="action" href="#wf-s-10">Open DOI (external)</a><button class="action" type="button">Copy citation</button></div></li><li class="record"><h3>Synthetic doctoral thesis record without a DOI</h3><p class="meta">Example author · Example repository · Doctoral thesis awarded</p><div class="action-row"><a class="action" href="#wf-s-10">View institutional record (external)</a></div></li></ol></div></div>
+        </article>
+
+        <article class="specimen" id="wf-r3-02" data-group="publications" data-span="6">
+          <header class="specimen-head"><span class="specimen-id">WF-R3-02</span><span class="specimen-kind">Publications · active query state</span></header>
+          <div class="specimen-body"><h3>Search and filters</h3><span class="filter-token">Search: “synthetic query that wraps across a narrow viewport”</span><span class="filter-token">Year: 2026</span><span class="filter-token">Publication type: Journal article</span><p role="status"><strong>1 of 100 publications</strong></p><div class="action-row"><button class="action" type="button">Clear filters</button></div><p class="annotation-note">Generated key order is q, year, type, theme. Theme is omitted until relationships are approved.</p></div>
+        </article>
+
+        <article class="specimen" id="wf-s-06" data-group="publications states" data-span="6">
+          <header class="specimen-head"><span class="specimen-id">WF-S-06</span><span class="specimen-kind">Publication no-results state</span></header>
+          <div class="specimen-body"><div class="status-box"><h3>No publications match these filters.</h3><p>Change the search or filters, or clear them to return to the complete catalogue.</p><button class="action" type="button">Clear filters</button></div><p class="annotation-note">Controls remain visible; focus returns to search or results heading.</p></div>
+        </article>
+
+        <article class="specimen" id="wf-s-07" data-group="publications states" data-span="6">
+          <header class="specimen-head"><span class="specimen-id">WF-S-07</span><span class="specimen-kind">Publication data unavailable</span></header>
+          <div class="specimen-body"><div class="status-box error"><h3>Publications could not be loaded.</h3><p>The catalogue data is temporarily unavailable. No trace, path, or stale record appears.</p><div class="action-row"><button class="action" type="button">Try again</button><a class="action" href="#wf-r2-01">View related research</a></div></div></div>
+        </article>
+
+        <article class="specimen" id="wf-s-05" data-group="publications states" data-span="6">
+          <header class="specimen-head"><span class="specimen-id">WF-S-05</span><span class="specimen-kind">Partial publication data</span></header>
+          <div class="specimen-body"><div class="status-box"><h3>Some publication details are unavailable.</h3><p>Available verified fields remain visible. Missing optional fields are omitted rather than estimated.</p></div><div class="record"><h3>Synthetic record with title and author only</h3><p class="meta">Example author list</p><a href="#wf-s-10">Open canonical source (external)</a></div></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="board-section" data-group-section="teaching" aria-labelledby="teaching-title">
+      <h2 class="section-title" id="teaching-title">Teaching route</h2>
+      <div class="specimen-grid"><article class="specimen" id="wf-r4-01" data-group="teaching"><header class="specimen-head"><span class="specimen-id">WF-R4-01</span><span class="specimen-kind">Teaching · grouped semantic lists</span></header><div class="specimen-body"><div class="page"><h1>Teaching</h1><p class="page-purpose">Synthetic structure only: teaching approach, approved course groups, supervision context, and inquiry boundary.</p><nav class="in-page-nav" aria-label="On this page"><strong>On this page</strong><ul><li><a href="#sample-teaching-approach">Teaching approach</a></li><li><a href="#sample-courses">Courses</a></li><li><a href="#sample-supervision">Supervision</a></li><li><a href="#sample-inquiry">Supervision inquiries</a></li></ul></nav><h2 id="sample-teaching-approach">Teaching approach</h2><p>Neutral density paragraph; omitted completely when no approved statement exists.</p><h2 id="sample-courses">Courses</h2><h3>Example group</h3><ul class="simple-list"><li>An intentionally long synthetic course title that wraps fully and does not become an isolated card</li><li>Second synthetic course title</li><li>Third synthetic course title</li></ul><h2 id="sample-supervision">Supervision</h2><p>Privacy-safe role-only pattern; no student, timetable, room, section, count, funding, or availability value.</p><h2>Related research and publications</h2><div class="action-row"><a class="action" href="#wf-r2-01">Explore research</a><a class="action" href="#wf-r3-01">View publications</a></div><h2 id="sample-inquiry">Prospective supervision inquiries</h2><a class="action" href="#wf-r7-01">Contact</a></div></div></article></div>
+    </section>
+
+    <section class="board-section" data-group-section="leadership" aria-labelledby="leadership-title">
+      <h2 class="section-title" id="leadership-title">Leadership &amp; Service route</h2>
+      <div class="specimen-grid"><article class="specimen" id="wf-r5-01" data-group="leadership"><header class="specimen-head"><span class="specimen-id">WF-R5-01</span><span class="specimen-kind">Leadership &amp; Service · category and chronology</span></header><div class="specimen-body"><div class="page"><h1>Leadership &amp; Service</h1><p class="page-purpose">Synthetic structure tests the required category hierarchy without asserting a real role, organisation, date, total, or outcome.</p><nav class="in-page-nav" aria-label="On this page"><strong>On this page</strong><ul><li><a href="#sample-tech-leadership">Technology leadership</a></li><li><a href="#sample-university-service">University service</a></li><li><a href="#sample-peer-review">Peer review</a></li><li><a href="#sample-community">Community engagement</a></li><li><a href="#sample-talks">Talks and development</a></li></ul></nav><div class="planes"><div class="reading-plane"><h2 id="sample-tech-leadership">Technology leadership</h2><ol class="timeline"><li><h3>Example role with an intentionally long organisation and responsibility label that wraps without truncation</h3><p class="meta"><strong>Period:</strong> supported dates · <strong>Status:</strong> historical example</p></li></ol><h2 id="sample-university-service">University service</h2><div class="record"><h3>Example committee-service record</h3><p class="meta">Role · supported period · scope</p></div><h2 id="sample-peer-review">Peer review</h2><p>Source-specific records only; no cumulative total.</p><h2 id="sample-community">Community engagement</h2><p>Example activity record pattern.</p><h2 id="sample-talks">Talks and development</h2><p>Distinct activity types remain labelled.</p><div class="action-row"><a class="action" href="#wf-r2-01">Explore research</a><a class="action" href="#wf-r3-01">View publications</a><a class="action primary" href="#wf-r7-01">Contact</a></div></div><aside class="evidence-rail"><h2>Record evidence</h2><p>Exact category, organisation, role, period, and status follow each claim; raw scans and totals never appear.</p></aside></div></div></div></article></div>
+    </section>
+
+    <section class="board-section" data-group-section="about" aria-labelledby="about-title">
+      <h2 class="section-title" id="about-title">About route</h2>
+      <div class="specimen-grid"><article class="specimen" id="wf-r6-01" data-group="about"><header class="specimen-head"><span class="specimen-id">WF-R6-01</span><span class="specimen-kind">About · long narrative and timelines</span></header><div class="specimen-body"><div class="page"><h1>About Faisal Albalwy</h1><p class="page-purpose">Role-neutral synthetic structure; no professional title, institution, education, appointment, or biography fact is asserted.</p><nav class="in-page-nav" aria-label="On this page"><strong>On this page</strong><ul><li><a href="#sample-biography">Biography</a></li><li><a href="#sample-current-roles">Current roles</a></li><li><a href="#sample-career">Career</a></li><li><a href="#sample-education">Education</a></li><li><a href="#sample-cv">CV</a></li></ul></nav><div class="planes"><div class="reading-plane"><h2 id="sample-biography">Short biography</h2><p>Faisal Albalwy’s personal academic website brings together research, publications, teaching, and service.</p><h2>Extended biography</h2><p>Synthetic paragraph block demonstrates a longer readable measure. Final wording is supplied only after content review and may be omitted sentence by sentence.</p><h2 id="sample-current-roles">Current verified roles</h2><div class="status-box"><p>Conditional module: absent when currentness is not approved.</p></div><h2 id="sample-career">Academic and leadership career</h2><ol class="timeline"><li><h3>Example role and organisation with long wrapping text</h3><p class="meta">Supported period</p></li><li><h3>Second example role</h3><p class="meta">Supported period</p></li></ol><h2 id="sample-education">Education</h2><ul class="simple-list"><li>Example verified award structure · institution · date precision</li></ul><h2>Selected recognition</h2><p>Conditional; no badge, certificate, metric, or prestige treatment.</p><h2 id="sample-cv">CV context</h2><div class="status-box"><h3>CV unavailable</h3><p>Accessible HTML context remains; no private or older file is linked.</p></div><div class="action-row"><a class="action" href="#wf-r2-01">Explore research</a><a class="action" href="#wf-r3-01">View publications</a><a class="action" href="#wf-r7-01">Contact</a></div></div><aside class="evidence-rail"><h2>About annotations</h2><p>Short biography precedes extended context. Timeline becomes a list at narrow widths. Repeated facts come from canonical records.</p></aside></div></div></div></article></div>
+    </section>
+
+    <section class="board-section" data-group-section="contact" aria-labelledby="contact-title">
+      <h2 class="section-title" id="contact-title">Contact route variants</h2>
+      <div class="specimen-grid">
+        <article class="specimen" id="wf-r7-01" data-group="contact" data-span="6"><header class="specimen-head"><span class="specimen-id">WF-R7-01</span><span class="specimen-kind">Contact · institutional email unavailable</span></header><div class="specimen-body"><div class="page"><h1>Contact</h1><p class="page-purpose">Prepare a focused professional inquiry. This structure does not promise availability, acceptance, funding, a meeting, or a response.</p><h2>Inquiry guidance</h2><ul><li>Research or collaboration context</li><li>Publication, editorial, or scholarly context</li><li>Teaching or supervision context</li><li>Speaking, professional, technology, or public-sector context</li></ul><div class="status-box warning"><h2>Institutional email unavailable</h2><p>The institutional email link is being verified and is not available. Please return later.</p></div><h2>Related routes</h2><a href="#wf-r3-01">View publications</a></div></div></article>
+        <article class="specimen" id="wf-r7-02" data-group="contact" data-span="6"><header class="specimen-head"><span class="specimen-id">WF-R7-02</span><span class="specimen-kind">Contact · verified-email layout pattern</span></header><div class="specimen-body"><div class="page"><h1>Contact</h1><p class="page-purpose">Available-state geometry only. The address below is deliberately non-routable and synthetic.</p><h2>Institutional email</h2><p class="doi">academic-contact-with-long-local-part@example.invalid</p><div class="action-row"><button class="action primary" type="button">Email Faisal Albalwy</button></div><p class="annotation-note">No form, hidden field, submission, storage, CAPTCHA, calendar, map, tracker, or prefilled sensitive body.</p></div></div></article>
+      </div>
+    </section>
+
+    <section class="board-section" data-group-section="cv" aria-labelledby="cv-title">
+      <h2 class="section-title" id="cv-title">Conditional CV utility</h2>
+      <div class="specimen-grid">
+        <article class="specimen" id="wf-r8-01" data-group="cv" data-span="6"><header class="specimen-head"><span class="specimen-id">WF-R8-01</span><span class="specimen-kind">CV available · future conditional pattern</span></header><div class="specimen-body"><div class="status-box"><h3>Curriculum vitae</h3><a class="action" href="#wf-m-01">Download CV (PDF, verified size)</a><p>Updated month year</p></div><p class="annotation-note">One canonical English PDF only; size, date, accessibility, privacy, metadata, and approval remain adjacent.</p></div></article>
+        <article class="specimen" id="wf-r8-02" data-group="cv" data-span="6"><header class="specimen-head"><span class="specimen-id">WF-R8-02</span><span class="specimen-kind">CV unavailable · current pattern</span></header><div class="specimen-body"><div class="status-box warning"><h3>CV unavailable</h3><p>The public English CV is being reviewed and is not available for download. Use About for accessible HTML context.</p><a class="action" href="#wf-r6-01">About</a></div><p class="annotation-note">Non-link state. Direct PDF request uses WF-S-01 404; no redirect or private substitute.</p></div></article>
+      </div>
+    </section>
+
+    <section class="board-section" data-group-section="states" aria-labelledby="states-title">
+      <h2 class="section-title" id="states-title">Operational, empty, unavailable, and recovery states</h2>
+      <div class="specimen-grid">
+        <article class="specimen" id="wf-s-01" data-group="states" data-span="4"><header class="specimen-head"><span class="specimen-id">WF-S-01</span><span class="specimen-kind">404 · page not found</span></header><div class="specimen-body"><div class="state-page"><h2>Page not found</h2><p>The page you requested could not be found. It may have moved, or the address may be incorrect.</p><ol><li><a href="#wf-r1-01">Return to homepage</a></li><li><a href="#wf-r2-01">Explore research</a></li><li><a href="#wf-r3-01">View publications</a></li><li><a href="#wf-r7-01">Contact</a></li></ol></div></div></article>
+        <article class="specimen" id="wf-s-02" data-group="states" data-span="4"><header class="specimen-head"><span class="specimen-id">WF-S-02</span><span class="specimen-kind">Recoverable application error</span></header><div class="specimen-body"><div class="status-box error"><h2>This page could not be loaded</h2><p>A site error prevented this page from loading. Try again or use another route.</p><div class="action-row"><button class="action" type="button">Try again</button><a class="action" href="#wf-r1-01">Return to homepage</a><a class="action" href="#wf-r3-01">View publications</a></div></div></div></article>
+        <article class="specimen" id="wf-s-03" data-group="states" data-span="4"><header class="specimen-head"><span class="specimen-id">WF-S-03</span><span class="specimen-kind">Empty optional module · omission contract</span></header><div class="specimen-body"><p><strong>Before:</strong> Section A → conditional module → Section B</p><p><strong>Rendered:</strong> Section A → Section B</p><p class="annotation-note">No heading, in-page link, message, placeholder, card, or reserved space remains.</p></div></article>
+        <article class="specimen" id="wf-s-04" data-group="states" data-span="4"><header class="specimen-head"><span class="specimen-id">WF-S-04</span><span class="specimen-kind">Required route unavailable · preview only</span></header><div class="specimen-body"><div class="status-box warning"><h2>This page is not available yet.</h2><p>Its content is still being reviewed. Use the available routes below while the evidence is completed.</p><div class="action-row"><a class="action" href="#wf-r3-01">View publications</a><a class="action" href="#wf-r1-01">Return to homepage</a></div></div></div></article>
+        <article class="specimen" id="wf-s-08" data-group="states publications" data-span="4"><header class="specimen-head"><span class="specimen-id">WF-S-08</span><span class="specimen-kind">No-script publication boundary</span></header><div class="specimen-body"><div class="status-box"><h2>Search and filters are unavailable.</h2><p>All publications remain listed below.</p></div><ol class="record-list"><li class="record"><h3>Synthetic record remains complete</h3><p class="doi">10.0000/example.no-script</p><a href="#wf-s-10">Open DOI (external)</a></li></ol></div></article>
+        <article class="specimen" id="wf-s-09" data-group="states" data-span="4"><header class="specimen-head"><span class="specimen-id">WF-S-09</span><span class="specimen-kind">Offline</span></header><div class="specimen-body"><div class="status-box warning"><h2>You’re offline.</h2><p>Content already loaded on this page remains available, but external sources and enhanced actions may not work until the connection returns.</p><button class="action" type="button">Try again</button></div></div></article>
+        <article class="specimen" id="wf-s-10" data-group="states" data-span="4"><header class="specimen-head"><span class="specimen-id">WF-S-10</span><span class="specimen-kind">External source failure</span></header><div class="specimen-body"><div class="status-box"><h2>The external source is currently unavailable.</h2><p>The verified local record remains available. Try the canonical destination again later.</p><button class="action" type="button">Try again</button></div></div></article>
+      </div>
+    </section>
+
+    <section class="board-section" data-group-section="modes" aria-labelledby="modes-title">
+      <h2 class="section-title" id="modes-title">Print, forced colors, font/no-image, and reduced-motion modes</h2>
+      <div class="specimen-grid">
+        <article class="specimen" id="wf-m-01" data-group="modes" data-span="6"><header class="specimen-head"><span class="specimen-id">WF-M-01</span><span class="specimen-kind">Print linearization</span></header><div class="specimen-body"><div class="print-sheet"><div class="print-header"><strong>Faisal Albalwy</strong><br>Publications</div><h2>Synthetic publication title</h2><p>Complete citation and visible text destination follow the title. Filters, menus, controls, shadows, images, and decorative geometry are absent.</p><aside class="evidence-rail"><strong>Evidence follows claim</strong><br>Year · type · venue · status · source label</aside><div class="print-footer">Source: canonical page URL<br>Printed: output-context date</div></div></div></article>
+        <article class="specimen" id="wf-m-02" data-group="modes" data-span="6"><header class="specimen-head"><span class="specimen-id">WF-M-02</span><span class="specimen-kind">Forced colors and focus</span></header><div class="specimen-body"><p>System colors preserve text, links, borders, current state, and selected state. Meaning is duplicated in words and structure.</p><div class="action-row"><a class="action" href="#wf-r3-01" style="outline:3px solid #4056e3;outline-offset:3px">Visible focus: View publications</a></div><p><strong>Current page:</strong> Publications</p></div></article>
+        <article class="specimen" id="wf-m-03" data-group="modes" data-span="6"><header class="specimen-head"><span class="specimen-id">WF-M-03</span><span class="specimen-kind">Font failure and no-image completeness</span></header><div class="specimen-body"><h2>Faisal Albalwy</h2><p>System fonts preserve hierarchy and long strings. There is no image element, logo fallback, portrait reserve, broken-image icon, decorative replacement, or layout gap.</p><p class="doi">10.0000/example.font-failure-and-long-word-wrapping-without-clipping</p></div></article>
+        <article class="specimen" id="wf-m-04" data-group="modes" data-span="6"><header class="specimen-head"><span class="specimen-id">WF-M-04</span><span class="specimen-kind">Reduced motion</span></header><div class="specimen-body"><p>Selector, menu, focus, filtering, status changes, and recovery are immediate when reduced motion is requested. No content is revealed only through animation.</p><button class="action" type="button">State change control</button></div></article>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const selector = document.getElementById("specimen-filter");
+      const status = document.getElementById("board-status");
+      const specimens = [...document.querySelectorAll("[data-group]")];
+      const sections = [...document.querySelectorAll("[data-group-section]")];
+
+      function applyFilter() {
+        const value = selector.value;
+        let shown = 0;
+        specimens.forEach((specimen) => {
+          const groups = specimen.dataset.group.split(" ");
+          const visible = value === "all" || groups.includes(value);
+          specimen.hidden = !visible;
+          if (visible) shown += 1;
+        });
+        sections.forEach((section) => {
+          section.hidden = ![...section.querySelectorAll("[data-group]")].some((item) => !item.hidden);
+        });
+        status.textContent = value === "all" ? `Showing all ${shown} specimens.` : `Showing ${shown} ${selector.options[selector.selectedIndex].text.toLowerCase()} specimens.`;
+      }
+
+      selector.addEventListener("change", applyFilter);
+      applyFilter();
+    })();
+  </script>
+</body>
+</html>

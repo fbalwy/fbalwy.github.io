@@ -1,0 +1,315 @@
+---
+import PublicationMetric from "./PublicationMetric.astro";
+import orcidFeed from "../../../content/data/orcid-feed.json";
+import journalMetrics from "../../../content/data/journal-metrics.json";
+import { currentSite } from "../../lib/integration/current-site";
+
+type Publication = (typeof orcidFeed.publications)[number];
+type Funding = Readonly<{
+  id: string;
+  title: string;
+  type: string | null;
+  organization: string | null;
+  start_year: string | null;
+  end_year: string | null;
+  grant_number: string | null;
+  url: string | null;
+}>;
+type PeerReview = Readonly<{
+  id: string;
+  role: string | null;
+  review_type: string | null;
+  organization: string | null;
+  container: string | null;
+  completion_date: string | null;
+  group_id: string | null;
+  url: string | null;
+}>;
+
+const email = "fbalwy@taibahu.edu.sa";
+const emailHref = `mailto:${email}?subject=Academic%20website%20inquiry`;
+const profileLinks = [
+  {
+    label: "ORCID",
+    href: "https://orcid.org/0000-0002-2342-2156",
+  },
+  {
+    label: "Google Scholar",
+    href: "https://scholar.google.com/citations?hl=en&user=zkrWLDAAAAAJ&view_op=list_works&sortby=pubdate",
+  },
+  {
+    label: "Scopus",
+    href: "https://www.scopus.com/pages/authors/57331483800",
+  },
+  {
+    label: "Web of Science",
+    href: "https://www.webofscience.com/wos/author/record/GRR-7890-2022",
+  },
+  {
+    label: "ResearchGate",
+    href: "https://www.researchgate.net/profile/Faisal-Albalwy?ev=hdr_xprf",
+  },
+];
+
+const typeGroups = [
+  { key: "journal-article", title: "Journal articles" },
+  { key: "conference-paper", title: "Conference papers" },
+  { key: "book-chapter", title: "Book chapters" },
+  { key: "other", title: "Other research outputs" },
+] as const;
+
+const hiddenPublicationTypes = new Set(["preprint", "doctoral-thesis"]);
+const visiblePublications = orcidFeed.publications.filter(
+  (publication) => !hiddenPublicationTypes.has(publication.type),
+);
+
+const publicationGroups = typeGroups
+  .map((group) => ({
+    ...group,
+    publications: visiblePublications.filter(
+      (publication) => publication.type === group.key,
+    ),
+  }))
+  .filter((group) => group.publications.length > 0);
+
+const knownTypes = new Set(typeGroups.map((group) => group.key));
+const unclassified = visiblePublications.filter(
+  (publication) => !knownTypes.has(publication.type as (typeof typeGroups)[number]["key"]),
+);
+if (unclassified.length) {
+  const other = publicationGroups.find((group) => group.key === "other");
+  if (other) other.publications.push(...unclassified);
+  else
+    publicationGroups.push({
+      key: "other",
+      title: "Other research outputs",
+      publications: unclassified,
+    });
+}
+
+let citationNumber = 0;
+const numberedPublicationGroups = publicationGroups.map((group) => ({
+  ...group,
+  publications: group.publications.map((publication) => ({
+    ...publication,
+    number: ++citationNumber,
+  })),
+}));
+
+function authorsForCitation(authors: readonly string[]): string {
+  if (authors.length < 2) return authors[0] ?? "";
+  if (authors.length === 2) return `${authors[0]} & ${authors[1]}`;
+  return `${authors.slice(0, -1).join(", ")}, & ${authors.at(-1)}`;
+}
+
+function publicationLocator(publication: Publication): string | undefined {
+  if (publication.pages) return publication.pages;
+  if (publication.article_number) return publication.article_number;
+  return undefined;
+}
+
+function publicationHref(publication: Publication): string {
+  return publication.doi_url ?? publication.official_url ?? publication.url;
+}
+
+function displayDate(value: string): string {
+  const date = new Date(value);
+  if (Number.isNaN(date.valueOf())) return value;
+  return new Intl.DateTimeFormat("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "Asia/Riyadh",
+  }).format(date);
+}
+
+const committeeService = [
+  "Chair, Timetabling, Examinations, Academic Advising and Student Welfare Committee, Department of Cybersecurity.",
+  "Member, Scholarships and Human Resources Committee, Department of Cybersecurity.",
+  "Member for Field Training, Graduation Projects and Field Training Committee, Department of Cybersecurity.",
+  "Member for Human Resources, Scholarships and Human Resources Committee, Department of Computer Science.",
+  "Member for Timetabling, Timetabling and Examinations Committee, Department of Computer Science.",
+];
+
+const journalMetricIndex = new Map(
+  journalMetrics.journals.map((metric) => [metric.venue, metric]),
+);
+
+function peerReviewWording(review: PeerReview): string {
+  const role = review.role
+    ? `${review.role.charAt(0).toUpperCase()}${review.role.slice(1)}`
+    : "Reviewer";
+  const target = review.container ?? review.organization;
+  const date = review.completion_date
+    ? `, completed ${displayDate(review.completion_date)}`
+    : "";
+  return `${role}${target ? ` for ${target}` : ""}${date}.`;
+}
+
+const research = currentSite.routes.research;
+const teaching = currentSite.routes.teaching;
+const service = currentSite.routes.service;
+const grants = orcidFeed.fundings as readonly Funding[];
+const orcidPeerReviews = orcidFeed.peer_reviews as readonly PeerReview[];
+const peerReviewItems = orcidPeerReviews.length
+  ? orcidPeerReviews.map((review) => peerReviewWording(review))
+  : service.reviews.map((item) => item.wording);
+const syncLabel =
+  orcidFeed.source === "orcid_public_api"
+    ? `Synced from ORCID · ${displayDate(orcidFeed.generated_at)}`
+    : `ORCID-linked catalogue · Verified ${displayDate(orcidFeed.generated_at)}`;
+const peerReviewSyncLabel = orcidPeerReviews.length
+  ? `Synced from ORCID · ${displayDate(orcidFeed.generated_at)}`
+  : `Verified record · ORCID sync enabled`;
+---
+
+<article class="academic-page">
+  <header class="academic-identity" aria-labelledby="page-title">
+    <h1 id="page-title">Faisal Albalwy</h1>
+    <p class="academic-role">Assistant Professor of Cybersecurity</p>
+    <p class="academic-affiliation">
+      Department of Cybersecurity <span aria-hidden="true">·</span> Taibah University
+    </p>
+    <p class="academic-statement">
+      My research advances trustworthy and resilient digital systems through
+      privacy-preserving data technologies, secure distributed infrastructures,
+      and intelligent cyber-threat detection.
+    </p>
+    <nav class="identity-links" aria-label="Contact and academic profiles">
+      <a href={emailHref}>{email}</a>
+      {profileLinks.map((profile) => (
+        <a href={profile.href} rel="noopener">{profile.label}</a>
+      ))}
+    </nav>
+    <p class="orcid-id">ORCID iD: 0000-0002-2342-2156</p>
+  </header>
+
+  <section class="academic-section" aria-labelledby="research-interests">
+    <h2 id="research-interests">Research interests</h2>
+    <ul class="plain-list research-interest-list">
+      {research.themes.map((theme) => <li>{theme.title}</li>)}
+    </ul>
+  </section>
+
+  <section class="academic-section" aria-labelledby="prospective-students">
+    <h2 id="prospective-students">Prospective research students</h2>
+    <p class="section-prose">
+      I welcome motivated students and researchers whose interests overlap with
+      my work. If you are exploring research opportunities, wish to discuss
+      collaboration, or are considering possible supervision pathways at Taibah
+      University or in a suitable external academic context, please introduce
+      yourself by email and share a brief description of your background and
+      interests.
+    </p>
+    <a class="direct-email" href={emailHref}>{email}</a>
+  </section>
+
+  <section class="academic-section publications-section" aria-labelledby="publications">
+    <div class="section-heading-row">
+      <h2 id="publications">Publications</h2>
+      <p>{syncLabel}</p>
+    </div>
+    <p class="publication-note">
+      Listed newest first in a traditional citation format. Select the DOI to
+      open the paper. Each journal badge shows one best verified quartile from
+      JCR (Web of Science), CiteScore (Scopus), or SJR (SCImago), with its
+      source, category, and year. Rankings describe journals, not the quality
+      of individual papers.
+    </p>
+
+    {numberedPublicationGroups.map((group) => (
+      <section class="publication-group" aria-labelledby={`publication-group-${group.key}`}>
+        <h3 id={`publication-group-${group.key}`}>{group.title}</h3>
+        <ol class="citation-list">
+          {group.publications.map((publication) => (
+            <li
+              class:list={[
+                "citation-record",
+                !journalMetricIndex.get(publication.venue ?? "")?.rankings[0]
+                  ?.quartile && "citation-record--no-metric",
+              ]}
+            >
+              <span class="citation-number" aria-hidden="true">{publication.number}.</span>
+              <p class="citation-text">
+                <span>{authorsForCitation(publication.authors)}. ({publication.year}). </span>
+                <span class="citation-title">{publication.title}.</span>{" "}
+                {publication.venue && <cite>{publication.venue}</cite>}
+                {publication.volume && <span>, <em>{publication.volume}</em></span>}
+                {publication.issue && <span>({publication.issue})</span>}
+                {publicationLocator(publication) && <span>, {publicationLocator(publication)}</span>}
+                <span>.</span>{" "}
+                {publication.doi && (
+                  <a
+                    class="citation-doi"
+                    href={publicationHref(publication)}
+                    rel="noopener"
+                  >
+                    https://doi.org/{publication.doi}
+                  </a>
+                )}
+              </p>
+              <PublicationMetric
+                publicationType={publication.type}
+                venue={publication.venue}
+                metric={journalMetricIndex.get(publication.venue ?? "")}
+              />
+            </li>
+          ))}
+        </ol>
+      </section>
+    ))}
+  </section>
+
+  <section class="academic-section" aria-labelledby="courses-taught">
+    <h2 id="courses-taught">Courses taught</h2>
+    <ul class="course-list">
+      {teaching.courses.map((course) => <li>{course.title}</li>)}
+    </ul>
+  </section>
+
+  {grants.length > 0 && (
+    <section class="academic-section" aria-labelledby="grants-funding">
+      <h2 id="grants-funding">Grants and funding</h2>
+      <ol class="service-list">
+        {grants.map((grant) => (
+          <li>
+            <strong>{grant.title}</strong>
+            <span>{[grant.organization, grant.type, grant.start_year].filter(Boolean).join(" · ")}</span>
+          </li>
+        ))}
+      </ol>
+    </section>
+  )}
+
+  <section class="academic-section" aria-labelledby="work-experience">
+    <h2 id="work-experience">Work experience</h2>
+    <ul class="service-list">
+      {service.leadership.map((item) => <li>{item.wording}</li>)}
+    </ul>
+  </section>
+
+  <section class="academic-section" aria-labelledby="university-committee-service">
+    <h2 id="university-committee-service">University committee service</h2>
+    <ul class="service-list">
+      {committeeService.map((item) => <li>{item}</li>)}
+    </ul>
+  </section>
+
+  <section class="academic-section" aria-labelledby="scholarly-peer-review">
+    <div class="section-heading-row">
+      <h2 id="scholarly-peer-review">Scholarly peer review</h2>
+      <p>{peerReviewSyncLabel}</p>
+    </div>
+    <ul class="service-list">
+      {peerReviewItems.map((item) => <li>{item}</li>)}
+    </ul>
+  </section>
+
+  <footer class="academic-footer">
+    <p>Personal academic website of Faisal Albalwy.</p>
+    <p>
+      Institutional affiliation: <a href="https://www.taibahu.edu.sa/" rel="noopener">Taibah University</a>.
+      This is not an official university website.
+    </p>
+  </footer>
+</article>

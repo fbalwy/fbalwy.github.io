@@ -1,0 +1,18 @@
+---
+import PublicationRecord from "./PublicationRecord.astro";
+import type { PublicationVM } from "../../lib/publications/model";
+
+interface Props {
+  records: readonly PublicationVM[];
+}
+
+const { records } = Astro.props;
+---
+
+<ol class="publication-list" data-publication-list>
+  {records.map((publication) => (
+    <li>
+      <PublicationRecord publication={publication} fragmentTarget />
+    </li>
+  ))}
+</ol>

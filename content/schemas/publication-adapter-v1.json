@@ -1,0 +1,42 @@
+{
+  "adapter_id": "publication-dataset-v1-to-canonical-v1",
+  "adapter_version": "1.0.0",
+  "source_schema_id": "https://fbalwy.sa/schemas/v1/publication-dataset-v1.schema.json",
+  "target_schema_id": "https://fbalwy.sa/schemas/v1/publication.schema.json",
+  "mutates_source": false,
+  "default_public_disposition": "eligible",
+  "default_render_eligibility": "internal_only",
+  "field_mappings": [
+    { "source": "publications[].stable_id", "target": "record_id", "transform": "identity" },
+    { "source": "schema_version", "target": "schema_version", "transform": "identity" },
+    { "source": "publications[].evidence_claim_ids", "target": "claim_ids", "transform": "identity" },
+    { "source": "publications[].title", "target": "data.title", "transform": "identity" },
+    { "source": "publications[].authors", "target": "data.authors", "transform": "rename name_variant_evidence to identity_evidence; preserve order and is_faisal" },
+    { "source": "publications[].type", "target": "data.work_type", "transform": "identity" },
+    { "source": "publications[].venue", "target": "data.venue", "transform": "identity" },
+    { "source": "publications[].publisher", "target": "data.publisher", "transform": "identity" },
+    { "source": "publications[].doi", "target": "data.doi", "transform": "identity; already normalized lowercase or null" },
+    { "source": "publications[].dates", "target": "data.dates", "transform": "publication type maps to issue; add calendar=gregorian and preserve source string/precision" },
+    { "source": "publications[].display_year", "target": "data.display_year", "transform": "identity" },
+    { "source": "publications[].display_sort_date", "target": "data.sort_date", "transform": "identity; ordering aid, not added bibliographic precision" },
+    { "source": "publications[].volume", "target": "data.volume", "transform": "identity" },
+    { "source": "publications[].issue", "target": "data.issue", "transform": "identity" },
+    { "source": "publications[].pages", "target": "data.pages", "transform": "identity" },
+    { "source": "publications[].article_number", "target": "data.article_number", "transform": "identity" },
+    { "source": "publications[].status", "target": "data.status", "transform": "identity" },
+    { "source": "publications[].doi_url and official_url", "target": "data.external_actions", "transform": "emit named DOI/publisher/repository actions; no null action" },
+    { "source": "publications[].version_relationships", "target": "data.version_relationships", "transform": "resolve canonical stable targets; unresolved candidate/DOI target remains held" },
+    { "source": "publications[].correction_retraction", "target": "data.notice_state and data.notice_checked_at", "transform": "normalize not_applicable_no_notice_found to not_applicable" },
+    { "source": "publications[].verification_status and public_disposition", "target": "governance", "transform": "retain verified/eligible; force internal_only and require missing governance axes before publish" },
+    { "source": "publications[].stable_id", "target": "public_presentation.fragment_id", "transform": "prefix publication-" }
+  ],
+  "required_enrichment": [
+    "source roles, authority scopes, and lineage IDs per cited field",
+    "privacy and evidence-privacy classification",
+    "rights and consent decisions",
+    "translation review",
+    "freshness owner, reviewer roles, verification timestamps, and next review",
+    "exact approved public wording and locations",
+    "append-only version and correction history"
+  ]
+}

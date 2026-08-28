@@ -1,0 +1,64 @@
+---
+import type { PublicationVM } from "../../lib/publications/model";
+
+interface Props {
+  publication: PublicationVM;
+  headingLevel?: "h2" | "h3";
+  fragmentTarget?: boolean;
+}
+
+const {
+  publication,
+  headingLevel = "h3",
+  fragmentTarget = false,
+} = Astro.props;
+const Heading = headingLevel;
+const details = [
+  publication.typeLabel,
+  publication.venue,
+  publication.volume ? `Volume ${publication.volume}` : undefined,
+  publication.issue ? `Issue ${publication.issue}` : undefined,
+  publication.pages ? `Pages ${publication.pages}` : undefined,
+  publication.articleNumber
+    ? `Article ${publication.articleNumber}`
+    : undefined,
+].filter(Boolean);
+---
+
+<article
+  class="publication-record"
+  id={fragmentTarget ? publication.fragment : undefined}
+  data-publication-record={fragmentTarget ? publication.id : undefined}
+  data-year={fragmentTarget ? publication.year : undefined}
+  data-type={fragmentTarget ? publication.type : undefined}
+  data-search={fragmentTarget ? publication.searchText : undefined}
+>
+  <p class="publication-year" aria-hidden="true">{publication.year}</p>
+  <div class="publication-record__body">
+    <Heading data-publication-heading={fragmentTarget ? "" : undefined}>
+      {publication.title}
+    </Heading>
+    <p class="publication-authors">{publication.authors.join(", ")}</p>
+    <p class="publication-status">
+      <strong>{publication.statusLabel}</strong>
+      <span aria-hidden="true"> · </span>
+      <span>{publication.displayDate}</span>
+    </p>
+    <p class="publication-meta">{details.join(" · ")}</p>
+    {publication.doi && <p class="publication-doi">DOI: {publication.doi}</p>}
+    {publication.citation && (
+      <p
+        class="publication-citation"
+        id={`${publication.fragment}-citation`}
+        data-visible-citation
+      >
+        {publication.citation}
+      </p>
+    )}
+  </div>
+  <div class="publication-actions" aria-label={`Actions for ${publication.title}`}>
+    {publication.actions.map((action) => (
+      <a href={action.url} rel="noopener">{action.label}</a>
+    ))}
+  </div>
+</article>

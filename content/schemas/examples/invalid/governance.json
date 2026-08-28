@@ -1,0 +1,11 @@
+{
+  "cases": [
+    { "case_id": "invalid-lifecycle-pair", "expected_check": "GOV-LIFECYCLE", "payload": { "verification_status": "verified", "public_disposition": "hold", "render_eligibility": "internal_only" } },
+    { "case_id": "eligible-is-not-public", "expected_check": "GOV-ELIGIBLE-PUBLIC", "payload": { "verification_status": "verified", "public_disposition": "eligible", "render_eligibility": "public" } },
+    { "case_id": "publish-release-incomplete", "expected_check": "GOV-PUBLISH-MISSING", "payload": { "verification_status": "verified", "public_disposition": "publish", "render_eligibility": "public", "record_owner_id": null, "rights_status": "pending", "consent_status": "not_applicable", "approvals": { "evidence": true, "privacy": true, "rights": false, "editorial": false, "qa": false }, "public_wording": null, "public_location_ids": [] } },
+    { "case_id": "unresolved-translation-publish", "expected_check": "TRANSLATION-UNRESOLVED-PUBLISH", "payload": { "translation_status": "pending", "public_disposition": "publish" } },
+    { "case_id": "restricted-privacy-publish", "expected_check": "GOV-PUBLISH-PRIVACY", "payload": { "privacy_class": "Restricted", "public_disposition": "publish" } },
+    { "case_id": "active-conflict-eligible", "expected_check": "GOV-CONFLICT", "payload": { "conflict_state": "active", "verification_status": "verified", "public_disposition": "eligible" } },
+    { "case_id": "unavailable-source-publish", "expected_check": "GOV-SOURCE-UNAVAILABLE", "payload": { "public_disposition": "publish", "sources": [ { "source_role": "authoritative_primary", "access_state": "blocked" } ] } }
+  ]
+}

@@ -1,0 +1,12 @@
+---
+import type { ResearchModel } from "../../lib/research/model";
+import "../../styles/research.css";
+interface Props { model: ResearchModel; }
+const { model } = Astro.props;
+---
+<div class="research-content" data-module-order={model.modules.join(",")}>
+  <header class="research-intro"><h1>Research</h1><p class="research-lead">My research examines trustworthy digital systems: how sensitive data can be shared with stronger privacy controls, how decentralized systems can exchange information securely, and how machine learning can support cyber-threat detection.</p><p>The themes below describe recurring areas in the verified publication record; they do not imply deployment, adoption, funding, or measured impact.</p></header>
+  {model.themes.map((theme) => <section class="research-theme" aria-labelledby={`${theme.id}-heading`}><div><h2 id={`${theme.id}-heading`}>{theme.title}</h2><p>{theme.summary}</p></div><aside aria-label={`Related publications for ${theme.title}`}><h3>Related publications</h3><ul>{theme.publications.map((publication) => <li><a href={publication.href}>{publication.title}</a></li>)}</ul></aside></section>)}
+  <section class="research-guidance" aria-labelledby="research-inquiry-heading"><h2 id="research-inquiry-heading">Collaboration inquiries</h2><p>For a research inquiry, include the research question, scope, intended contributions, relevant evidence, and any important constraints. An inquiry does not imply availability, funding, supervision capacity, consulting, partnership, institutional participation, or a response time.</p><a href="/contact">Contact Faisal Albalwy</a></section>
+  <section class="research-catalogue" aria-labelledby="research-catalogue-heading"><h2 id="research-catalogue-heading">Complete publication record</h2><p>The Publications catalogue contains the canonical, deduplicated record and links to publisher, DOI, or institutional evidence.</p><a href="/publications#publication-catalogue">Browse all publications</a></section>
+</div>

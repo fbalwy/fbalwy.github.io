@@ -1,0 +1,574 @@
+{
+  "schema_version": "2.0.0",
+  "accessed_at": "2026-08-28",
+  "display_policy": {
+    "title": "Best verified quartile",
+    "note": "The prominent quartile is the best current, source-backed quartile found across JCR and CiteScore, followed by SJR when no current JCR or CiteScore quartile is available. Every displayed ranking retains its own database, metric year and subject category; it is not an overall rating of an individual paper.",
+    "systems": [
+      {
+        "short": "JCR",
+        "name": "Journal Citation Reports",
+        "database": "Web of Science / Clarivate"
+      },
+      {
+        "short": "CiteScore",
+        "name": "CiteScore",
+        "database": "Scopus / Elsevier"
+      },
+      {
+        "short": "SJR",
+        "name": "SCImago Journal Rank",
+        "database": "SCImago, calculated from Scopus data"
+      }
+    ]
+  },
+  "journals": [
+    {
+      "venue": "Expert Systems with Applications",
+      "status": "verified_current",
+      "rankings": [
+        {
+          "source": "JCR",
+          "database": "Web of Science",
+          "year": 2025,
+          "quartile": "Q1",
+          "metric_label": "JIF",
+          "metric_value": null,
+          "category": "Artificial Intelligence",
+          "url": "https://www.sciencedirect.com/journal/expert-systems-with-applications"
+        },
+        {
+          "source": "SJR",
+          "database": "SCImago",
+          "year": 2024,
+          "quartile": "Q1",
+          "metric_label": "SJR",
+          "metric_value": 1.854,
+          "category": "Artificial Intelligence",
+          "url": "https://www.scimagojr.com/journalsearch.php?q=24201&tip=sid"
+        }
+      ],
+      "note": null
+    },
+    {
+      "venue": "Systems",
+      "status": "verified_current",
+      "rankings": [
+        {
+          "source": "JCR",
+          "database": "Web of Science",
+          "year": 2025,
+          "quartile": "Q1",
+          "metric_label": "JIF",
+          "metric_value": 3.8,
+          "category": "Social Sciences, Interdisciplinary",
+          "url": "https://www.mdpi.com/journal/systems/stats"
+        },
+        {
+          "source": "CiteScore",
+          "database": "Scopus",
+          "year": 2025,
+          "quartile": "Q1",
+          "metric_label": "CiteScore",
+          "metric_value": 5.4,
+          "category": "Information Systems and Management",
+          "url": "https://www.mdpi.com/journal/systems/stats"
+        },
+        {
+          "source": "SJR",
+          "database": "SCImago",
+          "year": 2024,
+          "quartile": "Q2",
+          "metric_label": "SJR",
+          "metric_value": 0.579,
+          "category": "Information Systems and Management",
+          "url": "https://www.scimagojr.com/journalsearch.php?q=21101020135&tip=sid"
+        }
+      ],
+      "note": "JCR and CiteScore place the journal in Q1 categories; the 2024 SJR best quartile is Q2."
+    },
+    {
+      "venue": "Computers, Materials & Continua",
+      "status": "verified_current",
+      "rankings": [
+        {
+          "source": "SJR",
+          "database": "SCImago",
+          "year": 2024,
+          "quartile": "Q2",
+          "metric_label": "SJR",
+          "metric_value": 0.431,
+          "category": "Electrical and Electronic Engineering",
+          "url": "https://www.scimagojr.com/journalsearch.php?q=24364&tip=sid"
+        },
+        {
+          "source": "JCR",
+          "database": "Web of Science",
+          "year": 2025,
+          "quartile": "Q3",
+          "metric_label": "JIF",
+          "metric_value": 2.4,
+          "category": "Computer Science, Information Systems",
+          "url": "https://www.techscience.com/journal/cmc"
+        }
+      ],
+      "note": "The publisher also reports a 2025 CiteScore of 6.6; no category quartile is asserted here without a direct category record."
+    },
+    {
+      "venue": "Alexandria Engineering Journal",
+      "status": "verified_current",
+      "rankings": [
+        {
+          "source": "JCR",
+          "database": "Web of Science",
+          "year": 2025,
+          "quartile": "Q1",
+          "metric_label": "JIF",
+          "metric_value": 6.8,
+          "category": "Engineering, Multidisciplinary",
+          "url": "https://www.sciencedirect.com/journal/alexandria-engineering-journal"
+        },
+        {
+          "source": "SJR",
+          "database": "SCImago",
+          "year": 2024,
+          "quartile": "Q1",
+          "metric_label": "SJR",
+          "metric_value": 1.037,
+          "category": "Engineering",
+          "url": "https://www.scimagojr.com/journalsearch.php?q=13907&tip=sid"
+        }
+      ],
+      "note": null
+    },
+    {
+      "venue": "Ingénierie des Systèmes d’Information",
+      "status": "verified_current",
+      "rankings": [
+        {
+          "source": "CiteScore",
+          "database": "Scopus",
+          "year": 2025,
+          "quartile": "Q3",
+          "metric_label": "CiteScore",
+          "metric_value": 2.6,
+          "category": "Information Systems",
+          "url": "https://www.iieta.org/Journals/ISI"
+        },
+        {
+          "source": "SJR",
+          "database": "SCImago",
+          "year": 2025,
+          "quartile": "Q3",
+          "metric_label": "SJR",
+          "metric_value": 0.236,
+          "category": "Information Systems",
+          "url": "https://www.scimagojr.com/journalsearch.php?q=21100202935&tip=sid"
+        }
+      ],
+      "note": "Active in Scopus; no current JCR quartile was verified."
+    },
+    {
+      "venue": "PeerJ Computer Science",
+      "status": "verified_current",
+      "rankings": [
+        {
+          "source": "CiteScore",
+          "database": "Scopus",
+          "year": 2024,
+          "quartile": "Q1",
+          "metric_label": "CiteScore",
+          "metric_value": 4.8,
+          "category": "Computer Science",
+          "url": "https://peerj.com/computer-science/"
+        },
+        {
+          "source": "SJR",
+          "database": "SCImago",
+          "year": 2024,
+          "quartile": "Q1",
+          "metric_label": "SJR",
+          "metric_value": 0.719,
+          "category": "Computer Science",
+          "url": "https://www.scimagojr.com/journalsearch.php?q=21100830173&tip=sid"
+        }
+      ],
+      "note": null
+    },
+    {
+      "venue": "Intelligent Information Management",
+      "status": "unverified",
+      "rankings": [],
+      "note": "No current JCR or Scopus category quartile was verified from an authoritative source.",
+      "status_url": "https://www.scirp.org/journal/aimscope?journalid=111"
+    },
+    {
+      "venue": "Advances in Internet of Things",
+      "status": "unverified",
+      "rankings": [],
+      "note": "No current JCR or Scopus category quartile was verified from the publisher's indexing record.",
+      "status_url": "https://www.scirp.org/journal/indexing?journalid=476"
+    },
+    {
+      "venue": "Advances in Artificial Intelligence and Machine Learning",
+      "status": "verified_current",
+      "rankings": [
+        {
+          "source": "CiteScore",
+          "database": "Scopus",
+          "year": 2025,
+          "quartile": "Q3",
+          "metric_label": "CiteScore",
+          "metric_value": 1.5,
+          "category": "Artificial Intelligence",
+          "url": "https://www.oajaiml.com/public/"
+        }
+      ],
+      "note": "The publisher confirms current Scopus coverage; this replaces the earlier SCImago-only Q4 display."
+    },
+    {
+      "venue": "Electronics",
+      "status": "verified_current",
+      "rankings": [
+        {
+          "source": "CiteScore",
+          "database": "Scopus",
+          "year": 2025,
+          "quartile": "Q1",
+          "metric_label": "CiteScore",
+          "metric_value": 7.0,
+          "category": "Signal Processing",
+          "url": "https://www.mdpi.com/journal/electronics"
+        },
+        {
+          "source": "JCR",
+          "database": "Web of Science",
+          "year": 2025,
+          "quartile": "Q2",
+          "metric_label": "JIF",
+          "metric_value": 2.9,
+          "category": "Engineering, Electrical and Electronic",
+          "url": "https://www.mdpi.com/journal/electronics"
+        },
+        {
+          "source": "SJR",
+          "database": "SCImago",
+          "year": 2024,
+          "quartile": "Q2",
+          "metric_label": "SJR",
+          "metric_value": 0.615,
+          "category": "Computer Networks and Communications",
+          "url": "https://www.scimagojr.com/journalsearch.php?q=21100829272&tip=sid"
+        }
+      ],
+      "note": null
+    },
+    {
+      "venue": "Applied Sciences",
+      "status": "verified_current",
+      "rankings": [
+        {
+          "source": "CiteScore",
+          "database": "Scopus",
+          "year": 2025,
+          "quartile": "Q1",
+          "metric_label": "CiteScore",
+          "metric_value": 6.1,
+          "category": "General Engineering",
+          "url": "https://www.mdpi.com/journal/applsci/stats"
+        },
+        {
+          "source": "JCR",
+          "database": "Web of Science",
+          "year": 2025,
+          "quartile": "Q2",
+          "metric_label": "JIF",
+          "metric_value": 2.9,
+          "category": "Engineering, Multidisciplinary",
+          "url": "https://www.mdpi.com/journal/applsci/stats"
+        },
+        {
+          "source": "SJR",
+          "database": "SCImago",
+          "year": 2024,
+          "quartile": "Q2",
+          "metric_label": "SJR",
+          "metric_value": 0.521,
+          "category": "Computer Science Applications",
+          "url": "https://www.scimagojr.com/journalsearch.php?q=21100829268&tip=sid"
+        }
+      ],
+      "note": "The attached SCImago card is Q2 for Computer Science Applications; CiteScore is Q1 in General Engineering."
+    },
+    {
+      "venue": "Biomedical Signal Processing and Control",
+      "status": "verified_current",
+      "rankings": [
+        {
+          "source": "CiteScore",
+          "database": "Scopus",
+          "year": 2025,
+          "quartile": "Q1",
+          "metric_label": "CiteScore",
+          "metric_value": 13.0,
+          "category": "Health Informatics",
+          "url": "https://www.sciencedirect.com/journal/biomedical-signal-processing-and-control"
+        },
+        {
+          "source": "JCR",
+          "database": "Web of Science",
+          "year": 2025,
+          "quartile": "Q2",
+          "metric_label": "JIF",
+          "metric_value": 4.9,
+          "category": "Engineering, Biomedical",
+          "url": "https://www.sciencedirect.com/journal/biomedical-signal-processing-and-control"
+        },
+        {
+          "source": "SJR",
+          "database": "SCImago",
+          "year": 2024,
+          "quartile": "Q1",
+          "metric_label": "SJR",
+          "metric_value": 1.229,
+          "category": "Health Informatics",
+          "url": "https://www.scimagojr.com/journalsearch.php?q=4700152237&tip=sid"
+        }
+      ],
+      "note": null
+    },
+    {
+      "venue": "Frontiers in Computer Science",
+      "status": "verified_current",
+      "rankings": [
+        {
+          "source": "CiteScore",
+          "database": "Scopus",
+          "year": 2025,
+          "quartile": "Q1",
+          "metric_label": "CiteScore",
+          "metric_value": 6.2,
+          "category": "Computer Science",
+          "url": "https://www.frontiersin.org/about/impact"
+        },
+        {
+          "source": "JCR",
+          "database": "Web of Science",
+          "year": 2025,
+          "quartile": "Q3",
+          "metric_label": "JIF",
+          "metric_value": 3.4,
+          "category": "Computer Science",
+          "url": "https://www.frontiersin.org/about/impact"
+        },
+        {
+          "source": "SJR",
+          "database": "SCImago",
+          "year": 2024,
+          "quartile": "Q2",
+          "metric_label": "SJR",
+          "metric_value": 0.588,
+          "category": "Computer Science Applications",
+          "url": "https://www.scimagojr.com/journalsearch.php?q=21101062832&tip=sid"
+        }
+      ],
+      "note": null
+    },
+    {
+      "venue": "Heliyon",
+      "status": "verified_current",
+      "rankings": [
+        {
+          "source": "SJR",
+          "database": "SCImago",
+          "year": 2024,
+          "quartile": "Q1",
+          "metric_label": "SJR",
+          "metric_value": 0.644,
+          "category": "Multidisciplinary",
+          "url": "https://www.scimagojr.com/journalsearch.php?q=21100411756&tip=sid"
+        }
+      ],
+      "note": "Only the current verified SJR quartile is displayed; no current JCR quartile is asserted."
+    },
+    {
+      "venue": "Future Generation Computer Systems",
+      "status": "verified_current",
+      "rankings": [
+        {
+          "source": "JCR",
+          "database": "Web of Science",
+          "year": 2025,
+          "quartile": "Q1",
+          "metric_label": "JIF",
+          "metric_value": 6.1,
+          "category": "Computer Science, Theory and Methods",
+          "url": "https://www.sciencedirect.com/journal/future-generation-computer-systems"
+        },
+        {
+          "source": "CiteScore",
+          "database": "Scopus",
+          "year": 2025,
+          "quartile": "Q1",
+          "metric_label": "CiteScore",
+          "metric_value": 17.1,
+          "category": "Computer Networks and Communications",
+          "url": "https://www.sciencedirect.com/journal/future-generation-computer-systems"
+        },
+        {
+          "source": "SJR",
+          "database": "SCImago",
+          "year": 2024,
+          "quartile": "Q1",
+          "metric_label": "SJR",
+          "metric_value": 1.551,
+          "category": "Computer Networks and Communications",
+          "url": "https://www.scimagojr.com/journalsearch.php?q=12264&tip=sid"
+        }
+      ],
+      "note": null
+    },
+    {
+      "venue": "IEEE Access",
+      "status": "verified_current",
+      "rankings": [
+        {
+          "source": "SJR",
+          "database": "SCImago",
+          "year": 2025,
+          "quartile": "Q1",
+          "metric_label": "SJR",
+          "metric_value": 0.884,
+          "category": "Computer Science",
+          "url": "https://ieeeaccess.ieee.org/about/bibliometrics/"
+        }
+      ],
+      "note": "IEEE also reports 2025 JIF 4.2 and CiteScore 9.3; their quartiles are not asserted here without a category-specific record."
+    },
+    {
+      "venue": "Computers",
+      "status": "verified_current",
+      "rankings": [
+        {
+          "source": "CiteScore",
+          "database": "Scopus",
+          "year": 2025,
+          "quartile": "Q1",
+          "metric_label": "CiteScore",
+          "metric_value": 9.1,
+          "category": "Computer Science (miscellaneous)",
+          "url": "https://www.mdpi.com/journal/computers/stats"
+        },
+        {
+          "source": "JCR",
+          "database": "Web of Science",
+          "year": 2025,
+          "quartile": "Q2",
+          "metric_label": "JIF",
+          "metric_value": 5.2,
+          "category": "Computer Science, Interdisciplinary Applications",
+          "url": "https://www.mdpi.com/journal/computers/stats"
+        },
+        {
+          "source": "SJR",
+          "database": "SCImago",
+          "year": 2024,
+          "quartile": "Q2",
+          "metric_label": "SJR",
+          "metric_value": 0.805,
+          "category": "Computer Networks and Communications",
+          "url": "https://www.scimagojr.com/journalsearch.php?q=21100886391&tip=sid"
+        }
+      ],
+      "note": null
+    },
+    {
+      "venue": "PLOS ONE",
+      "status": "verified_current",
+      "rankings": [
+        {
+          "source": "SJR",
+          "database": "SCImago",
+          "year": 2024,
+          "quartile": "Q1",
+          "metric_label": "SJR",
+          "metric_value": 0.803,
+          "category": "Multidisciplinary",
+          "url": "https://journals.plos.org/plosone/s/journal-information"
+        }
+      ],
+      "note": "PLOS recommends article-level evidence rather than treating journal metrics as an assessment of an individual paper."
+    },
+    {
+      "venue": "The Pharmacogenomics Journal",
+      "status": "verified_current",
+      "rankings": [
+        {
+          "source": "SJR",
+          "database": "SCImago",
+          "year": 2025,
+          "quartile": "Q2",
+          "metric_label": "SJR",
+          "metric_value": 0.76,
+          "category": "Pharmacology",
+          "url": "https://www.nature.com/tpj/journal-information"
+        }
+      ],
+      "note": "The publisher reports 2025 JIF 2.8; no JCR category quartile is asserted here."
+    },
+    {
+      "venue": "Wireless Communications and Mobile Computing",
+      "status": "verified_historical",
+      "rankings": [
+        {
+          "source": "CiteScore",
+          "database": "Scopus",
+          "year": 2022,
+          "quartile": "Q3",
+          "metric_label": "Historical rank",
+          "metric_value": null,
+          "category": "Computer Networks and Communications",
+          "url": "https://onlinelibrary.wiley.com/journal/6302"
+        }
+      ],
+      "note": "Historical paper-year context. The journal ceased publication in September 2024 and is not presented as currently ranked."
+    },
+    {
+      "venue": "JMIR Medical Informatics",
+      "status": "verified_current",
+      "rankings": [
+        {
+          "source": "CiteScore",
+          "database": "Scopus",
+          "year": 2025,
+          "quartile": "Q1",
+          "metric_label": "CiteScore",
+          "metric_value": 7.5,
+          "category": "Health Informatics",
+          "url": "https://medinform.jmir.org/"
+        },
+        {
+          "source": "JCR",
+          "database": "Web of Science",
+          "year": 2025,
+          "quartile": "Q2",
+          "metric_label": "JIF",
+          "metric_value": 5.0,
+          "category": "Medical Informatics",
+          "url": "https://medinform.jmir.org/"
+        },
+        {
+          "source": "SJR",
+          "database": "SCImago",
+          "year": 2024,
+          "quartile": "Q1",
+          "metric_label": "SJR",
+          "metric_value": 1.007,
+          "category": "Health Information Management",
+          "url": "https://www.scimagojr.com/journalsearch.php?q=21101030139&tip=sid"
+        }
+      ],
+      "note": null
+    }
+  ]
+}

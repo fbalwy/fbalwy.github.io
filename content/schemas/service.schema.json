@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fbalwy.sa/schemas/v1/service.schema.json",
+  "title": "Leadership and service record",
+  "allOf": [
+    { "$ref": "common.schema.json#/$defs/recordEnvelope" },
+    { "properties": { "domain": { "const": "service" }, "data": { "$ref": "#/$defs/serviceData" } } }
+  ],
+  "$defs": {
+    "serviceData": {
+      "type": "object", "additionalProperties": false,
+      "required": ["category", "role", "organisation", "activity", "period", "status", "issuer_metric", "membership_status"],
+      "properties": {
+        "category": { "enum": ["technology_leadership", "committee", "peer_review", "community_engagement", "talk", "professional_development", "membership"] },
+        "role": { "type": ["string", "null"] },
+        "organisation": { "type": "string", "minLength": 1 },
+        "activity": { "type": "string", "minLength": 1 },
+        "period": { "$ref": "common.schema.json#/$defs/period" },
+        "status": { "enum": ["historical", "active_verified", "active_unverified", "complete", "expired", "unknown"] },
+        "issuer_metric": {
+          "anyOf": [
+            { "type": "null" },
+            { "type": "object", "additionalProperties": false, "required": ["issuer_id", "metric_name", "value", "interval", "aggregation_policy"], "properties": {
+              "issuer_id": { "$ref": "common.schema.json#/$defs/stableId" },
+              "metric_name": { "enum": ["review_count", "hours", "occurrences"] },
+              "value": { "type": "integer", "minimum": 0 },
+              "interval": { "$ref": "common.schema.json#/$defs/period" },
+              "aggregation_policy": { "const": "source_specific_non_additive" }
+            } }
+          ]
+        },
+        "membership_status": { "enum": ["not_applicable", "verified_current", "unverified", "expired"] }
+      }
+    }
+  }
+}

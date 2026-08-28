@@ -1,0 +1,34 @@
+---
+import type { HomeModel } from "../../lib/home/model";
+import ResearchConstellation from "./ResearchConstellation.astro";
+
+interface Props { model: HomeModel; }
+const { model } = Astro.props;
+---
+<div class="home-content" data-module-order={model.modules.join(",")}>
+  <section class="home-module home-identity" aria-labelledby="home-title">
+    <div class="reading-plane home-hero-copy">
+      <h1 id="home-title">Faisal<br />Albalwy</h1>
+      <p class="home-role">Assistant Professor of Cybersecurity</p>
+      <p class="home-lead">Researching trustworthy digital systems across privacy, blockchain interoperability, and AI-enabled cyber-threat detection.</p>
+      <div class="home-hero-actions">
+        <a class="button button-primary" href="/research">Explore research</a>
+        <a class="button button-secondary" href="/publications">View publications</a>
+      </div>
+      <p class="home-affiliation">Taibah University · Department of Cybersecurity</p>
+    </div>
+    <aside class="home-research-index" aria-labelledby="research-index-title">
+      <div class="home-index-visual"><ResearchConstellation /></div>
+      <div>
+        <h2 id="research-index-title">Research index</h2>
+        <ol>{model.themes.map((theme) => <li><a href="/research">{String(theme.data?.name)}</a></li>)}</ol>
+      </div>
+    </aside>
+  </section>
+  <section class="home-module home-manifesto" aria-labelledby="research-title"><span class="section-number" aria-hidden="true">01</span><div class="reading-plane"><h2 id="research-title">Research and evidence</h2><p>My work examines how digital systems can protect sensitive data, communicate across technical boundaries, and detect cyber threats.</p></div><aside class="evidence-rail"><h3>One canonical catalogue</h3><p>Publication details remain linked to their canonical record.</p></aside></section>
+  <section class="home-module home-themes" aria-labelledby="themes-title"><div class="section-heading"><span class="section-number" aria-hidden="true">02</span><h2 id="themes-title">Research themes</h2></div><div class="theme-grid">{model.themes.map((theme, index) => <article class="theme-row"><p class="theme-index">{String(index + 1).padStart(2, "0")}</p><h3>{String(theme.data?.name)}</h3><p>{String(theme.data?.summary)}</p><a href="/publications">Explore this theme</a></article>)}</div></section>
+  <section class="home-module home-featured" aria-labelledby="featured-title"><div class="section-heading"><span class="section-number" aria-hidden="true">03</span><div><h2 id="featured-title">Featured publications</h2><p>Four topic-balanced pathways into the verified catalogue—not a ranking or impact claim.</p></div><a class="section-action" href="/publications">View all publications</a></div><ol class="featured-list">{model.featured.map((publication, index) => <li class="featured-record"><span>{String(index + 1).padStart(2, "0")}</span><h3>{String(publication.data?.title)}</h3><a href={`/publications#publication-${publication.record_id}`}>View record</a></li>)}</ol></section>
+  <section class="home-module home-snapshots" aria-label="Teaching and leadership snapshots"><span class="section-number" aria-hidden="true">04</span><article><h2>Teaching</h2><p>The teaching record includes cybersecurity and core computing subjects. Course titles are presented without sections, schedules, student information, or availability claims.</p><a href="/teaching">Explore teaching</a></article><article><h2>Leadership &amp; Service</h2><p>Selected records cover technology leadership, peer review, and community engagement. Source-specific review counts remain separate and are not combined.</p><a href="/leadership-service">Explore service</a></article></section>
+  <section class="home-module home-about" aria-labelledby="about-title"><span class="section-number" aria-hidden="true">05</span><div class="reading-plane"><h2 id="about-title">About</h2><p>Read verified appointment, doctoral, research, and selected professional context in the accessible About page.</p><a href="/about">About Faisal Albalwy</a></div></section>
+  <section class="home-module home-contact" aria-labelledby="contact-title"><span class="section-number" aria-hidden="true">06</span><div><h2 id="contact-title">Let’s connect</h2><p>Use Contact to prepare a focused professional inquiry and email Faisal through his verified institutional address.</p></div><a class="button button-secondary-inverse" href="/contact">Get in touch</a></section>
+</div>

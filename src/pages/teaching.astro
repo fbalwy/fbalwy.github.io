@@ -1,0 +1,11 @@
+---
+import PreviewLayout from "../layouts/PreviewLayout.astro";
+import UnavailableState from "../components/states/UnavailableState.astro";
+import TeachingContent from "../components/teaching/TeachingContent.astro";
+import { ROUTES } from "../lib/routes/registry";
+import { skeletonState } from "../lib/content/public-model";
+import { currentSite } from "../lib/integration/current-site";
+
+const teaching = currentSite.routes.teaching;
+---
+<PreviewLayout route={ROUTES[3]}>{teaching.public ? <TeachingContent model={teaching} /> : <UnavailableState {...skeletonState} />}</PreviewLayout>

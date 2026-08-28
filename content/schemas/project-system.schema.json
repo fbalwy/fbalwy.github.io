@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fbalwy.sa/schemas/v1/project-system.schema.json",
+  "title": "Project or research-system record",
+  "allOf": [
+    { "$ref": "common.schema.json#/$defs/recordEnvelope" },
+    { "properties": { "domain": { "const": "project-system" }, "data": { "$ref": "#/$defs/projectSystemData" } } }
+  ],
+  "$defs": {
+    "projectSystemData": {
+      "type": "object", "additionalProperties": false,
+      "required": ["record_type", "title", "status", "maturity", "period", "role", "problem", "approach", "outputs", "funder", "funding", "partner_ids", "confidentiality", "related_publication_ids", "related_theme_ids"],
+      "properties": {
+        "record_type": { "enum": ["project", "grant", "research_system", "framework", "prototype", "study", "dataset"] },
+        "title": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["proposed", "submitted", "awarded", "contracted", "active", "complete", "expired", "withdrawn", "unknown"] },
+        "maturity": { "enum": ["concept", "proposed", "implemented", "tested", "evaluated", "available", "deployed", "unknown"] },
+        "period": { "$ref": "common.schema.json#/$defs/period" },
+        "role": { "type": ["string", "null"] },
+        "problem": { "type": ["string", "null"] },
+        "approach": { "type": ["string", "null"] },
+        "outputs": { "type": "array", "items": { "type": "string", "minLength": 3 } },
+        "funder": { "type": ["string", "null"] },
+        "funding": {
+          "anyOf": [
+            { "type": "null" },
+            { "type": "object", "additionalProperties": false, "required": ["amount", "currency", "scope", "as_of"], "properties": { "amount": { "type": "number", "minimum": 0 }, "currency": { "const": "SAR" }, "scope": { "enum": ["total_award", "attributable_amount", "combined_value", "other"] }, "as_of": { "type": "string", "format": "date" } } }
+          ]
+        },
+        "partner_ids": { "type": "array", "uniqueItems": true, "items": { "$ref": "common.schema.json#/$defs/stableId" } },
+        "confidentiality": { "enum": ["none", "review_required", "restricted", "prohibited"] },
+        "related_publication_ids": { "type": "array", "uniqueItems": true, "items": { "$ref": "common.schema.json#/$defs/stableId" } },
+        "related_theme_ids": { "type": "array", "uniqueItems": true, "items": { "$ref": "common.schema.json#/$defs/stableId" } }
+      }
+    }
+  }
+}

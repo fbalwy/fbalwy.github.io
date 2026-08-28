@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.astro/
+.build/
+src/styles/tokens.css
+.playwright-cli/
+public/
+content/
+docs/
+design-concepts/wireframes/
+*.md
+ACADEMIC_WEBSITE_*.html
+ACADEMIC_WEBSITE_*.md
+AUTONOMOUS_EXECUTION_POLICY.md
+WEBSITE_VISUAL_IDENTITY_SPEC.md

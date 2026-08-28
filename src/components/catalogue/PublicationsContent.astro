@@ -1,0 +1,192 @@
+---
+import "../../styles/publications.css";
+import PublicationCatalogue from "./PublicationCatalogue.astro";
+import type { PublicationsModel } from "../../lib/publications/model";
+import { PUBLICATION_OPERATIONAL_COPY } from "../../lib/publications/model";
+
+interface Props {
+  model: PublicationsModel;
+}
+
+const { model } = Astro.props;
+---
+
+<div class="publications-page" data-publication-catalogue>
+  <div class="publication-state publication-state--offline" data-offline-state hidden>
+    <strong>{PUBLICATION_OPERATIONAL_COPY.offlineHeading}</strong>
+    <p>{PUBLICATION_OPERATIONAL_COPY.offlineExplanation}</p>
+  </div>
+
+  <header class="publications-intro">
+    <div>
+      <h1>Publications</h1>
+      <p class="publications-lead">
+        This catalogue provides a single, deduplicated record of Faisal Albalwy's
+        verified scholarly work and routes to canonical external evidence.
+        Duplicate profile entries and linked versions remain within one work
+        lineage rather than being counted as separate publications.
+      </p>
+      <p>
+        Browse the complete catalogue or use search and filters to find a
+        publication by title, author, year, venue, DOI, or type. Featured and
+        latest groupings are editorial pathways into the same catalogue; they
+        are not quality, impact, citation, or ranking claims.
+      </p>
+      <p class="publication-intro-actions">
+        <a href="#publication-catalogue">Browse catalogue</a>
+        <a href="/research">View related research</a>
+      </p>
+    </div>
+    <aside class="publication-evidence" aria-labelledby="publication-evidence-heading">
+      <h2 id="publication-evidence-heading">Catalogue coverage</h2>
+      <dl>
+        <div><dt>Work lineages</dt><dd>{model.counts.records}</dd></div>
+        <div><dt>Canonical order</dt><dd>Newest first</dd></div>
+        <div><dt>Source basis</dt><dd>DOI, publisher, institutional repository</dd></div>
+        <div><dt>Last checked</dt><dd>{model.lastChecked}</dd></div>
+      </dl>
+    </aside>
+  </header>
+
+  <section class="publication-section" aria-labelledby="featured-publications-heading">
+    <h2 id="featured-publications-heading">Featured publications</h2>
+    <p>
+      Featured publications provide a topic-balanced starting point for
+      exploring the record. Featured does not mean best, most cited, highest
+      ranked, or institutionally endorsed.
+    </p>
+    <ol class="publication-pathway-list">
+      {model.featured.map((publication) => (
+        <li>
+          <p><strong>{publication.year}</strong></p>
+          <div>
+            <h3>{publication.title}</h3>
+            <p>{publication.authors.join(", ")} · {publication.venue} · {publication.statusLabel}</p>
+          </div>
+          <a href={`#${publication.fragment}`}>View record</a>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="publication-section publication-latest" aria-labelledby="latest-publications-heading">
+    <div>
+      <h2 id="latest-publications-heading">Latest publications</h2>
+      <p>
+        Latest publications are the first {model.latest.length} eligible records
+        in the canonical order verified on {model.lastChecked}.
+      </p>
+      <p class="publication-future-note">
+        {model.counts.futureIssue} record is {model.futureIssueLabel?.toLocaleLowerCase("en")};
+        its status and future issue date remain explicit.
+      </p>
+    </div>
+    <ol>
+      {model.latest.map((publication) => (
+        <li><a href={`#${publication.fragment}`}>{publication.title}</a></li>
+      ))}
+    </ol>
+  </section>
+
+  <section
+    class="publication-section publication-catalogue"
+    id="publication-catalogue"
+    aria-labelledby="publication-catalogue-heading"
+  >
+    <h2 id="publication-catalogue-heading" tabindex="-1">Complete catalogue</h2>
+    <p>
+      The complete catalogue contains every eligible canonical work lineage,
+      newest first. It includes {model.counts.journalArticles} journal articles,
+      {model.counts.bookChapters} book chapter, {model.counts.preprint} preprint,
+      and {model.counts.awardedThesis} doctoral thesis.
+    </p>
+
+    <noscript>
+      <p class="publication-state">
+        <strong>Search and filters are unavailable.</strong> All publications
+        remain listed below.
+      </p>
+    </noscript>
+
+    <div class="publication-filters" data-publication-controls role="search" hidden>
+      <div class="publication-filter-grid">
+        <div>
+          <label for="publication-query">Search publications</label>
+          <input
+            id="publication-query"
+            type="search"
+            maxlength="200"
+            autocomplete="off"
+            aria-describedby="publication-query-hint"
+            data-publication-query
+          />
+          <small id="publication-query-hint">Search by title, author, venue, or DOI.</small>
+        </div>
+        <div>
+          <label for="publication-year">Year</label>
+          <select id="publication-year" data-publication-year>
+            <option value="">All years</option>
+            {model.years.map((year) => <option value={year}>{year}</option>)}
+          </select>
+        </div>
+        <div>
+          <label for="publication-type">Publication type</label>
+          <select id="publication-type" data-publication-type>
+            <option value="">All publication types</option>
+            {model.types.map((type) => <option value={type.value}>{type.label}</option>)}
+          </select>
+        </div>
+      </div>
+      <div class="publication-filter-summary">
+        <div>
+          <p class="publication-result-summary" data-result-summary>
+            {model.counts.records} publications
+          </p>
+          <ul class="publication-active-filters" data-active-filters hidden></ul>
+        </div>
+        <button type="button" data-clear-filters disabled>Clear filters</button>
+      </div>
+    </div>
+
+    <div class="publication-state" data-invalid-query-state hidden>
+      <p>{PUBLICATION_OPERATIONAL_COPY.invalidQuery}</p>
+    </div>
+    <div class="publication-state" data-no-results hidden>
+      <h3>{PUBLICATION_OPERATIONAL_COPY.noResultsHeading}</h3>
+      <p>{PUBLICATION_OPERATIONAL_COPY.noResultsExplanation}</p>
+      <button type="button" data-clear-no-results>Clear filters</button>
+    </div>
+    <div class="publication-state" data-partial-state hidden={!model.partial}>
+      <h3>{PUBLICATION_OPERATIONAL_COPY.partialHeading}</h3>
+      <p>{PUBLICATION_OPERATIONAL_COPY.partialExplanation}</p>
+    </div>
+    <div class="publication-state" data-external-state hidden>
+      <h3>{PUBLICATION_OPERATIONAL_COPY.externalHeading}</h3>
+      <p>{PUBLICATION_OPERATIONAL_COPY.externalExplanation}</p>
+    </div>
+    <p class="visually-hidden" data-citation-status role="status" aria-live="polite"></p>
+
+    <PublicationCatalogue records={model.records} />
+  </section>
+
+  <section class="publication-section publication-source" aria-labelledby="publication-source-heading">
+    <h2 id="publication-source-heading">Source and freshness</h2>
+    <p>
+      Publication metadata is reconciled against publisher pages,
+      DOI-registration records, and authoritative institutional repositories.
+      Duplicate and version relationships are resolved before a work enters the
+      catalogue.
+    </p>
+    <p>
+      External destinations and correction or retraction status were last
+      checked on {model.lastChecked}. Follow a canonical external source for the
+      latest publisher or repository notice.
+    </p>
+    <p>
+      Research provides context for approved themes, projects, and relationships
+      across this publication record. <a href="/research">View related research</a>
+    </p>
+  </section>
+</div>
+
+<script src="../../client/publication-catalogue.ts"></script>

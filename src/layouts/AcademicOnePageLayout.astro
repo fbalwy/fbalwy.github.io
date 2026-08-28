@@ -1,0 +1,63 @@
+---
+import "../styles/academic-one-page.css";
+import { currentSite } from "../lib/integration/current-site";
+import StructuredData from "../components/discovery/StructuredData.astro";
+import { structuredDataForRoute } from "../lib/structured-data/model";
+import { canonicalFor, metadataFor } from "../lib/discovery/metadata.mjs";
+import { socialMetadataFor } from "../lib/discovery/social.mjs";
+
+const origin = import.meta.env.SITE_ORIGIN ?? "https://local.invalid";
+const metadata = metadataFor("/");
+const canonical = canonicalFor(origin, "/");
+const social = socialMetadataFor(origin, "/");
+const robots =
+  import.meta.env.SITE_BUILD_MODE === "production"
+    ? "index, follow"
+    : "noindex, nofollow, noarchive, nosnippet";
+const structuredData = structuredDataForRoute({
+  site: currentSite,
+  origin,
+  pathname: "/",
+});
+---
+
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="robots" content={robots} />
+    <meta name="description" content={metadata.description} />
+    <meta name="author" content="Faisal Albalwy" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta property="og:type" content={social.openGraphType} />
+    <meta
+      property="og:site_name"
+      content="Faisal Albalwy | Personal academic website"
+    />
+    <meta property="og:title" content={social.title} />
+    <meta property="og:description" content={social.description} />
+    <meta property="og:url" content={social.url} />
+    <meta property="og:image" content={social.image} />
+    <meta property="og:image:secure_url" content={social.image} />
+    <meta property="og:image:type" content={social.imageType} />
+    <meta property="og:image:width" content={String(social.imageWidth)} />
+    <meta property="og:image:height" content={String(social.imageHeight)} />
+    <meta property="og:image:alt" content={social.imageAlt} />
+    <meta name="twitter:card" content={social.twitterCard} />
+    <meta name="twitter:title" content={social.title} />
+    <meta name="twitter:description" content={social.description} />
+    <meta name="twitter:image" content={social.image} />
+    <meta name="twitter:image:alt" content={social.imageAlt} />
+    <link rel="canonical" href={canonical} />
+    <title>{metadata.title}</title>
+    {structuredData && <StructuredData document={structuredData} />}
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <main id="main-content" tabindex="-1">
+      <slot />
+    </main>
+  </body>
+</html>

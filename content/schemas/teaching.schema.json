@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fbalwy.sa/schemas/v1/teaching.schema.json",
+  "title": "Canonical course title or teaching occurrence",
+  "oneOf": [
+    { "$ref": "#/$defs/courseRecord" },
+    { "$ref": "#/$defs/occurrenceRecord" }
+  ],
+  "$defs": {
+    "courseRecord": {
+      "allOf": [ { "$ref": "common.schema.json#/$defs/recordEnvelope" }, { "properties": { "domain": { "const": "course" }, "data": { "$ref": "#/$defs/courseData" } } } ]
+    },
+    "courseData": {
+      "type": "object", "additionalProperties": false,
+      "required": ["official_title", "normalized_english_title", "category", "title_authority"],
+      "properties": {
+        "official_title": { "type": "string", "minLength": 1 },
+        "normalized_english_title": { "type": ["string", "null"] },
+        "category": { "enum": ["cybersecurity", "computer_science", "software_engineering", "information_technology", "other"] },
+        "title_authority": { "enum": ["official_english", "owner_reviewed_literal", "pending"] }
+      }
+    },
+    "occurrenceRecord": {
+      "allOf": [ { "$ref": "common.schema.json#/$defs/recordEnvelope" }, { "properties": { "domain": { "const": "teaching-occurrence" }, "data": { "$ref": "#/$defs/occurrenceData" } } } ]
+    },
+    "occurrenceData": {
+      "type": "object", "additionalProperties": false,
+      "required": ["course_id", "term_label", "academic_year", "calendar", "historical"],
+      "properties": {
+        "course_id": { "$ref": "common.schema.json#/$defs/stableId" },
+        "term_label": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "academic_year": { "type": "string", "pattern": "^[0-9]{4}(?:-[0-9]{4})?$" },
+        "calendar": { "enum": ["gregorian", "hijri"] },
+        "historical": { "const": true }
+      }
+    }
+  }
+}

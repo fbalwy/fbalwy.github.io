@@ -1,0 +1,32 @@
+node_modules/
+dist/
+.astro/
+.build/
+coverage/
+playwright-report/
+test-results/
+blob-report/
+*.log
+.DS_Store
+.env
+.env.*
+!.env.example
+.playwright-cli/
+tmp/
+output/
+assets/cv/
+
+# Local planning and source-evidence material; never publish these folders.
+ACADEMIC_WEBSITE_EXECUTION_DASHBOARD.html
+ACADEMIC_WEBSITE_BENCHMARKED_STRUCTURE.md
+ACADEMIC_WEBSITE_MASTER_BUILD_PLAN.md
+ACADEMIC_WEBSITE_STRUCTURE.md
+WEBSITE_VISUAL_IDENTITY_SPEC.md
+design-concepts/*
+!design-concepts/wireframes/
+!design-concepts/wireframes/index.html
+الجداول الدراسية/
+الخدمة الإدارية/
+الخدمة المجتمعية/
+الدليل الارشادي للهوية البصرية.pdf
+ملفات الهوية/

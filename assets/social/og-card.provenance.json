@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "workPackage": "INT-003-v1",
+  "stableOutputName": "public/og.png",
+  "sourceRelativePath": "assets/social/og-card.html",
+  "sourceSha256": "1088000dd4e93f02439236ea5f5258febf4a8a9b492d52bfd5f660326513643d",
+  "sourceClassification": "project-authored deterministic text-only social preview",
+  "authorizationAndRightsNote": "Uses approved public-safe identity/context copy, approved brand colors, and system fonts only. It contains no university logo, portrait, pattern, protected media, candidate font, role, publication, metric, or third-party asset.",
+  "toolAndVersion": {
+    "node": "24.19.0",
+    "playwright": "1.62.1",
+    "renderer": "Google Chrome 151.0.7922.140"
+  },
+  "conversionSubsetCropSettings": "Chromium element screenshot at CSS scale 1; viewport and output 1200x630; reduced motion; animations disabled; no crop, resample, font subset, or remote resource.",
+  "colorProfileHandling": "Browser-rendered 8-bit RGB PNG. Only IHDR, IDAT, and IEND chunks are accepted; no ICC, EXIF, textual, time, source-path, or privacy metadata is retained.",
+  "dimensionsOrViewBox": "1200x630 pixels",
+  "fontUnicodeRange": "No font is embedded. Approved ASCII copy renders through ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif.",
+  "metadataScrubResult": "PASS: PNG contains only IHDR, IDAT, and IEND chunks.",
+  "visualSourceComparison": "PASS at 1200x630, 600x315, and 300x158: Faisal-first hierarchy, subordinate text affiliation, no clipping, and no logo/image/pattern dependency.",
+  "accessibilityChecks": "All text uses approved high-contrast pairs; text remains inside a 96px horizontal and 80px vertical safe area; social metadata supplies a concise equivalent image alt.",
+  "reviewer": "INT-003 implementation review",
+  "reviewDate": "2026-08-19",
+  "gateG0State": "Approved conservative Faisal-first text-only/no-logo system retained; G4 approved before INT-003 issuance.",
+  "openExternalExceptions": [
+    "Institutional clearance for university-logo social use remains unproven and excluded.",
+    "Production origin remains blocked until a separately authorized release decision."
+  ],
+  "outputSha256": "213c69b474cab71d4cd4d00817cb37b2279c50d492872c67ec0878b4b6b3cbe6",
+  "outputBytes": 32565,
+  "sizeBudgetBytes": 153600
+}

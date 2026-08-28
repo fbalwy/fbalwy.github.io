@@ -1,0 +1,14 @@
+---
+import {
+  serializeStructuredDocument,
+  type StructuredDocument,
+} from "../../lib/structured-data/model";
+
+interface Props {
+  document: StructuredDocument;
+}
+
+const { document } = Astro.props;
+const json = serializeStructuredDocument(document);
+---
+<script is:inline type="application/ld+json" set:html={json}></script>

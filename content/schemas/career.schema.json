@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fbalwy.sa/schemas/v1/career.schema.json",
+  "title": "Education, appointment, or career timeline record",
+  "allOf": [
+    { "$ref": "common.schema.json#/$defs/recordEnvelope" },
+    { "properties": { "domain": { "const": "career" }, "data": { "$ref": "#/$defs/careerData" } } }
+  ],
+  "$defs": {
+    "careerData": {
+      "type": "object", "additionalProperties": false,
+      "required": ["record_type", "title", "organisation", "unit", "period", "award_date", "current_status", "chronology_order"],
+      "properties": {
+        "record_type": { "enum": ["education", "appointment", "career_event"] },
+        "title": { "type": "string", "minLength": 1 },
+        "organisation": { "type": "string", "minLength": 1 },
+        "unit": { "type": ["string", "null"] },
+        "period": { "$ref": "common.schema.json#/$defs/period" },
+        "award_date": { "type": ["string", "null"], "format": "date" },
+        "current_status": { "enum": ["historical", "current_verified", "current_unverified", "unknown"] },
+        "chronology_order": { "enum": ["oldest_first", "newest_first", "not_applicable"] }
+      }
+    }
+  }
+}

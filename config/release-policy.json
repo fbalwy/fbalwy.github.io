@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "github-pages-user-site-authorized",
+  "canonicalPathPolicy": "no-trailing-slash",
+  "indexing": {
+    "tec003Default": "noindex, nofollow, noarchive, nosnippet",
+    "robots": "User-agent: *\nDisallow: /\n",
+    "productionMeta": "index, follow",
+    "productionRobotsTemplate": "User-agent: *\nAllow: /\nSitemap: {origin}/sitemap.xml\n"
+  },
+  "headers": {
+    "security": {
+      "Content-Security-Policy": "default-src 'self'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; form-action 'none'; script-src 'self'; script-src-attr 'none'; style-src 'self'; style-src-attr 'none'; img-src 'self'; font-src 'self'; connect-src 'none'; media-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'self'; upgrade-insecure-requests",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "Permissions-Policy": "camera=(), geolocation=(), microphone=(), payment=(), usb=(), browsing-topics=()",
+      "Cross-Origin-Opener-Policy": "same-origin",
+      "Cross-Origin-Resource-Policy": "same-origin",
+      "Strict-Transport-Security": "max-age=31536000"
+    },
+    "cache": {
+      "html": "public, max-age=0, must-revalidate",
+      "fingerprintedAsset": "public, max-age=31536000, immutable",
+      "stableDownload": "public, max-age=3600, must-revalidate",
+      "stableSocialImage": "public, max-age=3600, must-revalidate"
+    }
+  },
+  "routing": {
+    "unknownPath": "true-404",
+    "redirectStatus": 308,
+    "preserveQueryOnCanonicalRedirect": false,
+    "homepageFallbackForbidden": true
+  },
+  "adapter": {
+    "format": "vercel-static-v1",
+    "selected": false,
+    "reason": "A provider-neutral policy is retained until primary evidence proves every required capability, including headers on error responses and exact no-trailing-slash static routing."
+  }
+}

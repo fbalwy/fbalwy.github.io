@@ -1,0 +1,11 @@
+---
+import type { OperationalState } from "../../lib/states/contracts";
+interface Props { state: OperationalState; headingLevel?: "h1" | "h2"; }
+const { state, headingLevel = "h2" } = Astro.props;
+const Heading = headingLevel;
+---
+<section class="state operational-state" data-operational-state={state.id} aria-labelledby={`${state.id}-heading`} aria-live="polite">
+  <Heading id={`${state.id}-heading`}>{state.heading}</Heading>
+  <p>{state.explanation}</p>
+  {state.recovery ? <a class="state-recovery" href={state.recovery.href}>{state.recovery.label}</a> : null}
+</section>

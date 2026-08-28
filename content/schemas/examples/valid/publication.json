@@ -1,0 +1,106 @@
+{
+  "record_id": "example-thesis",
+  "schema_version": "1.0.0",
+  "domain": "publication",
+  "claim_ids": ["CLM-EXAMPLE-000001"],
+  "sources": [
+    {
+      "source_id": "SRC-EXAMPLE-001",
+      "source_role": "authoritative_primary",
+      "authority_scope": "Illustrative repository metadata only",
+      "custodian": "Illustrative institution",
+      "independence_basis": "Illustrative originator controls the example metadata.",
+      "evidence_lineage_id": "LIN-EXAMPLE",
+      "controlled_location_alias": "CORPUS-EXAMPLE",
+      "pinpoint_location": "Illustrative record",
+      "original_or_derivative": "response_snapshot",
+      "snapshot_id": "SNAP-EXAMPLE",
+      "snapshot_hash": null,
+      "snapshot_at": "2026-08-19T00:00:00+03:00",
+      "accessed_at": "2026-08-19T00:00:00+03:00",
+      "source_date": null,
+      "source_date_precision": "unknown",
+      "effective_date": null,
+      "access_state": "available",
+      "source_privacy_class": "Internal",
+      "redistribution_allowed": false,
+      "reviewer_note": "Illustrative fixture; no factual assertion.",
+      "public_source_note": null
+    }
+  ],
+  "governance": {
+    "verification_status": "unassessed",
+    "conflict_state": "none",
+    "public_disposition": "suppress",
+    "render_eligibility": "internal_only",
+    "privacy_class": "Public_after_review",
+    "evidence_privacy_class": "Internal",
+    "rights_status": "unknown",
+    "consent_status": "not_applicable",
+    "first_verified_at": null,
+    "freshness": {
+      "policy_id": "on-ingestion-plus-90-day-notice-check",
+      "maximum_age_days": 90,
+      "review_triggers": ["publisher notice or repository correction"],
+      "last_verified_at": null,
+      "reviewed_at": null,
+      "next_review_due": null
+    },
+    "record_owner_role": "publication_curator",
+    "record_owner_id": null,
+    "reviewer_roles": ["evidence_reviewer"],
+    "approvals": { "evidence": false, "privacy": false, "rights": false, "editorial": false, "qa": false },
+    "omission_reason": "Illustrative fixture only; not a factual or public record.",
+    "decision_rationale": "Demonstrates the permitted DOI-less thesis shape while remaining fail closed."
+  },
+  "translation": {
+    "evidence_language": "en",
+    "public_language": "en",
+    "status": "not_needed",
+    "source_value_protected": false,
+    "translator_or_reviewer_role": null
+  },
+  "public_presentation": {
+    "public_wording": null,
+    "public_location_ids": [],
+    "fragment_id": "publication-example-thesis",
+    "action_label": null,
+    "source_note": null
+  },
+  "versioning": {
+    "record_version": 1,
+    "supersedes_record_ids": [],
+    "superseded_by_record_id": null,
+    "correction_state": "none",
+    "correction_note": null,
+    "history": [
+      { "at": "2026-08-19T00:00:00+03:00", "actor_role": "publication_curator", "event": "created", "reason": "Created as a non-public validation fixture." }
+    ]
+  },
+  "data": {
+    "title": "Illustrative thesis title",
+    "authors": [
+      { "name": "Illustrative Faisal identity", "is_faisal": true, "identity_evidence": ["Illustrative fixture identity evidence"] }
+    ],
+    "work_type": "doctoral_thesis",
+    "venue": "Illustrative institutional repository",
+    "publisher": "Illustrative institution",
+    "doi": null,
+    "dates": [
+      { "type": "award", "value": "2022", "precision": "year", "calendar": "gregorian", "source_string": "2022" }
+    ],
+    "display_year": 2022,
+    "sort_date": "2022-01-01",
+    "volume": null,
+    "issue": null,
+    "pages": null,
+    "article_number": null,
+    "status": "awarded",
+    "external_actions": [
+      { "kind": "repository", "url": "https://example.invalid/repository/example-thesis", "label": "View repository record (external)", "availability": "unchecked" }
+    ],
+    "version_relationships": [],
+    "notice_state": "not_applicable",
+    "notice_checked_at": "2026-08-19"
+  }
+}

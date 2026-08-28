@@ -1,0 +1,95 @@
+---
+type Ranking = Readonly<{
+  source: string;
+  database: string;
+  year: number;
+  quartile: string;
+  metric_label: string;
+  metric_value: number | null;
+  category: string;
+  url: string;
+}>;
+
+type Metric = Readonly<{
+  status: string;
+  rankings: readonly Ranking[];
+  note: string | null;
+  status_url?: string;
+}>;
+
+interface Props {
+  metric?: Metric;
+  publicationType: string;
+  venue?: string | null;
+}
+
+const { metric, publicationType, venue } = Astro.props;
+const isBookChapter = publicationType === "book-chapter";
+const primary = metric?.rankings[0];
+const verified = Boolean(primary?.quartile);
+const historical = metric?.status === "verified_historical";
+const quartile = primary?.quartile ?? null;
+const metricCaption =
+  primary?.metric_value === null || primary?.metric_value === undefined
+    ? primary?.source ?? "ranking year"
+    : `${primary.metric_label} ${primary.year}`;
+const metricValue =
+  primary?.metric_value === null || primary?.metric_value === undefined
+    ? `${primary?.year ?? "—"}`
+    : primary.metric_value.toFixed(primary.metric_label === "SJR" ? 3 : 1);
+const rankingSummary = metric?.rankings.length
+  ? metric.rankings
+      .map(
+        (ranking) =>
+          `${ranking.database} ${ranking.year}: ${ranking.quartile} in ${ranking.category}`,
+      )
+      .join("; ")
+  : "No current JCR or Scopus category quartile has been verified.";
+const accessibleLabel = `${venue ?? "Journal"}. ${historical ? "Historical ranking. " : ""}${rankingSummary}${metric?.note ? `. ${metric.note}` : ""}`;
+---
+
+{!isBookChapter && verified && primary && (
+  <div
+    class:list={[
+      "publication-metric",
+      historical && "publication-metric--historical",
+    ]}
+    data-quartile={quartile?.toLowerCase()}
+    aria-label={accessibleLabel}
+    title={accessibleLabel}
+  >
+    <a class="publication-metric__panel" href={primary.url} rel="noopener">
+      <span class="publication-metric__heading">
+        <strong>{venue ?? primary.database}</strong>
+        <small>{historical ? "historical quartile" : "best quartile"}</small>
+      </span>
+      <span class="publication-metric__body">
+        <span
+          class="publication-metric__quartile"
+          data-quartile={quartile?.toLowerCase()}
+        >
+          {quartile}
+        </span>
+        <span class="publication-metric__detail">
+          <strong>{primary.category}</strong>
+          <span>{primary.database} category</span>
+        </span>
+      </span>
+      <span class="publication-metric__performance">
+        <span>
+          <small>{metricCaption}</small>
+          <strong>{metricValue}</strong>
+        </span>
+        <svg viewBox="0 0 92 30" role="presentation" aria-hidden="true">
+          <path class="publication-metric__area" d="M1 28 L1 22 L18 19 L35 17 L52 13 L69 11 L91 7 L91 28 Z"></path>
+          <path class="publication-metric__line" d="M1 22 L18 19 L35 17 L52 13 L69 11 L91 7"></path>
+          <circle cx="91" cy="7" r="2.4"></circle>
+        </svg>
+      </span>
+      <span class="publication-metric__source-line">
+        <strong>{primary.source}</strong>
+        <span>{primary.database}</span>
+      </span>
+    </a>
+  </div>
+)}

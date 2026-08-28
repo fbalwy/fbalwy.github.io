@@ -1,0 +1,18 @@
+---
+import PreviewLayout from "../layouts/PreviewLayout.astro";
+import PublicationsContent from "../components/catalogue/PublicationsContent.astro";
+import UnavailableState from "../components/states/UnavailableState.astro";
+import { skeletonState } from "../lib/content/public-model";
+import { ROUTES } from "../lib/routes/registry";
+import { currentSite } from "../lib/integration/current-site";
+
+const publications = currentSite.routes.publications;
+---
+
+<PreviewLayout route={ROUTES[2]}>
+  {publications.public ? (
+    <PublicationsContent model={publications} />
+  ) : (
+    <UnavailableState {...skeletonState} />
+  )}
+</PreviewLayout>

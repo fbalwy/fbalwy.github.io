@@ -1,0 +1,10 @@
+---
+import PreviewLayout from "../layouts/PreviewLayout.astro";
+import UnavailableState from "../components/states/UnavailableState.astro";
+import { ROUTES } from "../lib/routes/registry";
+import { skeletonState } from "../lib/content/public-model";
+import AboutContent from "../components/about/AboutContent.astro";
+import { currentSite } from "../lib/integration/current-site";
+const about = currentSite.routes.about;
+---
+<PreviewLayout route={ROUTES[5]}>{about.public ? <AboutContent model={about} /> : <UnavailableState {...skeletonState} />}</PreviewLayout>

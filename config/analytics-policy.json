@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "1.0.0",
+  "decision": "disabled",
+  "implementationAuthorized": false,
+  "artifactScope": [
+    "application-source",
+    "build-tooling",
+    "release-configuration",
+    "public-assets",
+    "generated-output",
+    "dependencies",
+    "runtime-network"
+  ],
+  "collection": {
+    "analytics": false,
+    "telemetry": false,
+    "trackingPixels": false,
+    "beacons": false,
+    "cookies": false,
+    "localStorage": false,
+    "sessionStorage": false,
+    "indexedDb": false,
+    "fingerprinting": false,
+    "serviceWorkers": false,
+    "trackingQueryMutation": false,
+    "thirdPartyRuntime": false
+  },
+  "runtimeOrigins": [],
+  "consentInterfaceRequired": false,
+  "hostLogs": {
+    "partOfStaticArtifact": false,
+    "authorizedByThisPolicy": false,
+    "scope": "A future host may expose operational logs only under separate owner authorization and provider-specific privacy governance."
+  },
+  "futureException": {
+    "state": "prohibited-until-approved",
+    "approvalOwner": "site-owner",
+    "implementationAuthorized": false,
+    "requiredControls": [
+      "explicit-owner-approval",
+      "purpose-and-necessity",
+      "data-field-inventory-and-minimization",
+      "lawful-and-privacy-basis",
+      "retention-access-and-deletion",
+      "processor-and-region-review",
+      "consent-decision",
+      "dnt-and-gpc-handling",
+      "visitor-disclosure",
+      "security-review",
+      "qa-006-reaudit",
+      "g4-and-g5-reopening-as-applicable"
+    ],
+    "requiredHandoffs": ["QA-005", "QA-006", "QA-007"],
+    "reopenGatesAsApplicable": ["G4", "G5"]
+  }
+}

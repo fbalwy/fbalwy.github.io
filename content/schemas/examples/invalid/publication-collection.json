@@ -1,0 +1,8 @@
+{
+  "cases": [
+    { "case_id": "duplicate-record-id", "expected_check": "COLLECTION-DUPLICATE-ID", "payload": { "records": [ { "record_id": "same-id" }, { "record_id": "same-id" } ] } },
+    { "case_id": "duplicate-normalized-doi", "expected_check": "COLLECTION-DUPLICATE-DOI", "payload": { "records": [ { "doi": "10.1000/example" }, { "doi": "HTTPS://DOI.ORG/10.1000/EXAMPLE" } ] } },
+    { "case_id": "two-faisal-authors", "expected_check": "PUBLICATION-ONE-FAISAL", "payload": { "authors": [ { "is_faisal": true }, { "is_faisal": true } ] } },
+    { "case_id": "future-issue-without-issue-date", "expected_check": "PUBLICATION-FUTURE-ISSUE", "payload": { "status": "online_first_with_future_issue_assignment", "dates": [ { "type": "observed", "value": "2026-08-19" } ] } }
+  ]
+}

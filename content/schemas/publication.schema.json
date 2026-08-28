@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fbalwy.sa/schemas/v1/publication.schema.json",
+  "title": "Canonical publication record",
+  "allOf": [
+    { "$ref": "common.schema.json#/$defs/recordEnvelope" },
+    {
+      "properties": {
+        "domain": { "const": "publication" },
+        "data": { "$ref": "#/$defs/publicationData" }
+      }
+    }
+  ],
+  "$defs": {
+    "author": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "is_faisal", "identity_evidence"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "is_faisal": { "type": "boolean" },
+        "identity_evidence": { "type": "array", "items": { "type": "string", "minLength": 3 }, "uniqueItems": true }
+      }
+    },
+    "publicationData": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "authors", "work_type", "venue", "publisher", "doi", "dates", "display_year", "sort_date", "volume", "issue", "pages", "article_number", "status", "external_actions", "version_relationships", "notice_state", "notice_checked_at"],
+      "properties": {
+        "title": { "type": "string", "minLength": 1 },
+        "authors": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/author" } },
+        "work_type": { "enum": ["journal_article", "conference_paper", "book_chapter", "review", "preprint", "doctoral_thesis", "dataset", "other"] },
+        "venue": { "type": ["string", "null"] },
+        "publisher": { "type": ["string", "null"] },
+        "doi": {
+          "anyOf": [
+            { "type": "string", "pattern": "^10\\.[0-9]{4,9}/[-._;()/:a-z0-9]+$" },
+            { "type": "null" }
+          ]
+        },
+        "dates": { "type": "array", "minItems": 1, "items": { "$ref": "common.schema.json#/$defs/dateEvent" } },
+        "display_year": { "type": "integer", "minimum": 1900, "maximum": 2200 },
+        "sort_date": { "type": "string", "format": "date" },
+        "volume": { "type": ["string", "null"] },
+        "issue": { "type": ["string", "null"] },
+        "pages": { "type": ["string", "null"] },
+        "article_number": { "type": ["string", "null"] },
+        "status": { "enum": ["accepted", "online_first", "online_first_with_future_issue_assignment", "published", "posted_preprint", "awarded", "corrected", "retracted", "withdrawn"] },
+        "external_actions": { "type": "array", "minItems": 1, "items": { "$ref": "common.schema.json#/$defs/externalAction" } },
+        "version_relationships": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["relationship_type", "related_record_id", "counted_separately", "note"],
+            "properties": {
+              "relationship_type": { "enum": ["preprint_of", "version_of_record_for", "conference_version_of", "corrects", "retracts", "duplicate_of", "related_later_work", "contains_related_research"] },
+              "related_record_id": { "$ref": "common.schema.json#/$defs/stableId" },
+              "counted_separately": { "type": "boolean" },
+              "note": { "type": "string", "minLength": 3 }
+            }
+          }
+        },
+        "notice_state": { "enum": ["none_found", "corrected", "expression_of_concern", "retracted", "withdrawn", "not_applicable"] },
+        "notice_checked_at": { "type": "string", "format": "date" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "work_type": { "const": "doctoral_thesis" } }, "required": ["work_type"] },
+          "then": {},
+          "else": { "properties": { "doi": { "type": "string" } } }
+        },
+        {
+          "if": { "properties": { "status": { "const": "online_first_with_future_issue_assignment" } }, "required": ["status"] },
+          "then": { "properties": { "dates": { "contains": { "properties": { "type": { "const": "issue" } }, "required": ["type"] } } } }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,113 @@
+---
+import PreviewLayout from "../layouts/PreviewLayout.astro";
+import OperationalState from "../components/states/OperationalState.astro";
+import { ROUTES } from "../lib/routes/registry";
+import { currentSite } from "../lib/integration/current-site";
+import { APPROVED_CONTACT_CONTRACT } from "../lib/content/public-actions";
+import { stateFor } from "../lib/states/contracts";
+const email = currentSite.actions.contactHref;
+const address = APPROVED_CONTACT_CONTRACT.address;
+---
+<PreviewLayout route={ROUTES[6]}>
+  <section class="contact-page" aria-labelledby="contact-title">
+    <h1 id="contact-title">Contact</h1>
+    <p>
+      Use this page to prepare a focused professional inquiry for Faisal
+      Albalwy. Choose the closest context below and include enough information
+      to make the purpose and requested next step clear.
+    </p>
+    <p>
+      This guidance does not promise a response, availability, acceptance,
+      supervision capacity, funding, consulting, a meeting, partnership,
+      institutional participation, or endorsement.
+    </p>
+
+    <h2>Inquiry guidance</h2>
+    <ul>
+      <li>
+        <strong>Research or collaboration context:</strong> research question,
+        scope, intended contribution, evidence, and constraints.
+      </li>
+      <li>
+        <strong>Publication, editorial, or scholarly context:</strong> subject
+        area, purpose, requested decision, and deadline.
+      </li>
+      <li>
+        <strong>Teaching or supervision context:</strong> topic, background,
+        programme context, and timing; this does not imply availability.
+      </li>
+      <li>
+        <strong>Speaking, professional, technology, or public-sector context:</strong>
+        topic, audience, format, date, and constraints.
+      </li>
+    </ul>
+
+    <h2>Institutional email</h2>
+    {
+      email ? (
+        <>
+          <p>
+            <a href={email} aria-describedby="email-delivery-boundary">
+              Email Faisal Albalwy
+            </a>
+          </p>
+          <p>
+            <strong>{address}</strong>
+          </p>
+        </>
+      ) : (
+        <OperationalState state={stateFor("email-unavailable")} />
+      )
+    }
+
+    <div id="email-delivery-boundary">
+      <h2>Privacy and delivery</h2>
+      <p>
+        This static site has no contact form or submission endpoint. It does
+        not collect, transmit, store, or retain an inquiry or its contents.
+      </p>
+      <p>
+        Selecting the email link hands a fixed recipient and neutral subject
+        to your email application. You decide whether to send. Your email
+        application and the sending and receiving mail providers control
+        transmission, delivery, and retention under their own terms, outside
+        this site's boundary.
+      </p>
+      <p>
+        This site cannot confirm that an email application opened, that a
+        message was sent, delivered, or read, or that a reply will be made.
+        The site does not request or record contact consent because it receives
+        no inquiry data.
+      </p>
+    </div>
+
+    <section aria-labelledby="email-recovery-title">
+      <h2 id="email-recovery-title">If email does not open</h2>
+      <p>
+        Use the visible institutional address in an email application you
+        trust. The site does not provide a private address, telephone number,
+        messaging account, calendar, or alternate submission route.
+      </p>
+      <p>
+        A fixed subject is the only prefilled message field; no cc, bcc, body,
+        attachment, tracking value, or hidden field is added. Do not include
+        passwords, identity numbers, student records, health data, or other
+        sensitive or confidential material.
+      </p>
+      <p data-contact-offline role="status" hidden>
+        You are offline. You can prepare a message in your email application,
+        but delivery depends on your application and mail provider reconnecting.
+        This site cannot confirm delivery.
+      </p>
+    </section>
+
+    <h2>Affiliation and personal-site context</h2>
+    <p><strong>Institutional affiliation: Taibah University</strong></p>
+    <p>
+      This is Faisal Albalwy's personal academic website. Taibah University is
+      shown as his institutional affiliation; this is not an official Taibah
+      University website.
+    </p>
+  </section>
+  <script src="../scripts/contact-email.ts"></script>
+</PreviewLayout>

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1200, initial-scale=1" />
+    <title>Faisal Albalwy social preview source</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 1200px;
+        height: 630px;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      body {
+        font-family:
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        color: #ffffff;
+        background: #111144;
+      }
+
+      .card {
+        position: relative;
+        display: grid;
+        width: 1200px;
+        height: 630px;
+        padding: 80px 96px;
+        grid-template-rows: auto 1fr auto;
+      }
+
+      .context {
+        margin: 0;
+        color: #40e0d0;
+        font-size: 24px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        line-height: 1.25;
+        text-transform: uppercase;
+      }
+
+      .identity {
+        align-self: center;
+      }
+
+      h1 {
+        max-width: 1000px;
+        margin: 0;
+        font-size: 82px;
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        line-height: 1.1;
+      }
+
+      .descriptor {
+        max-width: 900px;
+        margin: 26px 0 0;
+        font-size: 34px;
+        font-weight: 400;
+        line-height: 1.25;
+      }
+
+      .divider {
+        width: 176px;
+        height: 8px;
+        margin: 34px 0 0;
+        background: #4056e3;
+      }
+
+      .affiliation {
+        margin: 0;
+        color: #ffd1dc;
+        font-size: 27px;
+        font-weight: 600;
+        line-height: 1.3;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card" data-og-card>
+      <p class="context" data-safe-text>Academic profile</p>
+      <section class="identity" aria-label="Academic identity">
+        <h1 data-safe-text>Faisal Albalwy</h1>
+        <p class="descriptor" data-safe-text>Personal academic website</p>
+        <div class="divider" aria-hidden="true"></div>
+      </section>
+      <p class="affiliation" data-safe-text>
+        Institutional affiliation: Taibah University
+      </p>
+    </main>
+  </body>
+</html>

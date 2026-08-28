@@ -1,0 +1,127 @@
+{
+  "schema_version": "1.0.0",
+  "decision_id": "QA-007-v1-local-release-candidate",
+  "decision_at": "2026-08-19T06:37:00+03:00",
+  "state": "approved_local_noindex_release_candidate",
+  "source_fingerprints": {
+    "content/data/site-content.json": "d09d0afc23cdc98e4e82ed1eee962cf503a07db320d7c65fa8022edad7ebb7db",
+    "content/data/publications.json": "82403376f334b224335d1a15077a62dcaeb4a23cef233b1d1a883b7710c19a85",
+    "content/approved/APPROVED_COPY_MANIFEST.json": "d3a27bd307b20b556d89ff71cb699935ddd80ace7394bca5f18ca40fc1df5ad1"
+  },
+  "governance_append": {
+    "verification_status": "verified",
+    "conflict_state": "none",
+    "public_disposition": "publish",
+    "render_eligibility": "public",
+    "rights_status": "granted",
+    "consent_status": "not_applicable",
+    "record_owner_id": "faisal-albalwy",
+    "approvals": {
+      "evidence": true,
+      "privacy": true,
+      "rights": true,
+      "editorial": true,
+      "qa": true
+    }
+  },
+  "record_ids": {
+    "publications": [
+      "doi-10-1016-j-eswa-2026-132969",
+      "doi-10-3390-systems14040385",
+      "doi-10-32604-cmc-2025-075098",
+      "doi-10-1016-j-aej-2025-06-011",
+      "doi-10-18280-isi-300510",
+      "doi-10-7717-peerj-cs-2914",
+      "doi-10-4236-iim-2025-173004",
+      "doi-10-4236-ait-2025-152002",
+      "doi-10-3390-systems13040231",
+      "doi-10-54364-aaiml-2025-51193",
+      "doi-10-3390-electronics14050922",
+      "doi-10-1007-978-981-97-7603-0-35",
+      "doi-10-3390-app142411966",
+      "doi-10-3390-electronics13193799",
+      "doi-10-1016-j-bspc-2024-106313",
+      "doi-10-1016-j-eswa-2023-123056",
+      "doi-10-3389-fcomp-2024-1387354",
+      "doi-10-2139-ssrn-4765808",
+      "doi-10-1016-j-heliyon-2024-e25958",
+      "doi-10-1016-j-future-2023-09-032",
+      "doi-10-1109-access-2024-3518973",
+      "doi-10-3390-computers12060126",
+      "doi-10-1371-journal-pone-0280038",
+      "doi-10-1038-s41397-022-00285-5",
+      "doi-10-1155-2022-4389729",
+      "manchester-thesis-2022-albalwy-clinical-genomics",
+      "doi-10-2196-27816"
+    ],
+    "themes": [
+      "theme-privacy-preserving-health-data-sharing",
+      "theme-blockchain-security-and-interoperability",
+      "theme-machine-learning-for-cyber-threat-detection"
+    ],
+    "theme_publication_relationships": [
+      "theme-publication-001",
+      "theme-publication-002",
+      "theme-publication-003",
+      "theme-publication-004",
+      "theme-publication-005",
+      "theme-publication-006",
+      "theme-publication-007"
+    ],
+    "courses": [
+      "course-01",
+      "course-02",
+      "course-03",
+      "course-04",
+      "course-05",
+      "course-06",
+      "course-07",
+      "course-08",
+      "course-09",
+      "course-10",
+      "course-11",
+      "course-12",
+      "course-13",
+      "course-14",
+      "course-15",
+      "course-16",
+      "course-17",
+      "course-18",
+      "course-19"
+    ],
+    "career": [
+      "career-phd-manchester",
+      "career-assistant-professor-taibah"
+    ],
+    "service": [
+      "service-deputy-ceo-2023",
+      "service-ceo-2024",
+      "service-ceo-renewal-2025",
+      "service-ieee-reviewer-2026",
+      "service-mdpi-reviews-2025-2026",
+      "service-eswa-reviews-2023-2025",
+      "service-fgcs-reviews-2023-2025",
+      "service-jisa-reviews-2025",
+      "service-drug-awareness-2023",
+      "service-blockchain-workshop-2023"
+    ],
+    "profile_links": [
+      "profile-google-scholar",
+      "profile-orcid",
+      "profile-taibah"
+    ]
+  },
+  "relationship_presentation_append": {
+    "public_location_ids": ["R2"],
+    "public_wording_source": "data.editorial_rationale"
+  },
+  "release_controls": {
+    "indexing": "noindex, nofollow, noarchive, nosnippet",
+    "promotable": false,
+    "deployable": false,
+    "allowed_staged_files": [
+      "og.png",
+      "robots.txt"
+    ]
+  }
+}

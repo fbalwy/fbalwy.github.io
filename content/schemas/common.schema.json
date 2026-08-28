@@ -1,0 +1,412 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fbalwy.sa/schemas/v1/common.schema.json",
+  "title": "Faisal Albalwy site content shared definitions",
+  "type": "object",
+  "$defs": {
+    "stableId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+      "minLength": 3,
+      "maxLength": 160
+    },
+    "claimId": {
+      "type": "string",
+      "pattern": "^(?:CLM-[A-Z0-9]+-[0-9]{6}|DISC-[A-Z0-9]+-[0-9]{6})$"
+    },
+    "sourceId": {
+      "type": "string",
+      "pattern": "^SRC-[A-Z0-9]+(?:-[A-Z0-9]+)*-[0-9]{3}$"
+    },
+    "isoDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "isoDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "nullableDate": {
+      "anyOf": [
+        { "$ref": "#/$defs/isoDate" },
+        { "type": "null" }
+      ]
+    },
+    "dateValue": {
+      "type": "string",
+      "pattern": "^[0-9]{4}(?:-[0-9]{2}(?:-[0-9]{2})?)?$"
+    },
+    "nullableDateValue": {
+      "anyOf": [
+        { "$ref": "#/$defs/dateValue" },
+        { "type": "null" }
+      ]
+    },
+    "nullableDateTime": {
+      "anyOf": [
+        { "$ref": "#/$defs/isoDateTime" },
+        { "type": "null" }
+      ]
+    },
+    "privacyClass": {
+      "enum": ["Public", "Public_after_review", "Internal", "Restricted", "Prohibited"]
+    },
+    "rightsStatus": {
+      "enum": ["not_applicable", "unknown", "pending", "granted", "restricted", "denied", "expired", "withdrawn"]
+    },
+    "consentStatus": {
+      "enum": ["not_applicable", "unknown", "pending", "granted", "denied", "expired", "withdrawn"]
+    },
+    "translationStatus": {
+      "enum": ["not_needed", "source_official", "owner_reviewed_literal", "pending", "rejected"]
+    },
+    "recordOwnerRole": {
+      "enum": ["content_owner", "evidence_steward", "publication_curator", "privacy_reviewer", "rights_reviewer", "technical_link_reviewer", "quality_reviewer"]
+    },
+    "reviewerRole": {
+      "enum": ["evidence_reviewer", "privacy_reviewer", "rights_reviewer", "editorial_reviewer", "technical_link_reviewer", "quality_reviewer"]
+    },
+    "sourceAssertion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_id", "source_role", "authority_scope", "custodian", "independence_basis", "evidence_lineage_id", "controlled_location_alias", "pinpoint_location", "original_or_derivative", "snapshot_id", "snapshot_hash", "snapshot_at", "accessed_at", "source_date", "source_date_precision", "effective_date", "access_state", "source_privacy_class", "redistribution_allowed", "reviewer_note", "public_source_note"],
+      "properties": {
+        "source_id": { "$ref": "#/$defs/sourceId" },
+        "source_role": { "enum": ["authoritative_primary", "corroborating", "discovery_only", "owner_assertion", "unusable"] },
+        "authority_scope": { "type": "string", "minLength": 3, "maxLength": 300 },
+        "custodian": { "type": "string", "minLength": 2, "maxLength": 160 },
+        "independence_basis": { "type": "string", "minLength": 3, "maxLength": 300 },
+        "evidence_lineage_id": { "type": "string", "pattern": "^LIN-[A-Z0-9]+(?:-[A-Z0-9]+)*$" },
+        "controlled_location_alias": { "type": "string", "pattern": "^CORPUS-[A-Z0-9]+(?:-[A-Z0-9]+)*$" },
+        "pinpoint_location": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "original_or_derivative": { "enum": ["original", "derivative", "response_snapshot"] },
+        "snapshot_id": { "type": "string", "pattern": "^SNAP-[A-Z0-9]+(?:-[A-Z0-9]+)*$" },
+        "snapshot_hash": {
+          "anyOf": [
+            { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+            { "type": "null" }
+          ]
+        },
+        "snapshot_at": { "$ref": "#/$defs/nullableDateTime" },
+        "accessed_at": { "$ref": "#/$defs/isoDateTime" },
+        "source_date": { "$ref": "#/$defs/nullableDateValue" },
+        "source_date_precision": { "enum": ["day", "month", "year", "term", "unknown"] },
+        "effective_date": { "$ref": "#/$defs/nullableDateValue" },
+        "access_state": { "enum": ["available", "blocked", "login_required", "javascript_only", "rate_limited", "missing", "unusable"] },
+        "source_privacy_class": { "$ref": "#/$defs/privacyClass" },
+        "redistribution_allowed": { "type": "boolean" },
+        "reviewer_note": { "type": "string", "minLength": 3, "maxLength": 500 },
+        "public_source_note": {
+          "anyOf": [
+            { "type": "string", "minLength": 3, "maxLength": 300 },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "freshnessPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["policy_id", "maximum_age_days", "review_triggers", "last_verified_at", "reviewed_at", "next_review_due"],
+      "properties": {
+        "policy_id": { "enum": ["event-driven", "annual", "annual-and-before-release", "90-days", "90-days-and-before-release", "30-days", "30-days-and-before-release", "monthly-link-plus-90-day-identity", "on-ingestion-plus-90-day-notice-check"] },
+        "maximum_age_days": {
+          "anyOf": [
+            { "type": "integer", "minimum": 1 },
+            { "type": "null" }
+          ]
+        },
+        "review_triggers": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 3, "maxLength": 160 }
+        },
+        "last_verified_at": { "$ref": "#/$defs/nullableDateTime" },
+        "reviewed_at": { "$ref": "#/$defs/nullableDateTime" },
+        "next_review_due": { "$ref": "#/$defs/nullableDate" }
+      }
+    },
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verification_status", "conflict_state", "public_disposition", "render_eligibility", "privacy_class", "evidence_privacy_class", "rights_status", "consent_status", "first_verified_at", "freshness", "record_owner_role", "record_owner_id", "reviewer_roles", "approvals", "omission_reason", "decision_rationale"],
+      "properties": {
+        "verification_status": { "enum": ["unassessed", "collecting", "insufficient", "verified", "conflict_open", "stale", "superseded", "retracted", "rejected"] },
+        "conflict_state": { "enum": ["none", "potential", "active", "resolved"] },
+        "public_disposition": { "enum": ["suppress", "hold", "eligible", "publish", "withdraw"] },
+        "render_eligibility": { "enum": ["internal_only", "public"] },
+        "privacy_class": { "$ref": "#/$defs/privacyClass" },
+        "evidence_privacy_class": { "$ref": "#/$defs/privacyClass" },
+        "rights_status": { "$ref": "#/$defs/rightsStatus" },
+        "consent_status": { "$ref": "#/$defs/consentStatus" },
+        "first_verified_at": { "$ref": "#/$defs/nullableDateTime" },
+        "freshness": { "$ref": "#/$defs/freshnessPolicy" },
+        "record_owner_role": { "$ref": "#/$defs/recordOwnerRole" },
+        "record_owner_id": {
+          "anyOf": [
+            { "type": "string", "pattern": "^PERSON-[A-Z0-9]+(?:-[A-Z0-9]+)*$" },
+            { "type": "null" }
+          ]
+        },
+        "reviewer_roles": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/reviewerRole" }
+        },
+        "approvals": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["evidence", "privacy", "rights", "editorial", "qa"],
+          "properties": {
+            "evidence": { "type": "boolean" },
+            "privacy": { "type": "boolean" },
+            "rights": { "type": "boolean" },
+            "editorial": { "type": "boolean" },
+            "qa": { "type": "boolean" }
+          }
+        },
+        "omission_reason": {
+          "anyOf": [
+            { "type": "string", "minLength": 3, "maxLength": 300 },
+            { "type": "null" }
+          ]
+        },
+        "decision_rationale": { "type": "string", "minLength": 3, "maxLength": 500 }
+      },
+      "allOf": [
+        {
+          "oneOf": [
+            { "properties": { "verification_status": { "const": "unassessed" }, "public_disposition": { "const": "suppress" } }, "required": ["verification_status", "public_disposition"] },
+            { "properties": { "verification_status": { "enum": ["collecting", "insufficient"] }, "public_disposition": { "const": "hold" } }, "required": ["verification_status", "public_disposition"] },
+            { "properties": { "verification_status": { "const": "verified" }, "public_disposition": { "enum": ["eligible", "publish", "suppress"] } }, "required": ["verification_status", "public_disposition"] },
+            { "properties": { "verification_status": { "const": "conflict_open" }, "public_disposition": { "const": "suppress" }, "conflict_state": { "const": "active" } }, "required": ["verification_status", "public_disposition", "conflict_state"] },
+            { "properties": { "verification_status": { "const": "stale" }, "public_disposition": { "enum": ["hold", "withdraw"] } }, "required": ["verification_status", "public_disposition"] },
+            { "properties": { "verification_status": { "enum": ["superseded", "retracted"] }, "public_disposition": { "const": "withdraw" } }, "required": ["verification_status", "public_disposition"] },
+            { "properties": { "verification_status": { "const": "rejected" }, "public_disposition": { "const": "suppress" } }, "required": ["verification_status", "public_disposition"] }
+          ]
+        },
+        {
+          "if": { "properties": { "public_disposition": { "const": "publish" } }, "required": ["public_disposition"] },
+          "then": {
+            "properties": {
+              "render_eligibility": { "const": "public" },
+              "record_owner_id": { "type": "string" },
+              "privacy_class": { "enum": ["Public", "Public_after_review"] },
+              "evidence_privacy_class": { "not": { "const": "Prohibited" } },
+              "rights_status": { "enum": ["not_applicable", "granted"] },
+              "consent_status": { "enum": ["not_applicable", "granted"] },
+              "approvals": {
+                "properties": {
+                  "evidence": { "const": true },
+                  "privacy": { "const": true },
+                  "rights": { "const": true },
+                  "editorial": { "const": true },
+                  "qa": { "const": true }
+                }
+              }
+            }
+          },
+          "else": {
+            "properties": { "render_eligibility": { "const": "internal_only" } }
+          }
+        },
+        {
+          "if": { "properties": { "conflict_state": { "const": "active" } }, "required": ["conflict_state"] },
+          "then": {
+            "properties": {
+              "verification_status": { "const": "conflict_open" },
+              "public_disposition": { "const": "suppress" },
+              "render_eligibility": { "const": "internal_only" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "public_disposition": { "enum": ["suppress", "hold", "withdraw"] } }, "required": ["public_disposition"] },
+          "then": { "properties": { "omission_reason": { "type": "string", "minLength": 3 } } }
+        }
+      ]
+    },
+    "translation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_language", "public_language", "status", "source_value_protected", "translator_or_reviewer_role"],
+      "properties": {
+        "evidence_language": { "type": "string", "pattern": "^[a-z]{2,3}(?:-[A-Z]{2})?$" },
+        "public_language": { "const": "en" },
+        "status": { "$ref": "#/$defs/translationStatus" },
+        "source_value_protected": { "type": "boolean" },
+        "translator_or_reviewer_role": {
+          "anyOf": [
+            { "enum": ["content_owner", "evidence_steward", "editorial_reviewer"] },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "publicPresentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["public_wording", "public_location_ids", "fragment_id", "action_label", "source_note"],
+      "properties": {
+        "public_wording": {
+          "anyOf": [
+            { "type": "string", "minLength": 1, "not": { "pattern": "\\[(?:VERIFY|SOURCE|AS OF|OMIT IF UNRESOLVED|TRANSLATION TO VERIFY|DESCRIPTIVE LABEL)" } },
+            { "type": "null" }
+          ]
+        },
+        "public_location_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^(?:R[1-8]|MODULE-[A-Z0-9-]+|META-[A-Z0-9-]+|DOC-[A-Z0-9-]+)$" }
+        },
+        "fragment_id": {
+          "anyOf": [
+            { "type": "string", "pattern": "^(?:publication|project)-[a-z0-9]+(?:-[a-z0-9]+)*$" },
+            { "type": "null" }
+          ]
+        },
+        "action_label": {
+          "anyOf": [
+            { "type": "string", "minLength": 3, "maxLength": 120 },
+            { "type": "null" }
+          ]
+        },
+        "source_note": {
+          "anyOf": [
+            { "type": "string", "minLength": 3, "maxLength": 300 },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "versioning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["record_version", "supersedes_record_ids", "superseded_by_record_id", "correction_state", "correction_note", "history"],
+      "properties": {
+        "record_version": { "type": "integer", "minimum": 1 },
+        "supersedes_record_ids": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/stableId" } },
+        "superseded_by_record_id": {
+          "anyOf": [
+            { "$ref": "#/$defs/stableId" },
+            { "type": "null" }
+          ]
+        },
+        "correction_state": { "enum": ["none", "under_review", "corrected", "withdrawn", "retracted"] },
+        "correction_note": {
+          "anyOf": [
+            { "type": "string", "minLength": 3, "maxLength": 500 },
+            { "type": "null" }
+          ]
+        },
+        "history": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["at", "actor_role", "event", "reason"],
+            "properties": {
+              "at": { "$ref": "#/$defs/isoDateTime" },
+              "actor_role": { "$ref": "#/$defs/recordOwnerRole" },
+              "event": { "enum": ["created", "verified", "reviewed", "corrected", "superseded", "withdrawn", "retracted", "restored"] },
+              "reason": { "type": "string", "minLength": 3, "maxLength": 500 }
+            }
+          }
+        }
+      }
+    },
+    "dateEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "value", "precision", "calendar", "source_string"],
+      "properties": {
+        "type": { "enum": ["accepted", "online_first", "issue", "conference", "preprint", "award", "observed", "start", "end", "effective", "expiry"] },
+        "value": { "$ref": "#/$defs/dateValue" },
+        "precision": { "enum": ["day", "month", "year", "term", "unknown"] },
+        "calendar": { "enum": ["gregorian", "hijri", "unknown"] },
+        "source_string": { "type": "string", "minLength": 1, "maxLength": 120 }
+      },
+      "allOf": [
+        { "if": { "properties": { "precision": { "const": "day" } }, "required": ["precision"] }, "then": { "properties": { "value": { "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" } } } },
+        { "if": { "properties": { "precision": { "const": "month" } }, "required": ["precision"] }, "then": { "properties": { "value": { "pattern": "^[0-9]{4}-[0-9]{2}$" } } } },
+        { "if": { "properties": { "precision": { "const": "year" } }, "required": ["precision"] }, "then": { "properties": { "value": { "pattern": "^[0-9]{4}$" } } } }
+      ]
+    },
+    "period": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start", "end", "precision", "open_ended"],
+      "properties": {
+        "start": { "$ref": "#/$defs/nullableDateValue" },
+        "end": { "$ref": "#/$defs/nullableDateValue" },
+        "precision": { "enum": ["day", "month", "year", "term", "unknown"] },
+        "open_ended": { "type": "boolean" }
+      }
+    },
+    "externalAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "url", "label", "availability"],
+      "properties": {
+        "kind": { "enum": ["doi", "publisher", "repository", "full_text", "code", "data", "profile", "institution"] },
+        "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "label": { "type": "string", "minLength": 3, "maxLength": 120 },
+        "availability": { "enum": ["available", "unavailable", "unchecked"] }
+      }
+    },
+    "recordEnvelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["record_id", "schema_version", "domain", "claim_ids", "sources", "governance", "translation", "public_presentation", "versioning", "data"],
+      "properties": {
+        "record_id": { "$ref": "#/$defs/stableId" },
+        "schema_version": { "const": "1.0.0" },
+        "domain": { "type": "string" },
+        "claim_ids": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/claimId" } },
+        "sources": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/sourceAssertion" } },
+        "governance": { "$ref": "#/$defs/governance" },
+        "translation": { "$ref": "#/$defs/translation" },
+        "public_presentation": { "$ref": "#/$defs/publicPresentation" },
+        "versioning": { "$ref": "#/$defs/versioning" },
+        "data": { "type": "object" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "governance": { "properties": { "public_disposition": { "const": "publish" } }, "required": ["public_disposition"] } }, "required": ["governance"] },
+          "then": {
+            "properties": {
+              "sources": {
+                "items": {
+                  "properties": {
+                    "source_role": { "not": { "enum": ["unusable"] } },
+                    "access_state": { "const": "available" }
+                  }
+                },
+                "contains": {
+                  "properties": {
+                    "source_role": { "const": "authoritative_primary" },
+                    "access_state": { "const": "available" }
+                  },
+                  "required": ["source_role", "access_state"]
+                }
+              },
+              "public_presentation": {
+                "properties": {
+                  "public_wording": { "type": "string", "minLength": 1 },
+                  "public_location_ids": { "minItems": 1 }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "translation": { "properties": { "status": { "enum": ["pending", "rejected"] } }, "required": ["status"] } }, "required": ["translation"] },
+          "then": { "properties": { "governance": { "properties": { "public_disposition": { "not": { "const": "publish" } } } } } }
+        }
+      ]
+    }
+  }
+}

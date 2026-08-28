@@ -1,0 +1,6 @@
+{
+  "cases": [
+    { "case_id": "restricted-schedule-field", "expected_check": "PRIVACY-RESTRICTED-PUBLIC", "payload": { "public_object": { "course": "Illustrative course", "schedule_time": "08:00" } } },
+    { "case_id": "unresolved-marker", "expected_check": "PRIVACY-UNRESOLVED-MARKER", "payload": { "public_object": { "public_wording": "[VERIFY: unresolved claim]" } } }
+  ]
+}

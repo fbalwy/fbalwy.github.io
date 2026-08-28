@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fbalwy.sa/schemas/v1/site-content.schema.json",
+  "title": "Aggregate structured site content",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "generated_at", "publications", "themes", "theme_publication_relationships", "projects_and_systems", "courses", "teaching_occurrences", "career", "service", "metrics", "profile_links", "availability_states"],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "publications": { "type": "array", "items": { "$ref": "publication.schema.json" } },
+    "themes": { "type": "array", "items": { "$ref": "theme.schema.json#/$defs/themeRecord" } },
+    "theme_publication_relationships": { "type": "array", "items": { "$ref": "theme.schema.json#/$defs/themePublicationRelationship" } },
+    "projects_and_systems": { "type": "array", "items": { "$ref": "project-system.schema.json" } },
+    "courses": { "type": "array", "items": { "$ref": "teaching.schema.json#/$defs/courseRecord" } },
+    "teaching_occurrences": { "type": "array", "items": { "$ref": "teaching.schema.json#/$defs/occurrenceRecord" } },
+    "career": { "type": "array", "items": { "$ref": "career.schema.json" } },
+    "service": { "type": "array", "items": { "$ref": "service.schema.json" } },
+    "metrics": { "type": "array", "items": { "$ref": "metric.schema.json" } },
+    "profile_links": { "type": "array", "items": { "$ref": "profile-link.schema.json" } },
+    "availability_states": { "type": "array", "items": { "$ref": "availability.schema.json" } }
+  }
+}
