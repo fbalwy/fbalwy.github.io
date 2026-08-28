@@ -159,6 +159,9 @@ test("one-page presentation uses source-specific journal performance and the rev
     /\.citation-authors__self\s*\{\s*font-weight: 700;/,
   );
   assert.match(page, /ContactCardQr/);
+  assert.doesNotMatch(page, /Department of Cybersecurity <span/);
+  assert.match(metric, /reportRanking/);
+  assert.match(metric, /Open the \$\{reportRanking\.source\} ranking report/);
   const systems = metrics.journals.find((entry) => entry.venue === "Systems");
   assert.equal(systems.rankings[0].source, "JCR");
   assert.equal(systems.rankings[0].quartile, "Q1");

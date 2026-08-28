@@ -180,7 +180,7 @@ for (const file of files) {
     const card = await readFile(file, "utf8");
     if (
       card !==
-      "BEGIN:VCARD\nVERSION:3.0\nN:Albalwy;Faisal;;Dr.;\nFN:Dr. Faisal Albalwy\nTITLE:Assistant Professor of Cybersecurity\nORG:Taibah University;Department of Cybersecurity\nTEL;TYPE=CELL,VOICE:+966597332195\nEMAIL;TYPE=INTERNET,WORK:fbalwy@taibahu.edu.sa\nURL:https://fbalwy.sa\nEND:VCARD\n"
+      "BEGIN:VCARD\nVERSION:3.0\nN:Albalwy;Faisal;;Dr.;\nFN:Dr. Faisal Albalwy\nTITLE:Assistant Professor of Cybersecurity\nTEL;TYPE=CELL,VOICE:+966597332195\nEMAIL;TYPE=INTERNET,WORK:fbalwy@taibahu.edu.sa\nURL:https://fbalwy.sa\nEND:VCARD\n"
     )
       throw new Error(
         "Contact-card file does not match its approved public content.",

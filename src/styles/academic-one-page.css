@@ -89,7 +89,7 @@ main:focus {
 
 .identity-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 8.75rem;
+  grid-template-columns: minmax(0, 1fr) 12rem;
   gap: 2rem;
   align-items: start;
 }
@@ -165,14 +165,14 @@ main:focus {
   display: grid;
   justify-items: center;
   gap: 0.45rem;
-  width: 8.75rem;
+  width: 12rem;
   padding-block-start: 0.25rem;
 }
 
 .contact-card__qr {
   display: grid;
   place-items: center;
-  width: 8.25rem;
+  width: 11.5rem;
   padding: 0.45rem;
   border: 1px solid var(--rule);
   background: #fff;
@@ -323,7 +323,8 @@ main:focus {
 }
 
 .citation-title {
-  font-weight: 600;
+  font-style: italic;
+  font-weight: 400;
 }
 
 .citation-authors__self {

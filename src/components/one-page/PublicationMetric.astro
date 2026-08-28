@@ -46,6 +46,12 @@ const rankingSummary = metric?.rankings.length
       .join("; ")
   : "No current JCR or Scopus category quartile has been verified.";
 const accessibleLabel = `${venue ?? "Journal"}. ${historical ? "Historical ranking. " : ""}${rankingSummary}${metric?.note ? `. ${metric.note}` : ""}`;
+const reportRanking =
+  metric?.rankings.find(
+    (ranking) =>
+      ranking.quartile === primary?.quartile &&
+      (/scimagojr\.com/i.test(ranking.url) || /\/stats|bibliometrics|impact/i.test(ranking.url)),
+  ) ?? primary;
 ---
 
 {!isBookChapter && verified && primary && (
@@ -58,7 +64,12 @@ const accessibleLabel = `${venue ?? "Journal"}. ${historical ? "Historical ranki
     aria-label={accessibleLabel}
     title={accessibleLabel}
   >
-    <a class="publication-metric__panel" href={primary.url} rel="noopener">
+    <a
+      class="publication-metric__panel"
+      href={reportRanking.url}
+      rel="noopener"
+      aria-label={`Open the ${reportRanking.source} ranking report for ${venue ?? primary.database}`}
+    >
       <span class="publication-metric__heading">
         <strong>{venue ?? primary.database}</strong>
         <small>{historical ? "historical quartile" : "best quartile"}</small>
