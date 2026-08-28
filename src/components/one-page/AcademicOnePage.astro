@@ -267,8 +267,8 @@ const peerReviewSyncLabel = orcidPeerReviews.length
               <p class="citation-text">
                 <CitationAuthors authors={publication.authors} /> <span>({publication.year}). </span>
                 <span class="citation-title">{publication.title}.</span>{" "}
-                {publication.venue && <cite>{publication.venue}</cite>}
-                {publication.volume && <span>, <em>{publication.volume}</em></span>}
+                {publication.venue && <span>{publication.venue}</span>}
+                {publication.volume && <span>, {publication.volume}</span>}
                 {publication.issue && <span>({publication.issue})</span>}
                 {publicationLocator(publication) && <span>, {publicationLocator(publication)}</span>}
                 <span>.</span>{" "}

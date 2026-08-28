@@ -170,9 +170,18 @@ test("one-page presentation uses source-specific journal performance and the rev
   assert.match(page, /ResearchGate/);
   assert.match(profileIcon, /google-scholar/);
   assert.match(profileIcon, /researchgate/);
+  assert.match(
+    page,
+    /<span class="citation-title">\{publication\.title\}\.<\/span>/,
+  );
+  assert.doesNotMatch(
+    page,
+    /<cite>\{publication\.venue\}<\/cite>|<em>\{publication\.volume\}<\/em>/,
+  );
   assert.doesNotMatch(page, /Department of Cybersecurity <span/);
   assert.match(metric, /reportRanking/);
   assert.match(metric, /Open the \$\{reportRanking\.source\} ranking report/);
+  assert.match(onePageStyles, /\.contact-card\s*\{[\s\S]*?order: -1;/);
   const systems = metrics.journals.find((entry) => entry.venue === "Systems");
   assert.equal(systems.rankings[0].source, "JCR");
   assert.equal(systems.rankings[0].quartile, "Q1");
