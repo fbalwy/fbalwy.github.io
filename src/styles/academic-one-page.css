@@ -181,6 +181,46 @@ main:focus {
   font-size: 0.82rem;
 }
 
+.scholar-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0;
+  width: fit-content;
+  margin-block-start: 0.65rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.45;
+  text-decoration: none;
+}
+
+.scholar-metrics:hover {
+  color: var(--link-hover);
+}
+
+.scholar-metrics span {
+  display: inline-flex;
+  gap: 0.22rem;
+  align-items: baseline;
+}
+
+.scholar-metrics span:not(:last-of-type)::after {
+  margin-inline: 0.55rem;
+  color: #9da1af;
+  content: "·";
+}
+
+.scholar-metrics strong {
+  color: var(--ink);
+  font-weight: 680;
+}
+
+.scholar-metrics small {
+  width: 100%;
+  color: var(--muted);
+  font-size: 0.69rem;
+}
+
 .contact-card {
   display: grid;
   justify-items: center;
@@ -630,6 +670,10 @@ main:focus {
 
   .identity-links {
     gap: 0.5rem;
+  }
+
+  .scholar-metrics {
+    max-width: 19rem;
   }
 
   .section-heading-row {

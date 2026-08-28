@@ -164,12 +164,26 @@ test("one-page presentation uses source-specific journal performance and the rev
   );
   assert.match(page, /ContactCardQr/);
   assert.match(page, /AcademicProfileIcon/);
+  assert.match(page, /scholarMetrics/);
+  assert.match(page, /class="scholar-metrics"/);
+  assert.doesNotMatch(page, /<p class="orcid-id">/);
   assert.match(page, /aria-label={`Email Faisal Albalwy at \$\{email\}`}/);
   assert.match(page, /title=\{profile\.label\}/);
   assert.match(page, /Google Scholar/);
   assert.match(page, /ResearchGate/);
   assert.match(profileIcon, /google-scholar/);
   assert.match(profileIcon, /researchgate/);
+  const scholarMetrics = JSON.parse(
+    await readFile("content/data/scholar-metrics.json", "utf8"),
+  );
+  assert.deepEqual(
+    [
+      scholarMetrics.citations,
+      scholarMetrics.h_index,
+      scholarMetrics.i10_index,
+    ],
+    [636, 11, 12],
+  );
   assert.match(
     page,
     /<span class="citation-title">\{publication\.title\}\.<\/span>/,

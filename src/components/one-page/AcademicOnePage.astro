@@ -7,6 +7,7 @@ import AcademicProfileIcon, {
 } from "./AcademicProfileIcon.astro";
 import orcidFeed from "../../../content/data/orcid-feed.json";
 import journalMetrics from "../../../content/data/journal-metrics.json";
+import scholarMetrics from "../../../content/data/scholar-metrics.json";
 import { currentSite } from "../../lib/integration/current-site";
 
 type Publication = (typeof orcidFeed.publications)[number];
@@ -144,6 +145,13 @@ function displayDate(value: string): string {
   }).format(date);
 }
 
+const scholarMetricsUpdated = new Intl.DateTimeFormat("en-GB", {
+  day: "numeric",
+  month: "short",
+  year: "numeric",
+  timeZone: "Asia/Riyadh",
+}).format(new Date(`${scholarMetrics.observed_at}T00:00:00+03:00`));
+
 const committeeService = [
   "Chair, Timetabling, Examinations, Academic Advising and Student Welfare Committee, Department of Cybersecurity.",
   "Member, Scholarships and Human Resources Committee, Department of Cybersecurity.",
@@ -212,7 +220,18 @@ const peerReviewSyncLabel = orcidPeerReviews.length
             </a>
           ))}
         </nav>
-        <p class="orcid-id">ORCID iD: 0000-0002-2342-2156</p>
+        <a
+          class="scholar-metrics"
+          href={scholarMetrics.profile_url}
+          rel="noopener"
+          aria-label={`Open Google Scholar profile: ${scholarMetrics.citations} citations, h-index ${scholarMetrics.h_index}, i10-index ${scholarMetrics.i10_index}. Updated ${scholarMetricsUpdated}.`}
+          title={`Google Scholar snapshot · Updated ${scholarMetricsUpdated}`}
+        >
+          <span><strong>{scholarMetrics.citations}</strong> citations</span>
+          <span><strong>h-index {scholarMetrics.h_index}</strong></span>
+          <span><strong>i10-index {scholarMetrics.i10_index}</strong></span>
+          <small>Updated {scholarMetricsUpdated}</small>
+        </a>
       </div>
       <ContactCardQr />
     </div>

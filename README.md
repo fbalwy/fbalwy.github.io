@@ -17,6 +17,11 @@ Publication and peer-review records are prepared from the project's reviewed
 ORCID-linked catalogue. Journal badges retain the selected source, metric year,
 subject category, and quartile context.
 
+The small research-metrics strip on the home page is a verified Google Scholar
+snapshot. Before each push that changes the site, refresh the three values in
+`content/data/scholar-metrics.json` from the public Scholar profile and update
+its observation date.
+
 ## Local development
 
 The exact toolchain is Node `24.19.0` and npm `11.19.0`.
