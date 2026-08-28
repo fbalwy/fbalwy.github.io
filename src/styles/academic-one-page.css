@@ -278,6 +278,10 @@ main:focus {
   font-weight: 600;
 }
 
+.citation-authors__self {
+  font-weight: var(--font-weight-700);
+}
+
 .citation-text cite,
 .citation-text em {
   font-style: italic;

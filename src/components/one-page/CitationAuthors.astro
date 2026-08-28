@@ -1,0 +1,29 @@
+---
+interface Props {
+  authors: readonly string[];
+}
+
+const { authors } = Astro.props;
+const selfAuthorshipForms = new Set(["faisal albalwy", "f. albalwy"]);
+
+function separator(index: number, total: number): string {
+  if (index === 0) return "";
+  if (index === total - 1) return total === 2 ? " & " : ", & ";
+  return ", ";
+}
+---
+
+<span class="citation-authors">
+  {
+    authors.map((author, index) => (
+      <>
+        {separator(index, authors.length)}
+        {selfAuthorshipForms.has(author.trim().toLowerCase()) ? (
+          <strong class="citation-authors__self">{author}</strong>
+        ) : (
+          author
+        )}
+      </>
+    ))
+  }
+</span>

@@ -1,5 +1,6 @@
 ---
 import PublicationMetric from "./PublicationMetric.astro";
+import CitationAuthors from "./CitationAuthors.astro";
 import orcidFeed from "../../../content/data/orcid-feed.json";
 import journalMetrics from "../../../content/data/journal-metrics.json";
 import { currentSite } from "../../lib/integration/current-site";
@@ -51,6 +52,17 @@ const profileLinks = [
   },
 ];
 
+const journalMetricIndex = new Map(
+  journalMetrics.journals.map((metric) => [metric.venue, metric]),
+);
+
+function hasVerifiedJournalReport(publication: Publication): boolean {
+  const metric = journalMetricIndex.get(publication.venue ?? "");
+  return Boolean(
+    metric?.rankings.some((ranking) => /^Q[1-4]$/.test(ranking.quartile)),
+  );
+}
+
 const typeGroups = [
   { key: "journal-article", title: "Journal articles" },
   { key: "conference-paper", title: "Conference papers" },
@@ -60,7 +72,9 @@ const typeGroups = [
 
 const hiddenPublicationTypes = new Set(["preprint", "doctoral-thesis"]);
 const visiblePublications = orcidFeed.publications.filter(
-  (publication) => !hiddenPublicationTypes.has(publication.type),
+  (publication) =>
+    !hiddenPublicationTypes.has(publication.type) &&
+    hasVerifiedJournalReport(publication),
 );
 
 const publicationGroups = typeGroups
@@ -96,12 +110,6 @@ const numberedPublicationGroups = publicationGroups.map((group) => ({
   })),
 }));
 
-function authorsForCitation(authors: readonly string[]): string {
-  if (authors.length < 2) return authors[0] ?? "";
-  if (authors.length === 2) return `${authors[0]} & ${authors[1]}`;
-  return `${authors.slice(0, -1).join(", ")}, & ${authors.at(-1)}`;
-}
-
 function publicationLocator(publication: Publication): string | undefined {
   if (publication.pages) return publication.pages;
   if (publication.article_number) return publication.article_number;
@@ -130,10 +138,6 @@ const committeeService = [
   "Member for Human Resources, Scholarships and Human Resources Committee, Department of Computer Science.",
   "Member for Timetabling, Timetabling and Examinations Committee, Department of Computer Science.",
 ];
-
-const journalMetricIndex = new Map(
-  journalMetrics.journals.map((metric) => [metric.venue, metric]),
-);
 
 function peerReviewWording(review: PeerReview): string {
   const role = review.role
@@ -231,7 +235,7 @@ const peerReviewSyncLabel = orcidPeerReviews.length
             >
               <span class="citation-number" aria-hidden="true">{publication.number}.</span>
               <p class="citation-text">
-                <span>{authorsForCitation(publication.authors)}. ({publication.year}). </span>
+                <CitationAuthors authors={publication.authors} /> <span>({publication.year}). </span>
                 <span class="citation-title">{publication.title}.</span>{" "}
                 {publication.venue && <cite>{publication.venue}</cite>}
                 {publication.volume && <span>, <em>{publication.volume}</em></span>}

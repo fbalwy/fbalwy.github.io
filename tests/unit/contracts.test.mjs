@@ -106,8 +106,14 @@ test("one-page presentation uses source-specific journal performance and the rev
     await readFile("content/data/journal-metrics.json", "utf8"),
   );
   const sync = await readFile("scripts/sync-orcid-publications.mjs", "utf8");
+  const authors = await readFile(
+    "src/components/one-page/CitationAuthors.astro",
+    "utf8",
+  );
 
   assert.match(page, /PublicationMetric/);
+  assert.match(page, /hasVerifiedJournalReport/);
+  assert.match(page, /rankings\.some/);
   assert.match(
     page,
     /hiddenPublicationTypes = new Set\(\["preprint", "doctoral-thesis"\]\)/,
@@ -136,6 +142,14 @@ test("one-page presentation uses source-specific journal performance and the rev
     metrics.journals.filter((entry) => entry.status === "unverified").length,
     2,
   );
+  assert.deepEqual(
+    metrics.journals
+      .filter((entry) => entry.rankings.length === 0)
+      .map((entry) => entry.venue),
+    ["Intelligent Information Management", "Advances in Internet of Things"],
+  );
+  assert.match(authors, /citation-authors__self/);
+  assert.match(authors, /faisal albalwy/);
   const systems = metrics.journals.find((entry) => entry.venue === "Systems");
   assert.equal(systems.rankings[0].source, "JCR");
   assert.equal(systems.rankings[0].quartile, "Q1");
