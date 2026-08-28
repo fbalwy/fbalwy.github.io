@@ -179,8 +179,11 @@ test("one-page presentation uses source-specific journal performance and the rev
     /<cite>\{publication\.venue\}<\/cite>|<em>\{publication\.volume\}<\/em>/,
   );
   assert.doesNotMatch(page, /Department of Cybersecurity <span/);
-  assert.match(metric, /reportRanking/);
-  assert.match(metric, /Open the \$\{reportRanking\.source\} ranking report/);
+  assert.match(metric, /function rankingReportUrl/);
+  assert.match(metric, /jcr\.clarivate\.com/);
+  assert.match(metric, /www\.scopus\.com\/sources/);
+  assert.match(metric, /scimagojr\.com/);
+  assert.match(metric, /Open the \$\{primary\.source\} ranking report/);
   assert.match(onePageStyles, /\.contact-card\s*\{[\s\S]*?order: -1;/);
   const systems = metrics.journals.find((entry) => entry.venue === "Systems");
   assert.equal(systems.rankings[0].source, "JCR");

@@ -46,12 +46,35 @@ const rankingSummary = metric?.rankings.length
       .join("; ")
   : "No current JCR or Scopus category quartile has been verified.";
 const accessibleLabel = `${venue ?? "Journal"}. ${historical ? "Historical ranking. " : ""}${rankingSummary}${metric?.note ? `. ${metric.note}` : ""}`;
-const reportRanking =
-  metric?.rankings.find(
-    (ranking) =>
-      ranking.quartile === primary?.quartile &&
-      (/scimagojr\.com/i.test(ranking.url) || /\/stats|bibliometrics|impact/i.test(ranking.url)),
-  ) ?? primary;
+
+function rankingReportUrl(ranking: Ranking, journal: string): string {
+  if (ranking.source === "JCR") {
+    const query = new URLSearchParams({
+      journal,
+      year: String(ranking.year),
+    });
+    return `https://jcr.clarivate.com/jcr-jp/journal-profile?${query}`;
+  }
+
+  if (ranking.source === "CiteScore") {
+    const query = new URLSearchParams({
+      query: `TITLE("${journal}")`,
+    });
+    return `https://www.scopus.com/sources?${query}`;
+  }
+
+  if (ranking.source === "SJR" && !/scimagojr\.com/i.test(ranking.url)) {
+    const query = new URLSearchParams({
+      q: journal,
+      tip: "jou",
+    });
+    return `https://www.scimagojr.com/journalsearch.php?${query}`;
+  }
+
+  return ranking.url;
+}
+
+const reportUrl = rankingReportUrl(primary, venue ?? primary.database);
 ---
 
 {!isBookChapter && verified && primary && (
@@ -66,9 +89,9 @@ const reportRanking =
   >
     <a
       class="publication-metric__panel"
-      href={reportRanking.url}
+      href={reportUrl}
       rel="noopener"
-      aria-label={`Open the ${reportRanking.source} ranking report for ${venue ?? primary.database}`}
+      aria-label={`Open the ${primary.source} ranking report for ${venue ?? primary.database}`}
     >
       <span class="publication-metric__heading">
         <strong>{venue ?? primary.database}</strong>
