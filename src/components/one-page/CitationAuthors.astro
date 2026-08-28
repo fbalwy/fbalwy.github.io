@@ -4,7 +4,18 @@ interface Props {
 }
 
 const { authors } = Astro.props;
-const selfAuthorshipForms = new Set(["faisal albalwy", "f. albalwy"]);
+
+function isFaisalAlbalwy(author: string): boolean {
+  const normalized = author
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\./g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+
+  return /^(?:f|faisal)(?: a)? albalwy$/.test(normalized);
+}
 
 function separator(index: number, total: number): string {
   if (index === 0) return "";
@@ -18,7 +29,7 @@ function separator(index: number, total: number): string {
     authors.map((author, index) => (
       <>
         {separator(index, authors.length)}
-        {selfAuthorshipForms.has(author.trim().toLowerCase()) ? (
+        {isFaisalAlbalwy(author) ? (
           <strong class="citation-authors__self">{author}</strong>
         ) : (
           author

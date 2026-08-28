@@ -58,6 +58,7 @@ test("QA-007 append-only overlay promotes only the closed reviewed inventory", a
   );
   assert.deepEqual(QA007_PROMOTION.release_controls.allowed_staged_files, [
     "og.png",
+    "faisal-albalwy.vcf",
     "robots.txt",
   ]);
   assert.equal(QA007_PROMOTION.release_controls.promotable, false);

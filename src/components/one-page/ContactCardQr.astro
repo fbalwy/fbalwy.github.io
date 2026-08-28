@@ -1,0 +1,19 @@
+---
+import qrSvg from "../../assets/contact-card-qr.svg?raw";
+
+const contactCardPath = "/faisal-albalwy.vcf";
+---
+
+<aside class="contact-card" aria-label="Contact card">
+  <a
+    class="contact-card__qr"
+    href={contactCardPath}
+    download="dr-faisal-albalwy-contact.vcf"
+    aria-label="Download Dr. Faisal Albalwy's contact card"
+  >
+    <span aria-hidden="true" set:html={qrSvg}></span>
+  </a>
+  <a class="contact-card__label" href={contactCardPath} download="dr-faisal-albalwy-contact.vcf">
+    Scan to save contact
+  </a>
+</aside>

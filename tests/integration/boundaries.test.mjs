@@ -12,7 +12,7 @@ test("governed schema validation still passes", () => {
   assert.match(output, /PASS/);
 });
 
-test("public staging contains only the approved OG card and conservative robots control", async () => {
+test("public staging contains the approved OG card, contact card, and conservative robots control", async () => {
   execFileSync(process.execPath, ["scripts/stage-public.mjs"], {
     encoding: "utf8",
   });
@@ -20,6 +20,7 @@ test("public staging contains only the approved OG card and conservative robots 
     encoding: "utf8",
   });
   assert.deepEqual((await readdir(".build/public")).sort(), [
+    "faisal-albalwy.vcf",
     "og.png",
     "robots.txt",
   ]);

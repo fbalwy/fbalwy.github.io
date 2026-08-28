@@ -44,9 +44,9 @@ async function allFiles(current) {
 }
 
 const files = await allFiles(directory);
-if (staging && files.length > 2)
+if (staging && files.length > 3)
   throw new Error(
-    "Public staging may contain only the approved OG and generated robots control.",
+    "Public staging may contain only the approved OG, contact card, and generated robots control.",
   );
 const expectedBuildFiles = new Set([
   "404.html",
@@ -80,8 +80,9 @@ const discoveryPathForBuildFile = Object.freeze({
 const relativeFiles = files.map((file) => path.relative(directory, file));
 if (
   staging &&
-  (relativeFiles.length !== 2 ||
+  (relativeFiles.length !== 3 ||
     !relativeFiles.includes("og.png") ||
+    !relativeFiles.includes("faisal-albalwy.vcf") ||
     !relativeFiles.includes("robots.txt"))
 )
   throw new Error(
@@ -173,6 +174,17 @@ for (const file of files) {
       png.readUInt32BE(20) !== 630
     )
       throw new Error("Approved OG image must be a 1200x630 PNG.");
+    continue;
+  }
+  if (relative === "faisal-albalwy.vcf") {
+    const card = await readFile(file, "utf8");
+    if (
+      card !==
+      "BEGIN:VCARD\nVERSION:3.0\nN:Albalwy;Faisal;;Dr.;\nFN:Dr. Faisal Albalwy\nTITLE:Assistant Professor of Cybersecurity\nORG:Taibah University;Department of Cybersecurity\nTEL;TYPE=CELL,VOICE:+966597332195\nEMAIL;TYPE=INTERNET,WORK:fbalwy@taibahu.edu.sa\nURL:https://fbalwy.sa\nEND:VCARD\n"
+    )
+      throw new Error(
+        "Contact-card file does not match its approved public content.",
+      );
     continue;
   }
   const text = await readFile(file, "utf8");
@@ -282,7 +294,11 @@ for (const file of files) {
       const isFingerprintAsset = /^\/_astro\/[A-Za-z0-9_.-]+\.(?:css|js)$/.test(
         pathname,
       );
-      if (!publicPaths.has(pathname) && !isFingerprintAsset)
+      if (
+        !publicPaths.has(pathname) &&
+        pathname !== "/faisal-albalwy.vcf" &&
+        !isFingerprintAsset
+      )
         throw new Error(`Unexpected internal link ${href[1]} in ${relative}`);
     }
   }

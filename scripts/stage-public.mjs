@@ -32,8 +32,10 @@ async function inspect(directory) {
 await inspect(source);
 await rm(staging, { recursive: true, force: true });
 await mkdir(staging, { recursive: true });
-await copyFile(path.join(source, "og.png"), path.join(staging, "og.png"));
-const staged = ["og.png"];
+const staged = ["og.png", "faisal-albalwy.vcf"];
+for (const file of staged) {
+  await copyFile(path.join(source, file), path.join(staging, file));
+}
 if (
   staged.some(
     (file) =>
@@ -42,5 +44,5 @@ if (
 )
   throw new Error("QA-007 staging escaped its closed release allowlist.");
 console.log(
-  "Public staging contains the approved OG card only; local CV materials and held identity assets remain excluded.",
+  "Public staging contains the approved OG card and contact-card download; local CV materials and held identity assets remain excluded.",
 );

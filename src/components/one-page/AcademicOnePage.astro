@@ -1,6 +1,7 @@
 ---
 import PublicationMetric from "./PublicationMetric.astro";
 import CitationAuthors from "./CitationAuthors.astro";
+import ContactCardQr from "./ContactCardQr.astro";
 import orcidFeed from "../../../content/data/orcid-feed.json";
 import journalMetrics from "../../../content/data/journal-metrics.json";
 import { currentSite } from "../../lib/integration/current-site";
@@ -169,23 +170,28 @@ const peerReviewSyncLabel = orcidPeerReviews.length
 
 <article class="academic-page">
   <header class="academic-identity" aria-labelledby="page-title">
-    <h1 id="page-title">Faisal Albalwy</h1>
-    <p class="academic-role">Assistant Professor of Cybersecurity</p>
-    <p class="academic-affiliation">
-      Department of Cybersecurity <span aria-hidden="true">·</span> Taibah University
-    </p>
-    <p class="academic-statement">
-      My research advances trustworthy and resilient digital systems through
-      privacy-preserving data technologies, secure distributed infrastructures,
-      and intelligent cyber-threat detection.
-    </p>
-    <nav class="identity-links" aria-label="Contact and academic profiles">
-      <a href={emailHref}>{email}</a>
-      {profileLinks.map((profile) => (
-        <a href={profile.href} rel="noopener">{profile.label}</a>
-      ))}
-    </nav>
-    <p class="orcid-id">ORCID iD: 0000-0002-2342-2156</p>
+    <div class="identity-layout">
+      <div>
+        <h1 id="page-title">Faisal Albalwy</h1>
+        <p class="academic-role">Assistant Professor of Cybersecurity</p>
+        <p class="academic-affiliation">
+          Department of Cybersecurity <span aria-hidden="true">·</span> Taibah University
+        </p>
+        <p class="academic-statement">
+          My research advances trustworthy and resilient digital systems through
+          privacy-preserving data technologies, secure distributed infrastructures,
+          and intelligent cyber-threat detection.
+        </p>
+        <nav class="identity-links" aria-label="Contact and academic profiles">
+          <a href={emailHref}>{email}</a>
+          {profileLinks.map((profile) => (
+            <a href={profile.href} rel="noopener">{profile.label}</a>
+          ))}
+        </nav>
+        <p class="orcid-id">ORCID iD: 0000-0002-2342-2156</p>
+      </div>
+      <ContactCardQr />
+    </div>
   </header>
 
   <section class="academic-section" aria-labelledby="research-interests">

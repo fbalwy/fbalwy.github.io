@@ -121,6 +121,7 @@
     "deployable": false,
     "allowed_staged_files": [
       "og.png",
+      "faisal-albalwy.vcf",
       "robots.txt"
     ]
   }
