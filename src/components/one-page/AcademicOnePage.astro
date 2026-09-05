@@ -192,13 +192,17 @@ const peerReviewSyncLabel = orcidPeerReviews.length
   <header class="academic-identity" aria-labelledby="page-title">
     <div class="identity-layout">
       <div>
-        <h1 id="page-title">Faisal Albalwy</h1>
+        <h1 id="page-title">Dr Faisal Albalwy</h1>
         <p class="academic-role">Assistant Professor of Cybersecurity</p>
-        <p class="academic-statement">
-          My research advances trustworthy and resilient digital systems through
-          privacy-preserving data technologies, secure distributed infrastructures,
-          and intelligent cyber-threat detection.
-        </p>
+        <address class="identity-contact">
+          <a class="identity-email" href={emailHref}>{email}</a>
+          <p class="identity-address">
+            Department of Cybersecurity<br />
+            College of Computer Science and Engineering<br />
+            Taibah University<br />
+            Prince Nayef Road, Madinah 42353, Saudi Arabia
+          </p>
+        </address>
         <nav class="identity-links" aria-label="Contact and academic profiles">
           <a
             class="identity-links__item identity-links__item--email"
@@ -236,6 +240,54 @@ const peerReviewSyncLabel = orcidPeerReviews.length
       <ContactCardQr />
     </div>
   </header>
+
+  <section class="academic-section" aria-labelledby="academic-profile">
+    <h2 id="academic-profile">Academic profile</h2>
+    <p class="section-prose profile-introduction">
+      My research advances trustworthy and resilient digital systems through
+      privacy-preserving data technologies, secure distributed infrastructures,
+      and intelligent cyber-threat detection.
+    </p>
+
+    <section class="profile-subsection" aria-labelledby="academic-affiliations">
+      <h3 id="academic-affiliations">Academic affiliations</h3>
+      <div class="profile-subsection__content">
+        <p class="profile-item-title">Assistant Professor of Cybersecurity</p>
+        <p>Department of Cybersecurity, College of Computer Science and Engineering</p>
+        <p><a href="https://www.taibahu.edu.sa/en/employees/120" rel="noopener">Taibah University</a>, Madinah, Saudi Arabia</p>
+      </div>
+    </section>
+
+    <section class="profile-subsection" aria-labelledby="education-qualifications">
+      <h3 id="education-qualifications">Education and qualifications</h3>
+      <ol class="qualification-list">
+        <li>
+          <p class="profile-item-title">PhD in Computer Science</p>
+          <p>The University of Manchester, United Kingdom</p>
+          <p class="profile-item-meta">Study period: 2017–2021 · Awarded 14 April 2022</p>
+        </li>
+        <li>
+          <p class="profile-item-title">MSc in Advanced Computer Science</p>
+          <p>The University of Manchester, United Kingdom</p>
+          <p class="profile-item-meta">Specialisation: Computer Security · 2013</p>
+        </li>
+        <li>
+          <p class="profile-item-title">BSc in Computer Science</p>
+          <p>Taibah University, Saudi Arabia</p>
+          <p class="profile-item-meta">2009</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="profile-subsection" aria-labelledby="external-positions">
+      <h3 id="external-positions">External positions</h3>
+      <div class="profile-subsection__content">
+        <p class="profile-item-title">Honorary Research Fellow</p>
+        <p>School of Health Sciences, The University of Manchester, United Kingdom</p>
+        <p class="profile-item-meta">Former appointment · Appointed 2021</p>
+      </div>
+    </section>
+  </section>
 
   <section class="academic-section" aria-labelledby="research-interests">
     <h2 id="research-interests">Research interests</h2>

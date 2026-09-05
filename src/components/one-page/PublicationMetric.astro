@@ -74,7 +74,9 @@ function rankingReportUrl(ranking: Ranking, journal: string): string {
   return ranking.url;
 }
 
-const reportUrl = rankingReportUrl(primary, venue ?? primary.database);
+const reportUrl = primary
+  ? rankingReportUrl(primary, venue ?? primary.database)
+  : undefined;
 ---
 
 {!isBookChapter && verified && primary && (

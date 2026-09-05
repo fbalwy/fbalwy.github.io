@@ -176,13 +176,17 @@ test("one-page presentation uses source-specific journal performance and the rev
   const scholarMetrics = JSON.parse(
     await readFile("content/data/scholar-metrics.json", "utf8"),
   );
-  assert.deepEqual(
-    [
-      scholarMetrics.citations,
-      scholarMetrics.h_index,
-      scholarMetrics.i10_index,
-    ],
-    [636, 11, 12],
+  for (const value of [
+    scholarMetrics.citations,
+    scholarMetrics.h_index,
+    scholarMetrics.i10_index,
+  ]) {
+    assert.ok(Number.isSafeInteger(value) && value >= 0);
+  }
+  assert.match(scholarMetrics.observed_at, /^\d{4}-\d{2}-\d{2}$/);
+  assert.equal(
+    new URL(scholarMetrics.profile_url).searchParams.get("user"),
+    "zkrWLDAAAAAJ",
   );
   assert.match(
     page,

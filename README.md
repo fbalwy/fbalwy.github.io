@@ -8,7 +8,8 @@ Live site: [https://fbalwy.github.io](https://fbalwy.github.io)
 ## Website
 
 The site is a static Astro project with a concise, single-page academic
-presentation. It includes research interests, prospective-student guidance,
+presentation. It includes academic affiliations, education and qualifications,
+external positions, research interests, prospective-student guidance,
 traditional publication citations with source-backed journal quartile badges,
 courses taught, grants, work experience, committee service, and scholarly peer
 review.
