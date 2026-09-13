@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0.0",
-  "accessed_at": "2026-08-28",
+  "accessed_at": "2026-09-13",
   "display_policy": {
     "title": "Best verified quartile",
     "note": "The prominent quartile is the best current, source-backed quartile found across JCR and CiteScore, followed by SJR when no current JCR or CiteScore quartile is available. Every displayed ranking retains its own database, metric year and subject category; it is not an overall rating of an individual paper.",
@@ -23,6 +23,23 @@
     ]
   },
   "journals": [
+    {
+      "venue": "Computers & Security",
+      "status": "verified_current",
+      "rankings": [
+        {
+          "source": "SJR",
+          "database": "SCImago",
+          "year": 2024,
+          "quartile": "Q1",
+          "metric_label": "SJR",
+          "metric_value": 1.445,
+          "category": "Computer Science (miscellaneous)",
+          "url": "https://www.scimagojr.com/journalsearch.php?q=28898&tip=sid"
+        }
+      ],
+      "note": "The public SCImago record reports a 2024 SJR of 1.445 and Q1 in Computer Science (miscellaneous)."
+    },
     {
       "venue": "Expert Systems with Applications",
       "status": "verified_current",

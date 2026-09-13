@@ -136,11 +136,11 @@ test("one-page presentation uses source-specific journal performance and the rev
     /publication-metric__sources|No verified rank|Not listed|Book chapter/,
   );
   assert.equal(metrics.schema_version, "2.0.0");
-  assert.equal(metrics.journals.length, 21);
+  assert.equal(metrics.journals.length, 22);
   assert.equal(
     metrics.journals.filter((entry) => entry.status === "verified_current")
       .length,
-    18,
+    19,
   );
   assert.equal(
     metrics.journals.filter((entry) => entry.status === "unverified").length,
@@ -214,6 +214,19 @@ test("one-page presentation uses source-specific journal performance and the rev
       ["SJR", "Q2"],
     ],
   );
+  const computersSecurity = metrics.journals.find(
+    (entry) => entry.venue === "Computers & Security",
+  );
+  assert.deepEqual(computersSecurity.rankings[0], {
+    source: "SJR",
+    database: "SCImago",
+    year: 2024,
+    quartile: "Q1",
+    metric_label: "SJR",
+    metric_value: 1.445,
+    category: "Computer Science (miscellaneous)",
+    url: "https://www.scimagojr.com/journalsearch.php?q=28898&tip=sid",
+  });
   const aaiml = metrics.journals.find((entry) =>
     entry.venue.startsWith("Advances in Artificial Intelligence"),
   );
