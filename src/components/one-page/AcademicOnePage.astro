@@ -89,6 +89,9 @@ const visiblePublications = orcidFeed.publications.filter(
   (publication) =>
     !hiddenPublicationTypes.has(publication.type) &&
     hasVerifiedJournalReport(publication),
+).sort(
+  (left, right) =>
+    Date.parse(right.sort_date) - Date.parse(left.sort_date),
 );
 
 const publicationGroups = typeGroups

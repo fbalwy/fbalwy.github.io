@@ -2,8 +2,30 @@
   "schema_version": "1.0.0",
   "orcid": "0000-0002-2342-2156",
   "source": "verified_catalogue_seed",
-  "generated_at": "2026-09-13T00:00:00+03:00",
+  "generated_at": "2026-10-17T00:00:00+03:00",
   "publications": [
+    {
+      "id": "doi-10-3390-app162010296",
+      "title": "Reliable Streaming Truth Discovery for Blockchain-Enabled Healthcare IoT: An Off-Chain Architecture with Deterministic On-Chain Aggregation",
+      "authors": [
+        "Bayan Hashr Alamri",
+        "Faisal Albalwy",
+        "Zainab Mohammed Badawi"
+      ],
+      "type": "journal-article",
+      "year": 2026,
+      "sort_date": "2026-10-17",
+      "venue": "Applied Sciences",
+      "volume": "16",
+      "issue": "20",
+      "pages": null,
+      "article_number": "10296",
+      "doi": "10.3390/app162010296",
+      "doi_url": "https://doi.org/10.3390/app162010296",
+      "official_url": "https://www.mdpi.com/2076-3417/16/20/10296",
+      "url": "https://doi.org/10.3390/app162010296",
+      "orcid_put_code": null
+    },
     {
       "id": "doi-10-1016-j-cose-2026-105134",
       "title": "Detecting and mitigating IMSI catcher attacks: A formalized framework for secure mobile networks",
