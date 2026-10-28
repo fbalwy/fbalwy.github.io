@@ -2,8 +2,28 @@
   "schema_version": "1.0.0",
   "orcid": "0000-0002-2342-2156",
   "source": "verified_catalogue_seed",
-  "generated_at": "2026-10-17T00:00:00+03:00",
+  "generated_at": "2026-10-28T00:00:00+03:00",
   "publications": [
+    {
+      "id": "doi-10-3390-electronics15214984",
+      "title": "Authenticated Key Release for Electronic Health Records During Migration to Post-Quantum Cryptography",
+      "authors": [
+        "Faisal Albalwy"
+      ],
+      "type": "journal-article",
+      "year": 2026,
+      "sort_date": "2026-10-28",
+      "venue": "Electronics",
+      "volume": "15",
+      "issue": "21",
+      "pages": null,
+      "article_number": "4984",
+      "doi": "10.3390/electronics15214984",
+      "doi_url": "https://doi.org/10.3390/electronics15214984",
+      "official_url": "https://www.mdpi.com/2079-9292/15/21/4984",
+      "url": "https://doi.org/10.3390/electronics15214984",
+      "orcid_put_code": null
+    },
     {
       "id": "doi-10-3390-app162010296",
       "title": "Reliable Streaming Truth Discovery for Blockchain-Enabled Healthcare IoT: An Off-Chain Architecture with Deterministic On-Chain Aggregation",
