@@ -1,6 +1,6 @@
 # Faisal Albalwy academic website
 
-Personal academic website for Faisal Albalwy, Assistant Professor of
+Personal academic website for Faisal Albalwy, Associate Professor of
 Cybersecurity at Taibah University.
 
 Live site: [https://fbalwy.github.io](https://fbalwy.github.io)
